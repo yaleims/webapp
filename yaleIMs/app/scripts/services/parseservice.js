@@ -3,13 +3,13 @@
 angular.module('yaleImsApp')
 	.factory('ParseService', function() {
  
-  	Parse.initialize("OIrcvapOVEU2B8RqVp7uzyLavPl5WExmOR5Bw9ph", "ljWrwJntFsQhK6GxZOIVEWYH2SFvslPbiQoNN4Nv");  
+  	Parse.initialize('OIrcvapOVEU2B8RqVp7uzyLavPl5WExmOR5Bw9ph', 'ljWrwJntFsQhK6GxZOIVEWYH2SFvslPbiQoNN4Nv');
 
     var ParseService = {
-      name: "Parse",
+      name: 'Parse',
 
       getColleges: function GetColleges(callback) {
-		var GameScore = Parse.Object.extend("College");
+		var GameScore = Parse.Object.extend('College');
 		var query = new Parse.Query(GameScore);
 		var colleges = [];
 
@@ -27,7 +27,7 @@ angular.module('yaleImsApp')
 			    callback(colleges);
 				},
 		  		error: function(error) {
-		    		alert("Error: " + error.code + " " + error.message);
+		    		alert('Error: ' + error.code + ' ' + error.message);
 		  		}
 			});
 		}	
