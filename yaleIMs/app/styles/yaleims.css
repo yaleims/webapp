@@ -1,0 +1,42 @@
+body {
+    padding-top: 70px;
+    font-size: 16px;
+    font-weight: 200;
+}
+
+.coverPhoto
+{
+    margin-top: -20px;
+}
+
+
+.profileData
+{
+    width: 100%;
+    height: 200px;
+    -transform: translate(0px,125px);
+    -webkit-transform: translate(0px,125px); /** Chrome & Safari **/
+    -o-transform: translate(0px,125px); /** Opera **/
+    -moz-transform: translate(0px,125px); /** Firefox **/
+}
+
+
+.affix
+{
+    -webkit-transform: translateZ(0);
+}
+
+.smallSportIcon
+{
+    font-size: 20px !important;
+}
+
+.mediumSportIcon
+{
+    font-size: 60px !important;
+}
+
+.largeSportIcon
+{
+    font-size: 100px !important;
+}
