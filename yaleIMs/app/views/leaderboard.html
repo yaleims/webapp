@@ -7,6 +7,12 @@
 </div>
 
 <div class="container">
+    <div ng-controller="LeaderboardCtrl">
+        <h2>Colleges</h2>
+        <ul>
+            <li ng-repeat="coll in colleges">{{coll.name}} - {{coll.score}}</li>
+        </ul>
+    </div>
 
     <h3>Badminton</h3>
     <div class="row">
