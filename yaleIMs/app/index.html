@@ -12,19 +12,46 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+
+    <link rel="stylesheet" href="styles/yaleims.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="colinApp">
+  <body ng-app="yaleImsApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
+    <nav class="navbar navbar-default navbar-fixed-top affix" role="navigation">
+        <!-- Start Container for Nav -->
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#imsNavbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Yale IMs</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="imsNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#/newsfeed">Newsfeed</a></li>
+                    <li><a href="/#/leaderboard">Leaderboards</a></li>
+                    <li><a href="/#/college">Colleges</a></li>
+                    <li><a href="/#/sport">Sports</a></li>
+                    <li><a href="/#/profile">My Profile</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- End container for nav -->
+    </nav>
     <div class="container" ng-view=""></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -58,6 +85,12 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/home.js"></script>
+        <script src="scripts/controllers/profile.js"></script>
+        <script src="scripts/controllers/newsfeed.js"></script>
+        <script src="scripts/controllers/leaderboard.js"></script>
+        <script src="scripts/controllers/sport.js"></script>
+        <script src="scripts/controllers/college.js"></script>
         <!-- endbuild -->
 </body>
 </html>
