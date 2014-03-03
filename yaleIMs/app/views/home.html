@@ -29,13 +29,6 @@
         <div class="col-md-4">
             <h3>College Leaderboard</h3>
             <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>College</th>
-                        <th>Score</th>
-                    </tr>
-                </thead>
                 <tbody>
                     <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score' | limitTo:6" noWinLoss="true" rank="{{$index + 1}}" college="{{college.name}}" points="{{college.score}}"></tr>
                 </tbody>
@@ -46,13 +39,6 @@
         <div class="col-md-4">
             <h3>Player Leaderboard</h3>
             <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Player</th>
-                        <th>Score</th>
-                    </tr>
-                </thead>
                 <tbody>
                     <tr playerlb-row ng-repeat="player in players | orderBy:'-points' | limitTo:6" rank="{{$index + 1}}" player="{{player.name}}" points="{{player.points}}"></tr>
                 </tbody>
@@ -68,6 +54,6 @@
         <div class="col-md-3"><a class="thumbnail"><center><span class="flaticon-badminton1 largeSportIcon"></span></center></a></div>
         <div class="col-md-3"><a class="thumbnail"><center><span class="flaticon-bowling2 largeSportIcon"></span></center></a></div>
         <div class="col-md-3"><a class="thumbnail"><center><span class="flaticon-bat largeSportIcon"></span></center></a></div>
-        <div class="col-md-3"><a class="thumbnail"><center><span class="flaticon-bowling2 largeSportIcon"></span></center></a></div>
+        <div class="col-md-3"><a class="thumbnail"><center><span class="flaticon-swimmer largeSportIcon"></span></center></a></div>
     </div>
 </div>
