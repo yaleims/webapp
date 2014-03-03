@@ -28,25 +28,35 @@
         <!-- Leaderboard - Colleges -->
         <div class="col-md-4">
             <h3>College Leaderboard</h3>
-            <ul class="list-group">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Morbi leo risus</li>
-                <li class="list-group-item">Porta ac consectetur ac</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>College</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score' | limitTo:6" home="true" rank="{{$index + 1}}" college="{{college.name}}" points="{{college.score}}"></tr>
+                </tbody>
+            </table>
         </div>
 
         <!-- Leaderboard - People -->
         <div class="col-md-4">
             <h3>Player Leaderboard</h3>
-            <ul class="list-group">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Morbi leo risus</li>
-                <li class="list-group-item">Porta ac consectetur ac</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Player</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr playerlb-row ng-repeat="player in players | orderBy:'-score' | limitTo:6" rank="{{$index + 1}}" player="{{player.name}}" points="{{player.score}}"></tr>
+                </tbody>
+            </table>
         </div>
     </div>
     <hr class="featurette-divider">
