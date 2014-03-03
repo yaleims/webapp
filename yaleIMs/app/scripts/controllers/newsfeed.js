@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('yaleImsApp')
-  .controller('NewsfeedCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('NewsfeedCtrl', ['$scope', 'ParseService', function ($scope, ParseService) {
+
+    ParseService.getColleges(function(results) {
+        $scope.$apply(function() {
+            $scope.colleges = results;
+        })
+    });
+}]);

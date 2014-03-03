@@ -37,7 +37,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score' | limitTo:6" home="true" rank="{{$index + 1}}" college="{{college.name}}" points="{{college.score}}"></tr>
+                    <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score' | limitTo:6" noWinLoss="true" rank="{{$index + 1}}" college="{{college.name}}" points="{{college.score}}"></tr>
                 </tbody>
             </table>
         </div>
