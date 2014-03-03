@@ -3,9 +3,9 @@
 angular.module('yaleImsApp')
   .controller('SportCtrl', ['$scope', 'ParseService', function ($scope, ParseService) {
 
-  ParseService.getColleges(function(results) {
+  ParseService.getSports('Coed Water Polo', function(results) {
       $scope.$apply(function() {
-          $scope.colleges = results;
+          $scope.sports = results;
       })
   });
 }]);
