@@ -79,3 +79,9 @@ margin-left: 0px;
 .flaticon-three13:before {
 	content: "\e015";
 }
+
+
+a, a:link, a:visited, a:hover, a:active
+{
+    text-decoration: none !important;
+}

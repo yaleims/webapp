@@ -3,14 +3,15 @@
 angular.module('yaleImsApp')
     .directive('sportlbRow', function () {
         return {
-            template: '<td>{{rank}}</td><td>{{college}}</td><td>{{points}}</td><td>{{wins}} - {{loss}}</td>',
+            template: '<td>{{college1}} vs. {{college2}}</td><td>{{score1}} - {{score2}}</td><td>{{outcome}}</td><td>+{{points}}</td>',
             restrict: 'A',
             scope: {
-                rank: '@',
-                college: '@',
-                points: '@',
-                wins: '@',
-                loss: '@'
+                college1: '@',
+                college2: '@',
+                score1: '@',
+                score2: '@',
+                outcome: '@',
+                points: '@'
             }
         };
     });

@@ -1,14 +1,11 @@
 <div class="container">
-
     <div class="page-header">
         <h1>Badminton<button type="button" class="btn btn-danger pull-right">Join Team</button></h1>
-
     </div>
-
 </div>
 
-<div class="container">
 
+<div class="container">
     <h3>Leaderboard</h3>
     <table class="table table-hover">
         <thead>
@@ -20,15 +17,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="game in games">
-            <td>{{game.colleges}}</td>
-            <td>{{game.score}}</td>
-            <td>{{game.outcome}}</td>
-        </tr>
+            <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score'" rank="{{$index + 1}}" college="{{college.name}}" points="{{college.score}}" wins="1" loss="3"></tr>
         </tbody>
     </table>
     <hr class="featurette-divider">
-
 
     <h3>Schedule</h3>
     <ul class="list-group">

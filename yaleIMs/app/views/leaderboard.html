@@ -23,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr sportlb-row ng-repeat="college in colleges | orderBy:'-score'" rank="{{$index + 1}}" college="{{college.name}}" points="{{college.score}}" wins="1" loss="3"></tr>
+                    <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score'" rank="{{$index + 1}}" college="{{college.name}}" points="{{college.score}}" wins="1" loss="3"></tr>
                 </tbody>
             </table>
         </div>

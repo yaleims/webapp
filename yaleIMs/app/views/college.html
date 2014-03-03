@@ -1,4 +1,4 @@
-<div class="jumbotron coverPhoto">
+<div class="jumbotron coverPhoto morse">
     <div class="container">
 
         <h1>Morse</h1>
@@ -27,30 +27,14 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>#</th>
                     <th>Colleges</th>
                     <th>Score</th>
-                    <th>Win-Loss</th>
+                    <th>Outcome</th>
+                    <th>Tyng Points</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                    <tr sportlb-row ng-repeat="college in colleges | orderBy:'-score'" college1="Morse" college2="{{college.name}}" score1="1" score2="3" points="{{college.score}}" outcome="W"></tr>
                 </tbody>
             </table>
         </div>

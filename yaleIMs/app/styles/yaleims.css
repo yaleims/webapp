@@ -7,8 +7,14 @@ body {
 .coverPhoto
 {
     margin-top: -20px;
-}
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 
+    /* Text style for over photo */
+    color: #fff;
+    text-shadow: 0 0 3px rgba(0,0,0,0.8);
+}
 
 .profileData
 {
@@ -40,3 +46,66 @@ body {
 {
     font-size: 100px !important;
 }
+
+
+/********* College Photos **********/
+.morse
+{
+    background-image: url(../images/colleges/morse.jpg);
+}
+
+.stiles
+{
+    background-image: url(../images/colleges/stiles.jpg);
+}
+
+.pierson
+{
+    background-image: url(../images/colleges/pierson.jpg);
+}
+
+.silliman
+{
+    background-image: url(../images/colleges/silliman.jpg);
+}
+
+.trumbull
+{
+    background-image: url(../images/colleges/trumbull.jpg);
+}
+
+.je
+{
+    background-image: url(../images/colleges/je.jpg);
+}
+
+.branford
+{
+    background-image: url(../images/colleges/branford.jpg);
+}
+
+.saybrook
+{
+    background-image: url(../images/colleges/saybrook.jpg);
+}
+
+.calhoun
+{
+    background-image: url(../images/colleges/calhoun.jpg);
+}
+
+.berkeley
+{
+    background-image: url(../images/colleges/berkeley.jpg);
+}
+
+.davenport
+{
+    background-image: url(../images/colleges/davenport.jpg);
+}
+
+.td
+{
+    background-image: url(../images/colleges/td.jpg);
+}
+/******* End College Photos ********/
