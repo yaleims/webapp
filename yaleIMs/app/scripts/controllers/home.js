@@ -7,4 +7,10 @@ angular.module('yaleImsApp')
             $scope.colleges = results;
         })
     });
+
+    ParseService.getPlayers(function(results) {
+        $scope.$apply(function() {
+            $scope.players = results;
+        })
+    });
 }]);

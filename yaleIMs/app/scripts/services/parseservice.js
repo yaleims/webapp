@@ -30,7 +30,31 @@ angular.module('yaleImsApp')
 		    		alert('Error: ' + error.code + ' ' + error.message);
 		  		}
 			});
-		}	
+		},
+
+        getPlayers: function GetPlayers(callback) {
+            var GameScore = Parse.Object.extend('Player');
+            var query = new Parse.Query(GameScore);
+            var players = [];
+
+            query.find({
+                success: function(results) {
+
+                    //Do something with the returned Parse.Object values
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        players.push({
+                            name : object.get('FirstName') + ' ' + object.get('LastName'),
+                            points : object.get('Points')
+                        });
+                    }
+                    callback(players);
+                },
+                error: function(error) {
+                    alert('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        }
      };
 
      return ParseService;
