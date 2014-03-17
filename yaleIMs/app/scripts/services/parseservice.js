@@ -102,6 +102,11 @@ angular.module('yaleImsApp')
 
             query.equalTo('Completed', past);
 
+            if (past)
+                query.descending('Date');
+            else
+                query.ascending('Date');
+
             var games = [];
 
             query.find({
@@ -149,10 +154,10 @@ function formatDate(date) {
     months[11]="December";
 
     var d = new Date(date);
-    var day = d.getDate();
-    var month = months[d.getMonth()];
-    var hours = d.getHours();
-    var minutes = ('0' + (d.getMinutes()+1)).slice(-2);
+    var day = d.getUTCDate();
+    var month = months[d.getUTCMonth()];
+    var hours = d.getUTCHours();
+    var minutes = ('0' + d.getUTCMinutes()).slice(-2);
     var timeStamp = 'PM';
     
     if (hours > 12)

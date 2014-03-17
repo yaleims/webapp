@@ -14,4 +14,10 @@ angular.module('yaleImsApp')
         $scope.pastGames = results;
       	})
   	}, undefined, undefined, true);
+
+  ParseService.getGames(function(results) {
+        $scope.$apply(function() {
+        $scope.upcomingGames = results;
+        })
+    }, undefined, undefined, false);
 }]);
