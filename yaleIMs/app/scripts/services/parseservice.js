@@ -32,10 +32,10 @@ angular.module('yaleImsApp')
 			});
 		},
 
-        getSports: function GetSports(sportname, callback) {
-            var parseClass = Parse.Object.extend('Sport');
+        getSports: function GetSports(sport, callback) {
+            var parseClass = Parse.Object.extend('Team');
             var query = new Parse.Query(parseClass);
-            query.equalTo('Name', sportname);
+            query.equalTo('Name', sport);
             var sports = [];
 
             query.find({
@@ -81,8 +81,87 @@ angular.module('yaleImsApp')
                     alert('Error: ' + error.code + ' ' + error.message);
                 }
             });
+        },
+
+        //get game by sport, college
+        getGames: function GetGames(callback, sport, college, past) {
+            
+            var parseClass = Parse.Object.extend('Game');
+            var query = new Parse.Query(parseClass);
+
+            if (typeof college !== 'undefined') {
+                var query1 = new Parse.Query(parseClass);
+                var query2 = new Parse.Query(parseClass);
+                query1.equalTo('Team1', college);
+                query2.equalTo('Team2', college);
+                query = Parse.Query.or(query1, query2);
+            } 
+
+            if (typeof sport !== 'undefined')
+                query.equalTo('Sport', sport);
+
+            query.equalTo('Completed', past);
+
+            var games = [];
+
+            query.find({
+                success: function(results) {
+                
+                //Do something with the returned Parse.Object values
+                for (var i = 0; i < results.length; i++) { 
+                    var object = results[i];
+
+                    games.push({
+                        sport : object.get('Sport'),
+                        team1 : object.get('Team1'),
+                        team2 : object.get('Team2'),
+                        score1 : object.get('Score1'),
+                        score2 : object.get('Score2'),
+                        date : formatDate(object.get('Date'))
+                    });
+                }   
+                callback(games);
+                },
+                error: function(error) {
+                    alert('Error: ' + error.code + ' ' + error.message);
+                }
+            });
         }
      };
 
      return ParseService;
 });
+
+function formatDate(date) {
+    
+    var months = new Array();
+    months[0]="January";
+    months[1]="February";
+    months[2]="March";
+    months[3]="April";
+    months[4]="May";
+    months[5]="June";
+    months[6]="July";
+    months[7]="August";
+    months[8]="September";
+    months[9]="October";
+    months[10]="November";
+    months[11]="December";
+
+    var d = new Date(date);
+    var day = d.getDate();
+    var month = months[d.getMonth()];
+    var hours = d.getHours();
+    var minutes = ('0' + (d.getMinutes()+1)).slice(-2);
+    var timeStamp = 'PM';
+    
+    if (hours > 12)
+        hours = hours-12;
+    else if (hours == 0) {
+        hours = 12;
+        timeStamp = 'AM';
+    }
+
+    var formatted = month + " " + day + ", " + hours + ":" + minutes + " " + timeStamp;
+    return formatted;
+}

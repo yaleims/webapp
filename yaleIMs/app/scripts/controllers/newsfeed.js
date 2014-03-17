@@ -8,4 +8,10 @@ angular.module('yaleImsApp')
             $scope.colleges = results;
         })
     });
+
+	ParseService.getGames(function(results) {
+      	$scope.$apply(function() {
+        $scope.pastGames = results;
+      	})
+  	}, undefined, undefined, true);
 }]);

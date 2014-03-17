@@ -1,18 +1,21 @@
-<div class="container">
+<div class="container" ng-controller="NewsfeedCtrl">
 
     <div class="row">
         <div class="col-md-4">
             <h2>Recent Games</h2>
-            <ul class="list-group">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Morbi leo risus</li>
-                <li class="list-group-item">Porta ac consectetur ac</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
-
-
-
+                 <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Colleges</th>
+                        <th>Score</th>
+                        <th>Tyng Points</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr gamelb-row ng-repeat="game in pastGames" college1="{{game.team1}}" college2="{{game.team2}}" score1="{{game.score1}}" score2="{{game.score2}}" points=0 date="{{game.date}}"></tr>
+                    </tbody>
+                </table>
             <h2>Overall Leaderboard</h2>
             <table class="table table-hover">
                 <thead>
