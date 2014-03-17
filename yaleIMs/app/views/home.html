@@ -51,9 +51,8 @@
 <div class="container">
     <h2>Winter Sports</h2>
     <div class="row">
-        <div class="col-md-3"><a class="thumbnail"><center><span class="flaticon-badminton1 largeSportIcon"></span></center></a></div>
-        <div class="col-md-3"><a class="thumbnail"><center><span class="flaticon-bowling2 largeSportIcon"></span></center></a></div>
-        <div class="col-md-3"><a class="thumbnail"><center><span class="flaticon-bat largeSportIcon"></span></center></a></div>
-        <div class="col-md-3"><a class="thumbnail"><center><span class="flaticon-swimmer largeSportIcon"></span></center></a></div>
+        <div ng-repeat="sport in sports" class="col-md-3">
+            <a class="thumbnail"><center><span class="largeSportIcon flaticon-{{sport.name}}"></span></center></a>
+        </div>
     </div>
 </div>

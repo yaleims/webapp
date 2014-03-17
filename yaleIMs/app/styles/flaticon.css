@@ -11,72 +11,81 @@
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
 	font-family: Flaticon;
-font-style: normal;
-margin-left: 0px;
-}.flaticon-badminton:before {
-	content: "\e000";
+    font-style: normal;
+    margin-left: 0px;
 }
-.flaticon-badminton1:before {
+/*
+Not as good an icon
+.flaticon-badminton:before {
+	content: "\e000";
+}*/
+[class$="badminton"]:before {
 	content: "\e001";
 }
-.flaticon-ball6:before {
+[class$="football"]:before {
 	content: "\e002";
 }
+/*
 .flaticon-baseball6:before {
 	content: "\e003";
-}
-.flaticon-baseball9:before {
+}*/
+[class$="baseball"]:before {
 	content: "\e004";
 }
-.flaticon-basketball3:before {
+[class$="basketball"]:before {
 	content: "\e005";
 }
-.flaticon-bat:before {
+[class$="pingpong"]:before {
 	content: "\e006";
 }
-.flaticon-bowling2:before {
+[class$="bowling"]:before {
 	content: "\e007";
 }
-.flaticon-football28:before {
+[class$="soccer"]:before {
 	content: "\e008";
 }
-.flaticon-golf1:before {
+[class$="golf"]:before {
 	content: "\e009";
 }
-.flaticon-man36:before {
-	content: "\e00a";
-}
-.flaticon-man50:before {
+/*
+[class$="basketball"]:before {
 	content: "\e00b";
-}
-.flaticon-rugby2:before {
+}*/
+/*
+.[class$="badminton"]:before {
+	content: "\e00a";
+}*/
+[class$="rugby"]:before {
 	content: "\e00c";
 }
-.flaticon-running:before {
+/*
+[class$="running"]:before {
 	content: "\e00d";
 }
-.flaticon-sport5:before {
+[class$="soccer"]:before {
 	content: "\e00e";
-}
-.flaticon-sportive2:before {
+}*/
+[class$="volleyball"]:before {
 	content: "\e00f";
 }
+/*
 .flaticon-sports13:before {
 	content: "\e010";
-}
-.flaticon-sports5:before {
+}*/
+[class$="tennis"]:before {
 	content: "\e011";
 }
-.flaticon-sports6:before {
+[class$="leaderboard"]:before {
 	content: "\e012";
 }
-.flaticon-swimmer:before {
+[class$="swimming"]:before {
 	content: "\e013";
 }
+/*
 .flaticon-tennis1:before {
 	content: "\e014";
-}
-.flaticon-three13:before {
+}*/
+[class$="leaderboard"]:before {
 	content: "\e015";
 }
 
