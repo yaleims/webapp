@@ -8,9 +8,21 @@ angular.module('yaleImsApp')
         })
     });
 
+    ParseService.getGames(function(results) {
+        $scope.$apply(function() {
+            $scope.upcomingGames = results;
+        })
+    }, undefined, undefined, false);
+
     ParseService.getPlayers(function(results) {
         $scope.$apply(function() {
             $scope.players = results;
+        })
+    });
+
+    ParseService.getSeasonalSports("Winter", function(results) {
+        $scope.$apply(function() {
+            $scope.sports = results;
         })
     });
 }]);

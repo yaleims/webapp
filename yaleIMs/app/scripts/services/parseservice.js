@@ -59,6 +59,31 @@ angular.module('yaleImsApp')
             });
         },
 
+        getSeasonalSports: function GetSeasonalSports(season, callback) {
+            var parseClass = Parse.Object.extend('Sport');
+            var query = new Parse.Query(parseClass);
+            query.equalTo('Season', season);
+            var sports = [];
+
+            query.find({
+                success: function(results) {
+
+                    //Do something with the returned Parse.Object values
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        sports.push({
+                            name : object.get('Name'),
+                            url : object.get('URL'),
+                        });
+                    }
+                    callback(sports);
+                },
+                error: function(error) {
+                    alert('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        },
+
         getPlayers: function GetPlayers(callback) {
             var parseClass = Parse.Object.extend('Player');
             var query = new Parse.Query(parseClass);
@@ -122,7 +147,7 @@ angular.module('yaleImsApp')
                         team2 : object.get('Team2'),
                         score1 : object.get('Score1'),
                         score2 : object.get('Score2'),
-                        date : formatDate(object.get('Date'))
+                        date : object.get('Date')
                     });
                 }   
                 callback(games);
@@ -137,36 +162,4 @@ angular.module('yaleImsApp')
      return ParseService;
 });
 
-function formatDate(date) {
-    
-    var months = new Array();
-    months[0]="January";
-    months[1]="February";
-    months[2]="March";
-    months[3]="April";
-    months[4]="May";
-    months[5]="June";
-    months[6]="July";
-    months[7]="August";
-    months[8]="September";
-    months[9]="October";
-    months[10]="November";
-    months[11]="December";
-
-    var d = new Date(date);
-    var day = d.getUTCDate();
-    var month = months[d.getUTCMonth()];
-    var hours = d.getUTCHours();
-    var minutes = ('0' + d.getUTCMinutes()).slice(-2);
-    var timeStamp = 'PM';
-    
-    if (hours > 12)
-        hours = hours-12;
-    else if (hours == 0) {
-        hours = 12;
-        timeStamp = 'AM';
-    }
-
-    var formatted = month + " " + day + ", " + hours + ":" + minutes + " " + timeStamp;
-    return formatted;
-}
+// There is a filter for dates builtin to angular.

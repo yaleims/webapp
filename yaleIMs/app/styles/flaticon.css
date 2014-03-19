@@ -32,7 +32,7 @@ Not as good an icon
 [class$="baseball"]:before {
 	content: "\e004";
 }
-[class$="basketball"]:before {
+[class$="hoops"]:before {
 	content: "\e005";
 }
 [class$="pingpong"]:before {
