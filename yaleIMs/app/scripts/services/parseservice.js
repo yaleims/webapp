@@ -59,6 +59,29 @@ angular.module('yaleImsApp')
             });
         },
 
+        getSportFromUrl: function GetSportsFromUrl(sport, callback) {
+            var parseClass = Parse.Object.extend('Sport');
+            var query = new Parse.Query(parseClass);
+            query.equalTo('URL', sport);
+            var sportName = "";
+
+            query.find({
+                success: function(results) {
+
+                    //Do something with the returned Parse.Object values
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        sportName = object.get('Name');
+
+                    }
+                    callback(sportName);
+                },
+                error: function(error) {
+                    alert('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        },
+
         getSeasonalSports: function GetSeasonalSports(season, callback) {
             var parseClass = Parse.Object.extend('Sport');
             var query = new Parse.Query(parseClass);
