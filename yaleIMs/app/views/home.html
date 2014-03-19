@@ -18,7 +18,7 @@
             <h3>Upcoming Games</h3>
             <table class="table table-hover">
                 <tbody>
-                    <tr upcoming-game-row ng-repeat="game in upcomingGames | orderBy:'date' | limitTo:6"   date="{{game.date | date:'MM/dd @ h:mma'}}" sport="{{game.sport}}" sporturl="{{game.sport}}" team1="{{game.team1}}" team2="{{game.team2}}"></tr>
+                    <tr game-row ng-repeat="game in upcomingGames | orderBy:'date' | limitTo:6"   date="{{game.date | date:'MM/dd @ h:mma'}}" sport="{{game.sport}}" sporturl="{{game.sport}}" team1="{{game.team1}}" team2="{{game.team2}}"></tr>
                 </tbody>
             </table>
         </div>
