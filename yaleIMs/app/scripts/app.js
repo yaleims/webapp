@@ -28,7 +28,11 @@ angular.module('yaleImsApp', [
         templateUrl: 'views/leaderboard.html',
         controller: 'LeaderboardCtrl'
       })
-      .when('/sport', {
+        .when('/sport/:sport', {
+            templateUrl: 'views/sport.html',
+            controller: 'SportCtrl'
+        })
+        .when('/sport', {
         templateUrl: 'views/sport.html',
         controller: 'SportCtrl'
       })
