@@ -1,7 +1,7 @@
 <div class="jumbotron coverPhoto morse">
     <div class="container">
-        <h1>Colin Dunn</h2>
-        <h2>Morse 2015</h3>
+        <h1>{{playerName}}</h1>
+        <h2>{{playerCollege}} {{playerYear}}</h2>
     </div>
 </div>
 
@@ -10,10 +10,9 @@
     <h2>Your Teams<button type="button" class="btn btn-danger pull-right">Add Team</button></h2>
 
     <div class="row">
-        <div class="col-md-3"><a class="thumbnail"><center><span class="flaticon-badminton1 largeSportIcon"></span></center></a></div>
-        <div class="col-md-3"><a class="thumbnail"><center><span class="flaticon-bowling2 largeSportIcon"></span></center></a></div>
-        <div class="col-md-3"><a class="thumbnail"><center><span class="flaticon-bat largeSportIcon"></span></center></a></div>
-        <div class="col-md-3"><a class="thumbnail"><center><span class="flaticon-bowling2 largeSportIcon"></span></center></a></div>
+        <div ng-repeat="team in playerTeams | orderBy:'sport'" class="col-md-3">
+            <flaticon  sport="{{team.sport}}" sporturl="{{team.sporturl}}" size="largeSportIcon"></flaticon>
+        </div>
     </div>
 
     <h2>Games Attended</h2>
@@ -29,23 +28,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                    <tr></tr>
                 </tbody>
             </table>
         </div>
