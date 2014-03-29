@@ -269,5 +269,3 @@ angular.module('yaleImsApp')
 
      return ParseService;
 });
-
-// There is a filter for dates builtin to angular.
