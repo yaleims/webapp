@@ -40,6 +40,10 @@ angular.module('yaleImsApp', [
         templateUrl: 'views/college.html',
         controller: 'CollegeCtrl'
       })
+        .when('/college/:college', {
+            templateUrl: 'views/college.html',
+            controller: 'CollegeCtrl'
+        })
       .otherwise({
         redirectTo: '/'
       });
