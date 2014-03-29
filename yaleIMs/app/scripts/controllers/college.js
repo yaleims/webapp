@@ -10,13 +10,20 @@ angular.module('yaleImsApp')
         $scope.collegeURL = college;
         $scope.sportURL = sport;
 
-        ParseService.getCollegeFromUrl(college, function(collegeName) {
-            college = collegeName;
-            $scope.collegeName = collegeName;
+        ParseService.getCollegeFromUrl(college, function(results) {
+            college = results[0].collegeName;
+            $scope.totalTyngPoints = results[0].totalTyngPoints;
+            $scope.collegeName = results[0].collegeName;
 
             ParseService.getSportFromUrl(sport, function(sportName){
                 sport = sportName;
                 $scope.sportName = sportName;
+
+                ParseService.getGames(function(results) {
+                    $scope.$apply(function() {
+                        $scope.pastGames = results;
+                    })
+                }, sport, college, true);
 
                 ParseService.getGames(function(results) {
                     $scope.$apply(function() {

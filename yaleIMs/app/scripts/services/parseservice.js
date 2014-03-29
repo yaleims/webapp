@@ -36,7 +36,7 @@ angular.module('yaleImsApp')
             var parseClass = Parse.Object.extend('College');
             var query = new Parse.Query(parseClass);
             query.equalTo('CollegeURL', college);
-            var collegeName = "";
+            var collegeData = [];
 
             query.find({
                 success: function(results) {
@@ -44,10 +44,13 @@ angular.module('yaleImsApp')
                     //Do something with the returned Parse.Object values
                     for (var i = 0; i < results.length; i++) {
                         var object = results[i];
-                        collegeName = object.get('College');
+                        collegeData.push({
+                            collegeName: object.get('College'),
+                            totalTyngPoints: object.get('Score')
+                        });
 
                     }
-                    callback(collegeName);
+                    callback(collegeData);
                 },
                 error: function(error) {
                     alert('Error: ' + error.code + ' ' + error.message);
