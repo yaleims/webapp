@@ -36,7 +36,7 @@ angular.module('yaleImsApp', [
         templateUrl: 'views/sport.html',
         controller: 'SportCtrl'
       })
-      .when('/college', {
+      .when('/college/:college/:sport', {
         templateUrl: 'views/college.html',
         controller: 'CollegeCtrl'
       })

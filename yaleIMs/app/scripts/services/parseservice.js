@@ -32,6 +32,29 @@ angular.module('yaleImsApp')
 			});
 		},
 
+        getCollegeFromUrl: function GetCollegeFromUrl(college, callback) {
+            var parseClass = Parse.Object.extend('College');
+            var query = new Parse.Query(parseClass);
+            query.equalTo('CollegeURL', college);
+            var collegeName = "";
+
+            query.find({
+                success: function(results) {
+
+                    //Do something with the returned Parse.Object values
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        collegeName = object.get('College');
+
+                    }
+                    callback(collegeName);
+                },
+                error: function(error) {
+                    alert('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        },
+
         getSports: function GetSports(sport, callback) {
             var parseClass = Parse.Object.extend('Team');
             var query = new Parse.Query(parseClass);
