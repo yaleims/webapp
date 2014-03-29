@@ -58,10 +58,16 @@ angular.module('yaleImsApp')
             });
         },
 
-        getSports: function GetSports(sport, callback) {
+        getSports: function GetSports(callback, sport, college) {
             var parseClass = Parse.Object.extend('Team');
             var query = new Parse.Query(parseClass);
-            query.equalTo('Name', sport);
+
+            if (typeof college !== 'undefined')
+                query.equalTo('College', college);
+
+            if (typeof sport !== 'undefined')
+                query.equalTo('Name', sport);
+
             var sports = [];
 
             query.find({

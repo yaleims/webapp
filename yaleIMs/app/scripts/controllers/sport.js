@@ -9,11 +9,11 @@ angular.module('yaleImsApp')
             sport = sportName;
             $scope.sportName = sportName;
 
-            ParseService.getSports(sport, function(results) {
+            ParseService.getSports(function(results) {
                 $scope.$apply(function() {
                 $scope.sports = results;
                 })
-            });
+            }, sport, undefined);
 
             ParseService.getGames(function(results) {
                 $scope.$apply(function() {
