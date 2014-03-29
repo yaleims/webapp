@@ -239,7 +239,8 @@ angular.module('yaleImsApp')
                 query.ascending('Date');
 
             var games = [];
-
+  
+            query.include("SportTest")
             query.find({
                 success: function(results) {
                 
@@ -248,7 +249,8 @@ angular.module('yaleImsApp')
                     var object = results[i];
 
                     games.push({
-                        sport : object.get('SportTest').get('Names'),
+                        sport : object.get('SportTest').get('Name'),
+                        url : object.get('SportTest').get('URL'),
                         team1 : object.get('Team1'),
                         team2 : object.get('Team2'),
                         score1 : object.get('Score1'),
@@ -257,7 +259,7 @@ angular.module('yaleImsApp')
                     });
                 }   
                 callback(games);
-                },
+                },  
                 error: function(error) {
                     alert('Error: ' + error.code + ' ' + error.message);
                 }
