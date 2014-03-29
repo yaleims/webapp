@@ -73,7 +73,7 @@ angular.module('yaleImsApp')
                     //Do something with the returned Parse.Object values
                     for (var i = 0; i < results.length; i++) {
                         var object = results[i];
-                        var season = object.get('Season')
+                        var season = object.get('Season');
 
                         if (season == 'Fall') {
                             fall.push({
@@ -81,7 +81,7 @@ angular.module('yaleImsApp')
                                 url : object.get('Score')
                             });
                         }
-                        
+
                         else if (season == 'Winter') {
                             winter.push({
                                 name: object.get('Name'),
@@ -101,7 +101,6 @@ angular.module('yaleImsApp')
                     sports.push({season : 'Winter', sport : winter});
                     sports.push({season : 'Spring', sport : spring});
 
-                    }
                     callback(sport);
                 },
                 error: function(error) {
