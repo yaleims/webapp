@@ -12,10 +12,7 @@
         <div class="col-md-3">
             <h2>Sports</h2>
             <div class="row">
-                <div class="col-md-6"><a class="thumbnail"><center><span class="flaticon-badminton1 mediumSportIcon"></span></center></a></div>
-                <div class="col-md-6"><a class="thumbnail"><center><span class="flaticon-bowling2 mediumSportIcon"></span></center></a></div>
-                <div class="col-md-6"><a class="thumbnail"><center><span class="flaticon-bat mediumSportIcon"></span></center></a></div>
-                <div class="col-md-6"><a class="thumbnail"><center><span class="flaticon-bowling2 mediumSportIcon"></span></center></a></div>
+                <sport-select ng-repeat="sport in sports" url="/#/{{collegeURL}}/{{sport.url}}" sporturl="sport.url" sport="sport.name" iconSize="mediumSportIcon" colSize="col-md-6"></sport-select>
             </div>
         </div>
 
