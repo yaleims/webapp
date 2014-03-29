@@ -23,11 +23,11 @@ angular.module('yaleImsApp')
                 sport = sportName;
                 $scope.sportName = sportName;
 
-                ParseService.getGames(function(results) {
-                    $scope.$apply(function() {
-                        $scope.pastGames = results;
-                    })
-                }, sport, college, true);
+                ParseService.getSports(function(results) {
+                    $scope.sportWins = results[0].win;
+                    $scope.sportLosses = results[0].loss;
+                    $scope.sportTyngPoints = results[0].points;
+                }, sport, college);
 
                 ParseService.getGames(function(results) {
                     $scope.$apply(function() {
