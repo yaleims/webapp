@@ -7,6 +7,27 @@
 </div>
 
 <div class="container">
+    <!-- Leaderboard - Colleges -->
+    <div class="row">
+        <div class="col-md-6">
+            <h3>College Leaderboard</h3>
+            <table class="table table-hover">
+                <tbody>
+                <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score'" noWinLoss="true" rank="{{$index + 1}}" college="{{college.name}}" points="{{college.score}}"></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Leaderboard - People -->
+        <div class="col-md-6">
+            <h3>Player Leaderboard</h3>
+            <table class="table table-hover">
+                <tbody>
+                <tr playerlb-row ng-repeat="player in players | orderBy:'-points' | limitTo:12" rank="{{$index + 1}}" player="{{player.name}}" points="{{player.points}}"></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <h3>Badminton</h3>
     <div class="row">
         <div class="col-md-3">

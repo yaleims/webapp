@@ -78,21 +78,21 @@ angular.module('yaleImsApp')
                         if (season == 'Fall') {
                             fall.push({
                                 name: object.get('Name'),
-                                url : object.get('Score')
+                                url : object.get('URL')
                             });
                         }
 
                         else if (season == 'Winter') {
                             winter.push({
                                 name: object.get('Name'),
-                                url : object.get('Score')
+                                url : object.get('URL')
                             });
                         }
 
                         else if (season == 'Spring') {
                             spring.push({
                                 name: object.get('Name'),
-                                url : object.get('Score')
+                                url : object.get('URL')
                             });
                         }
                     }
@@ -101,7 +101,7 @@ angular.module('yaleImsApp')
                     sports.push({season : 'Winter', sport : winter});
                     sports.push({season : 'Spring', sport : spring});
 
-                    callback(sport);
+                    callback(sports);
                 },
                 error: function(error) {
                     alert('Error: ' + error.code + ' ' + error.message);

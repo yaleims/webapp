@@ -11,8 +11,11 @@
     <div class="row">
         <div class="col-md-3">
             <h2>Sports</h2>
-            <div class="row">
-                <sport-select ng-repeat="sport in sports" url="/#/{{collegeURL}}/{{sport.url}}" sporturl="sport.url" sport="sport.name" iconSize="mediumSportIcon" colSize="col-md-6"></sport-select>
+            <div ng-repeat="season in allSports">
+                <h3>{{season.season}}</h3>
+                <div class="row">
+                    <sport-select ng-repeat="sport in season.sport" url="/#/college/{{collegeURL}}/{{sport.url}}" sporturl="{{sport.url}}" sport="{{sport.name}}" iconsize="mediumSportIcon" colsize="col-md-4"></sport-select>
+                </div>
             </div>
         </div>
 
