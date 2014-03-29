@@ -13,7 +13,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr game-row ng-repeat="game in pastGames | orderBy:'date' | limitTo:6"   date="{{game.date | date:'MM/dd @ h:mma'}}" sport="{{game.sport}}" sporturl="{{game.sport}}" team1="{{game.team1}}" team2="{{game.team2}}" past="true" score1="{{game.score1}}" score2="{{game.score2}}"></tr>
+                        <tr game-row ng-repeat="game in pastGames | orderBy:'date' | limitTo:6"   date="{{game.date | date:'MM/dd @ h:mma'}}" sport="{{game.sport}}" sporturl="{{game.url}}" team1="{{game.team1}}" team2="{{game.team2}}" past="true" score1="{{game.score1}}" score2="{{game.score2}}"></tr>
                     </tbody>
                 </table>
             <h2>Overall Leaderboard</h2>
@@ -43,7 +43,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr game-row ng-repeat="game in upcomingGames | orderBy:'date' | limitTo:6"   date="{{game.date | date:'MM/dd @ h:mma'}}" sport="{{game.sport}}" sporturl="{{game.sport}}" team1="{{game.team1}}" team2="{{game.team2}}"></tr>
+                        <tr game-row ng-repeat="game in upcomingGames | orderBy:'date' | limitTo:6"   date="{{game.date | date:'MM/dd @ h:mma'}}" sport="{{game.sport}}" sporturl="{{game.url}}" team1="{{game.team1}}" team2="{{game.team2}}"></tr>
                     </tbody>
             </table>
         </div>
