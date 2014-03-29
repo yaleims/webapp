@@ -58,6 +58,58 @@ angular.module('yaleImsApp')
             });
         },
 
+        getAllSports: function GetAllSports(callback) {
+            var parseClass = Parse.Object.extend('Sport');
+            var query = new Parse.Query(parseClass);
+      
+            var sports = [];
+            var fall = [];
+            var winter = [];
+            var spring = [];
+
+            query.find({
+                success: function(results) {
+
+                    //Do something with the returned Parse.Object values
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        var season = object.get('Season')
+
+                        if (season == 'Fall') {
+                            fall.push({
+                                name: object.get('Name'),
+                                url : object.get('Score')
+                            });
+                        }
+                        
+                        else if (season == 'Winter') {
+                            winter.push({
+                                name: object.get('Name'),
+                                url : object.get('Score')
+                            });
+                        }
+
+                        else if (season == 'Spring') {
+                            spring.push({
+                                name: object.get('Name'),
+                                url : object.get('Score')
+                            });
+                        }
+                    }
+
+                    sports.push({season : 'Fall', sport : fall});
+                    sports.push({season : 'Winter', sport : winter});
+                    sports.push({season : 'Spring', sport : spring});
+
+                    }
+                    callback(sport);
+                },
+                error: function(error) {
+                    alert('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        },
+
         getSports: function GetSports(callback, sport, college) {
             var parseClass = Parse.Object.extend('Team');
             var query = new Parse.Query(parseClass);
@@ -197,7 +249,7 @@ angular.module('yaleImsApp')
                     var object = results[i];
 
                     games.push({
-                        sport : object.get('Sport'),
+                        sport : object.get('SportTest').get('Names'),
                         team1 : object.get('Team1'),
                         team2 : object.get('Team2'),
                         score1 : object.get('Score1'),
