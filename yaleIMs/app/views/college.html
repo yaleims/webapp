@@ -11,9 +11,10 @@
 
     <div ng-if="!sportURL" class="row">
         <div class="col-md-12">
-            <h2>Sports</h2>
+            <h2>Choose A Sport</h2>
+            <hr class="featurette-divider">
             <div ng-repeat="season in allSports">
-                <h3>{{season.season}}</h3>
+                <h2>{{season.season}}</h2>
                 <div class="row">
                     <sport-select ng-repeat="sport in season.sport"  url="/#/college/{{collegeURL}}/{{sport.url}}" sporturl="{{sport.url}}" sport="{{sport.name}}" iconsize="largeSportIcon" colsize="col-sm-3"></sport-select>
                 </div>

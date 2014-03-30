@@ -4,6 +4,10 @@ angular.module('yaleImsApp')
   .controller('SportCtrl', ['$scope', 'ParseService', '$routeParams', function ($scope, ParseService, $routeParams) {
 
 
+        ParseService.getAllSports(function(results) {
+            $scope.allSports = results;
+        });
+
         var sport = $routeParams.sport;
         ParseService.getSportFromUrl(sport, function(sportName){
             sport = sportName;
