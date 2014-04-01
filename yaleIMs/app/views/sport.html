@@ -5,13 +5,15 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
-            <div ng-repeat="season in allSports">
-                <h2>{{season.season}}</h2>
-                <div class="row">
-                    <sport-select ng-repeat="sport in season.sport"  url="/#/sport/{{sport.url}}" sporturl="{{sport.url}}" sport="{{sport.name}}" iconsize="largeSportIcon" colsize="col-sm-3"></sport-select>
-                </div>
+        <div ng-repeat="season in allSports">
+            <div class="col-md-3">
+
+                    <h2>{{season.season}}</h2>
+                    <div class="row">
+                        <sport-select ng-repeat="sport in season.sport"  url="/#/sport/{{sport.url}}" sporturl="{{sport.url}}" sport="{{sport.name}}" iconsize="mediumSportIcon" colsize="col-sm-4"></sport-select>
+                    </div>
             </div>
+            <div class="col-md-1"></div>
         </div>
     </div>
 </div>

@@ -9,20 +9,7 @@
 
 <div class="container" ng-controller='CollegeCtrl'>
 
-    <div ng-if="!sportURL" class="row">
-        <div class="col-md-12">
-            <h2>Choose A Sport</h2>
-            <hr class="featurette-divider">
-            <div ng-repeat="season in allSports">
-                <h2>{{season.season}}</h2>
-                <div class="row">
-                    <sport-select ng-repeat="sport in season.sport"  url="/#/college/{{collegeURL}}/{{sport.url}}" sporturl="{{sport.url}}" sport="{{sport.name}}" iconsize="largeSportIcon" colsize="col-sm-3"></sport-select>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div ng-if="sportURL" class="row">
+    <div class="row">
         <div class="col-md-3">
             <h2>Sports</h2>
             <div ng-repeat="season in allSports">
@@ -35,7 +22,11 @@
 
         <div class="col-md-1"></div>
 
-        <div class="col-md-8">
+        <div  ng-if="!sportURL" class="col-md-8">
+            <h2 class="">Choose a sport on the left to see recent and upcoming games</h2>
+        </div>
+
+        <div  ng-if="sportURL" class="col-md-8">
             <h2>{{collegeName}} {{sportName}}<small>({{sportWins}}-{{sportLosses}})</small> <small>{{sportTyngPoints}} Tyng Points</small></h2>
             <h3>Schedule</h3>
                 <h4>Past Games</h4>
