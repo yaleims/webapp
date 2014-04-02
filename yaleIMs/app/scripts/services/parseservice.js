@@ -243,6 +243,8 @@ angular.module('yaleImsApp')
             var games = [];
   
             query.include("SportTest")
+            query.include("Test1")
+            query.include("Test2")
             query.find({
                 success: function(results) {
                 
@@ -253,8 +255,8 @@ angular.module('yaleImsApp')
                     games.push({
                         sport : object.get('SportTest').get('Name'),
                         url : object.get('SportTest').get('URL'),
-                        team1 : object.get('Team1'),
-                        team2 : object.get('Team2'),
+                        team1 : object.get('Test1').get('Abbreviation'),
+                        team2 : object.get('Test2').get('Abbreviation'),
                         score1 : object.get('Score1'),
                         score2 : object.get('Score2'),
                         date : object.get('Date')
