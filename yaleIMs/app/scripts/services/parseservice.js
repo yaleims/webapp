@@ -21,7 +21,8 @@ angular.module('yaleImsApp')
 			    	var object = results[i];
 			    	colleges.push({
 						name : object.get('College'),			
-						score : object.get('Score')
+						score : object.get('Score'),
+                        collegeAbbr: object.get('Abbreviation')
 					});
 			    }   
 			    callback(colleges);
@@ -46,7 +47,8 @@ angular.module('yaleImsApp')
                         var object = results[i];
                         collegeData.push({
                             collegeName: object.get('College'),
-                            totalTyngPoints: object.get('Score')
+                            totalTyngPoints: object.get('Score'),
+                            collegeAbbr: object.get('Abbreviation')
                         });
 
                     }
