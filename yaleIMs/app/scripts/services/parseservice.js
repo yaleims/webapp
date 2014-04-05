@@ -124,6 +124,9 @@ angular.module('yaleImsApp')
 
             var sports = [];
 
+
+            query.include("Test2")
+
             query.find({
                 success: function(results) {
                 
@@ -268,9 +271,9 @@ angular.module('yaleImsApp')
 
             var games = [];
   
-            query.include("SportTest")
-            query.include("Test1")
-            query.include("Test2")
+            query.include("Sport")
+            query.include("Team1")
+            query.include("Team2")
             query.find({
                 success: function(results) {
                 
@@ -279,14 +282,14 @@ angular.module('yaleImsApp')
                     var object = results[i];
 
                     games.push({
-                        sport : object.get('SportTest').get('Name'),
-                        url : object.get('SportTest').get('URL'),
-                        team1 : object.get('Test1').get('College'),
-                        team1abbr : object.get('Test1').get('Abbreviation'),
-                        team1url : object.get('Test1').get('CollegeURL'),
-                        team2 : object.get('Test2').get('College'),
-                        team2abbr : object.get('Test2').get('Abbreviation'),
-                        team2url : object.get('Test2').get('CollegeURL'),
+                        sport : object.get('Sport').get('Name'),
+                        url : object.get('Sport').get('URL'),
+                        team1 : object.get('Team1').get('College'),
+                        team1abbr : object.get('Team1').get('Abbreviation'),
+                        team1url : object.get('Team1').get('CollegeURL'),
+                        team2 : object.get('Team2').get('College'),
+                        team2abbr : object.get('Team2').get('Abbreviation'),
+                        team2url : object.get('Team2').get('CollegeURL'),
                         score1 : object.get('Score1'),
                         score2 : object.get('Score2'),
                         date : object.get('Date')
