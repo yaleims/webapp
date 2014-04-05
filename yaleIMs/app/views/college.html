@@ -1,29 +1,33 @@
-<div class="jumbotron coverPhoto morse">
+<div class="jumbotron coverPhoto {{collegeURL}}">
     <div class="container">
 
-        <h1>Morse</h1>
-        <h2>800 Tyng Points</h2>
+        <h1>{{collegeName}}</h1>
+        <h2>{{totalTyngPoints}} Tyng Points</h2>
 
     </div>
 </div>
 
-<div class="container" ng-controller='CollegeCtrl' ng-init="init('Morse', 'Coed Water Polo')">
+<div class="container" ng-controller='CollegeCtrl'>
 
     <div class="row">
         <div class="col-md-3">
             <h2>Sports</h2>
-            <div class="row">
-                <div class="col-md-6"><a class="thumbnail"><center><span class="flaticon-badminton1 mediumSportIcon"></span></center></a></div>
-                <div class="col-md-6"><a class="thumbnail"><center><span class="flaticon-bowling2 mediumSportIcon"></span></center></a></div>
-                <div class="col-md-6"><a class="thumbnail"><center><span class="flaticon-bat mediumSportIcon"></span></center></a></div>
-                <div class="col-md-6"><a class="thumbnail"><center><span class="flaticon-bowling2 mediumSportIcon"></span></center></a></div>
+            <div ng-repeat="season in allSports">
+                <h3>{{season.season}}</h3>
+                <div class="row">
+                    <sport-select ng-repeat="sport in season.sport" url="/#/college/{{collegeURL}}/{{sport.url}}" sporturl="{{sport.url}}" sport="{{sport.name}}" iconsize="mediumSportIcon" colsize="col-md-4"></sport-select>
+                </div>
             </div>
         </div>
 
         <div class="col-md-1"></div>
 
-        <div class="col-md-8">
-            <h2>Morse Bowling <small>(W-L)</small> <small>120 Tyng Points</small></h2>
+        <div  ng-if="!sportURL" class="col-md-8">
+            <h2 class="">Choose a sport on the left to see recent and upcoming games</h2>
+        </div>
+
+        <div  ng-if="sportURL" class="col-md-8">
+            <h2>{{collegeName}} {{sportName}}<small>({{sportWins}}-{{sportLosses}})</small> <small>{{sportTyngPoints}} Tyng Points</small></h2>
             <h3>Schedule</h3>
                 <h4>Past Games</h4>
                 <table class="table table-hover">
@@ -32,11 +36,19 @@
                         <th>Date</th>
                         <th>Colleges</th>
                         <th>Score</th>
-                        <th>Tyng Points</th>
+                        <th>Outcome</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <tr gamelb-row ng-repeat="game in pastGames" college1="{{game.team1}}" college2="{{game.team2}}" score1="{{game.score1}}" score2="{{game.score2}}" points=0 date="{{game.date}}"></tr>
+                    <tr game-row ng-repeat="game in pastGames"
+                        team1="{{game.team1}}"
+                        team2="{{game.team2}}"
+                        score1="{{game.score1}}"
+                        score2="{{game.score2}}"
+                        past="true"
+                        noicon="true"
+                        date="{{game.date | date:'MM/dd @ h:mma'}}"
+                        outcome="{{outcome}}W"></tr>
                     </tbody>
                 </table>
                  <h4>Upcoming Games</h4>
@@ -45,12 +57,17 @@
                     <tr>
                         <th>Date</th>
                         <th>Colleges</th>
-                        <th>Score</th>
-                        <th>Tyng Points</th>
+                        <th>RSVP</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <tr gamelb-row ng-repeat="game in upcomingGames" college1="{{game.team1}}" college2="{{game.team2}}" score1="{{game.score1}}" score2="{{game.score2}}" points=0 date="{{game.date}}"></tr>
+                    <tr game-row ng-repeat="game in upcomingGames"
+                        team1="{{game.team1}}"
+                        team2="{{game.team2}}"
+
+                        date="{{game.date | date:'MM/dd @ h:mma'}}"
+                        noicon="true"
+                        rsvp="true"></tr>
                     </tbody>
                 </table>
         </div>

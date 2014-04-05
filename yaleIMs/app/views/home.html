@@ -18,7 +18,7 @@
             <h3>Upcoming Games</h3>
             <table class="table table-hover">
                 <tbody>
-                    <tr game-row ng-repeat="game in upcomingGames | orderBy:'date' | limitTo:6"   date="{{game.date | date:'MM/dd @ h:mma'}}" sport="{{game.sport}}" sporturl="{{game.sport}}" team1="{{game.team1}}" team2="{{game.team2}}"></tr>
+                    <tr game-row ng-repeat="game in upcomingGames | orderBy:'date' | limitTo:6"   date="{{game.date | date:'MM/dd @ h:mma'}}" sport="{{game.sport}}" sporturl="{{game.url}}" team1="{{game.team1}}" team2="{{game.team2}}"></tr>
                 </tbody>
             </table>
         </div>
@@ -50,7 +50,7 @@
     <h2>Winter Sports</h2>
     <div class="row">
         <div ng-repeat="sport in sports | orderBy:'name'" class="col-md-3">
-            <flaticon sport="{{sport.name}}" sportUrl="{{sport.url}}" size="largeSportIcon"></flaticon>
+            <flaticon sport="{{sport.name}}" sportUrl="{{sport.url}}" size="largeSportIcon" center="true"></flaticon>
         </div>
     </div>
 </div>

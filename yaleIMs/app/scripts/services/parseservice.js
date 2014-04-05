@@ -21,7 +21,8 @@ angular.module('yaleImsApp')
 			    	var object = results[i];
 			    	colleges.push({
 						name : object.get('College'),			
-						score : object.get('Score')
+						score : object.get('Score'),
+                        collegeAbbr: object.get('Abbreviation')
 					});
 			    }   
 			    callback(colleges);
@@ -32,10 +33,94 @@ angular.module('yaleImsApp')
 			});
 		},
 
-        getSports: function GetSports(sport, callback) {
+        getCollegeFromUrl: function GetCollegeFromUrl(college, callback) {
+            var parseClass = Parse.Object.extend('College');
+            var query = new Parse.Query(parseClass);
+            query.equalTo('CollegeURL', college);
+            var collegeData = [];
+
+            query.find({
+                success: function(results) {
+
+                    //Do something with the returned Parse.Object values
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        collegeData.push({
+                            collegeName: object.get('College'),
+                            totalTyngPoints: object.get('Score'),
+                            collegeAbbr: object.get('Abbreviation')
+                        });
+
+                    }
+                    callback(collegeData);
+                },
+                error: function(error) {
+                    alert('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        },
+
+        getAllSports: function GetAllSports(callback) {
+            var parseClass = Parse.Object.extend('Sport');
+            var query = new Parse.Query(parseClass);
+      
+            var sports = [];
+            var fall = [];
+            var winter = [];
+            var spring = [];
+
+            query.find({
+                success: function(results) {
+
+                    //Do something with the returned Parse.Object values
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        var season = object.get('Season');
+
+                        if (season == 'Fall') {
+                            fall.push({
+                                name: object.get('Name'),
+                                url : object.get('URL')
+                            });
+                        }
+
+                        else if (season == 'Winter') {
+                            winter.push({
+                                name: object.get('Name'),
+                                url : object.get('URL')
+                            });
+                        }
+
+                        else if (season == 'Spring') {
+                            spring.push({
+                                name: object.get('Name'),
+                                url : object.get('URL')
+                            });
+                        }
+                    }
+
+                    sports.push({season : 'Fall', sport : fall});
+                    sports.push({season : 'Winter', sport : winter});
+                    sports.push({season : 'Spring', sport : spring});
+
+                    callback(sports);
+                },
+                error: function(error) {
+                    alert('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        },
+
+        getSports: function GetSports(callback, sport, college) {
             var parseClass = Parse.Object.extend('Team');
             var query = new Parse.Query(parseClass);
-            query.equalTo('Name', sport);
+
+            if (typeof college !== 'undefined')
+                query.equalTo('College', college);
+
+            if (typeof sport !== 'undefined')
+                query.equalTo('Name', sport);
+
             var sports = [];
 
             query.find({
@@ -156,7 +241,10 @@ angular.module('yaleImsApp')
                 query.ascending('Date');
 
             var games = [];
-
+  
+            query.include("SportTest")
+            query.include("Test1")
+            query.include("Test2")
             query.find({
                 success: function(results) {
                 
@@ -165,16 +253,17 @@ angular.module('yaleImsApp')
                     var object = results[i];
 
                     games.push({
-                        sport : object.get('Sport'),
-                        team1 : object.get('Team1'),
-                        team2 : object.get('Team2'),
+                        sport : object.get('SportTest').get('Name'),
+                        url : object.get('SportTest').get('URL'),
+                        team1 : object.get('Test1').get('Abbreviation'),
+                        team2 : object.get('Test2').get('Abbreviation'),
                         score1 : object.get('Score1'),
                         score2 : object.get('Score2'),
                         date : object.get('Date')
                     });
                 }   
                 callback(games);
-                },
+                },  
                 error: function(error) {
                     alert('Error: ' + error.code + ' ' + error.message);
                 }
@@ -184,5 +273,3 @@ angular.module('yaleImsApp')
 
      return ParseService;
 });
-
-// There is a filter for dates builtin to angular.
