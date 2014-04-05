@@ -15,7 +15,14 @@
             <div ng-repeat="season in allSports">
                 <h3>{{season.season}}</h3>
                 <div class="row">
-                    <sport-select ng-click="" ng-repeat="sport in season.sport" url="" sporturl="{{sport.url}}" sport="{{sport.name}}" iconsize="mediumSportIcon" colsize="col-md-4"></sport-select>
+                    <sport-select ng-repeat="sport in season.sport"
+                                  dial="updateSchedule(sport.name, sport.url)"
+                                  updatepage="true"
+                                  url=""
+                                  sporturl="{{sport.url}}"
+                                  sport="{{sport.name}}"
+                                  iconsize="mediumSportIcon"
+                                  colsize="col-md-4"></sport-select>
                 </div>
             </div>
         </div>
