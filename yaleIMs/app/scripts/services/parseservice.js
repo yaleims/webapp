@@ -132,6 +132,7 @@ angular.module('yaleImsApp')
                     var object = results[i];
                     sports.push({
                         college : object.get('College'),
+                        //collegeURL: //fill in,
                         win : object.get('Win'),   
                         loss : object.get('Loss'),
                         points : object.get('Points')
