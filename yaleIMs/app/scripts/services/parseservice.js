@@ -216,6 +216,30 @@ angular.module('yaleImsApp')
             });
         },
 
+
+        getSportsObjects: function getSportsObjects(callback) {
+            
+            var parseClass = Parse.Object.extend('Sport');
+            var query = new Parse.Query(parseClass);
+      
+            var sports = [];
+            
+            query.find({
+                success: function(results) {
+
+                    //Do something with the returned Parse.Object values
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        
+                        //sports.push(object);
+                    }
+                    callback(sports);
+                },
+                error: function(error) {
+                    alert('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        },
         //get game by sport, college
         getGames: function GetGames(callback, sport, college, past) {
             
@@ -267,6 +291,69 @@ angular.module('yaleImsApp')
                 error: function(error) {
                     alert('Error: ' + error.code + ' ' + error.message);
                 }
+            });
+        },
+
+        getCollegeId: function getCollegeId(college, callback) {
+
+            var parseClass = Parse.Object.extend('College');
+            var query = new Parse.Query(parseClass);
+            
+            query.equalTo('College', college);
+            var id;
+
+            query.find({
+                success: function(results) {
+          
+                    for (var i = 0; i < results.length; i++) { 
+                        var object = results[i];
+                        id = object;    
+                        alert(id.id);
+                    }
+                    callback(id);
+                },  
+                error: function(error) {
+                    alert('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        },
+
+        getSportId: function getSportId(name, callback) {
+
+            var parseClass = Parse.Object.extend('Sport');
+            var query = new Parse.Query(parseClass);
+            
+            query.equalTo('Name', name);
+            var id;
+
+            query.find({
+                success: function(results) {
+          
+                    for (var i = 0; i < results.length; i++) { 
+                        var object = results[i];
+                        id = object;
+                        alert(id.id);    
+                    }
+                    callback(id);
+                },  
+                error: function(error) {
+                    alert('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        },
+
+        addGame: function addGame(team1, team2, sport, callback) {
+            
+            var object = Parse.Object.extend('Game');
+            var object = new object();
+
+            object.save({Test1:team1, Test2:team2, SportTest:sport}, {
+              success: function(object) {
+                callback();
+              },
+              error: function(error) {
+                alert("Error: " + error.message);
+              }
             });
         }
      };
