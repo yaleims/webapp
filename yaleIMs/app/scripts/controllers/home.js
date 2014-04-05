@@ -20,7 +20,7 @@ angular.module('yaleImsApp')
         })
     });
 
-    ParseService.getAllSports(function(results) {
-        $scope.allSports = results;
-    });
+        ParseService.getAllSports(function(results) {
+            $scope.allSports = results;
+        });
 }]);
