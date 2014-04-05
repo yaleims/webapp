@@ -20,9 +20,7 @@ angular.module('yaleImsApp')
         })
     });
 
-    ParseService.getSeasonalSports("Winter", function(results) {
-        $scope.$apply(function() {
-            $scope.sports = results;
-        })
+    ParseService.getAllSports(function(results) {
+        $scope.allSports = results;
     });
 }]);
