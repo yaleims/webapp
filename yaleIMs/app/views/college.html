@@ -15,19 +15,15 @@
             <div ng-repeat="season in allSports">
                 <h3>{{season.season}}</h3>
                 <div class="row">
-                    <sport-select ng-repeat="sport in season.sport" url="/#/college/{{collegeURL}}/{{sport.url}}" sporturl="{{sport.url}}" sport="{{sport.name}}" iconsize="mediumSportIcon" colsize="col-md-4"></sport-select>
+                    <sport-select ng-click="" ng-repeat="sport in season.sport" url="" sporturl="{{sport.url}}" sport="{{sport.name}}" iconsize="mediumSportIcon" colsize="col-md-4"></sport-select>
                 </div>
             </div>
         </div>
 
         <div class="col-md-1"></div>
 
-        <div  ng-if="!sportURL" class="col-md-8">
-            <h2 class="">Choose a sport on the left to see recent and upcoming games</h2>
-        </div>
-
-        <div  ng-if="sportURL" class="col-md-8">
-            <h2>{{collegeName}} {{sportName}}<small>({{sportWins}}-{{sportLosses}})</small> <small>{{sportTyngPoints}} Tyng Points</small></h2>
+        <div class="col-md-8">
+            <h2 ng-if="sportURL">{{collegeName}} {{sportName}}<small>({{sportWins}}-{{sportLosses}})</small> <small>{{sportTyngPoints}} Tyng Points</small></h2>
             <h3>Schedule</h3>
                 <h4>Past Games</h4>
                 <table class="table table-hover">
@@ -48,7 +44,7 @@
                         past="true"
                         noicon="true"
                         date="{{game.date | date:'MM/dd @ h:mma'}}"
-                        outcome="{{outcome}}W"></tr>
+                        outcome="{{outcome}}"></tr>
                     </tbody>
                 </table>
                  <h4>Upcoming Games</h4>
