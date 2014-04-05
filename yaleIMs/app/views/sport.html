@@ -37,7 +37,13 @@
         </tr>
         </thead>
         <tbody>
-            <tr collegelb-row ng-repeat="sport in sports | orderBy:['-points','-win','loss']" rank="{{$index + 1}}" college="{{sport.college}}" points="{{sport.points}}" wins="{{sport.win}}" loss="{{sport.loss}}"></tr>
+            <tr collegelb-row ng-repeat="sport in sports | orderBy:['-points','-win','loss']"
+                rank="{{$index + 1}}"
+                college="{{sport.college}}"
+                collegeurl="{{sport.collegeURL}}"
+                points="{{sport.points}}"
+                wins="{{sport.win}}"
+                loss="{{sport.loss}}"></tr>
         </tbody>
     </table>
     <hr class="featurette-divider">
@@ -56,7 +62,11 @@
         <tbody>
             <tr game-row ng-repeat="game in upcomingGames"
                 team1="{{game.team1}}"
+                team1abbr="{{game.team1}}"
+                team1url="{{game.team1url}}"
                 team2="{{game.team2}}"
+                team2abbr="{{game.team2}}"
+                team2url="{{game.team2url}}"
                 score1="{{game.score1}}"
                 score2="{{game.score2}}"
                 date="{{game.date | date:'MM/dd @ h:mma'}}"
@@ -78,7 +88,11 @@
         <tbody>
             <tr game-row ng-repeat="game in pastGames"
                 team1="{{game.team1}}"
+                team1abbr="{{game.team1}}"
+                team1url="{{game.team1url}}"
                 team2="{{game.team2}}"
+                team2abbr="{{game.team2}}"
+                team2url="{{game.team2url}}"
                 score1="{{game.score1}}"
                 score2="{{game.score2}}"
                 past="true"

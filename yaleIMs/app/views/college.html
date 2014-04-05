@@ -23,7 +23,7 @@
         <div class="col-md-1"></div>
 
         <div class="col-md-8">
-            <h2 ng-if="sportURL">{{collegeName}} {{sportName}}<small>({{sportWins}}-{{sportLosses}})</small> <small>{{sportTyngPoints}} Tyng Points</small></h2>
+            <h2 ng-if="sportURL">{{collegeName}} {{sportName}}<small> ({{sportWins}}-{{sportLosses}})</small> <small>{{sportTyngPoints}} Tyng Points</small></h2>
             <h3>Schedule</h3>
                 <h4>Past Games</h4>
                 <table class="table table-hover">
@@ -38,7 +38,11 @@
                     <tbody>
                     <tr game-row ng-repeat="game in pastGames"
                         team1="{{game.team1}}"
+                        team1abbr="{{game.team1}}"
+                        team1url="{{game.team1url}}"
                         team2="{{game.team2}}"
+                        team2abbr="{{game.team2}}"
+                        team2url="{{game.team2url}}"
                         score1="{{game.score1}}"
                         score2="{{game.score2}}"
                         past="true"
@@ -59,7 +63,11 @@
                     <tbody>
                     <tr game-row ng-repeat="game in upcomingGames"
                         team1="{{game.team1}}"
+                        team1abbr="{{game.team1}}"
+                        team1url="{{game.team1url}}"
                         team2="{{game.team2}}"
+                        team2abbr="{{game.team2}}"
+                        team2url="{{game.team2url}}"
 
                         date="{{game.date | date:'MM/dd @ h:mma'}}"
                         noicon="true"

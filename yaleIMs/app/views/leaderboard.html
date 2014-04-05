@@ -13,7 +13,12 @@
             <h3>College Leaderboard</h3>
             <table class="table table-hover">
                 <tbody>
-                <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score'" noWinLoss="true" rank="{{$index + 1}}" college="{{college.name}}" points="{{college.score}}"></tr>
+                <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score'"
+                    noWinLoss="true"
+                    rank="{{$index + 1}}"
+                    college="{{college.name}}"
+                    collegeurl="{{college.collegeURL}}"
+                    points="{{college.score}}"></tr>
                 </tbody>
             </table>
         </div>
@@ -28,29 +33,5 @@
             </table>
         </div>
     </div>
-    <h3>Badminton</h3>
-    <div class="row">
-        <div class="col-md-3">
-            <a class="thumbnail"><center><span class="flaticon-badminton1 largeSportIcon"></span></center></a>
-        </div>
 
-        <div class="col-md-1"></div>
-
-        <div class="col-md-8">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Colleges</th>
-                    <th>Score</th>
-                    <th>Win-Loss</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score'" rank="{{$index + 1}}" college="{{college.name}}" points="{{college.score}}" wins="1" loss="3"></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <hr class="featurette-divider">
 </div>

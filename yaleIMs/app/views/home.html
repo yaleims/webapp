@@ -18,7 +18,16 @@
             <h3>Upcoming Games</h3>
             <table class="table table-hover">
                 <tbody>
-                    <tr game-row ng-repeat="game in upcomingGames | orderBy:'date' | limitTo:6"   date="{{game.date | date:'MM/dd @ h:mma'}}" sport="{{game.sport}}" sporturl="{{game.url}}" team1="{{game.team1}}" team2="{{game.team2}}"></tr>
+                    <tr game-row ng-repeat="game in upcomingGames | orderBy:'date' | limitTo:6"
+                        date="{{game.date | date:'MM/dd @ h:mma'}}"
+                        sport="{{game.sport}}"
+                        sporturl="{{game.url}}"
+                        team1="{{game.team1}}"
+                        team1abbr="{{game.team1abbr}}"
+                        team1url="{{game.team1url}}"
+                        team2="{{game.team2}}"
+                        team2abbr="{{game.team2abbr}}"
+                        team2url="{{game.team2url}}"></tr>
                 </tbody>
             </table>
         </div>
@@ -28,7 +37,12 @@
             <h3>College Leaderboard</h3>
             <table class="table table-hover">
                 <tbody>
-                    <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score' | limitTo:6" noWinLoss="true" rank="{{$index + 1}}" college="{{college.name}}" points="{{college.score}}"></tr>
+                    <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score' | limitTo:6"
+                        noWinLoss="true"
+                        rank="{{$index + 1}}"
+                        college="{{college.name}}"
+                        collegeurl="{{college.collegeURL}}"
+                        points="{{college.score}}"></tr>
                 </tbody>
             </table>
         </div>
