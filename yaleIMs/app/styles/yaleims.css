@@ -32,6 +32,8 @@ body {
     -webkit-transform: translateZ(0);
 }
 
+
+/*********** ICON SIZE ************/
 .smallSportIcon
 {
     font-size: 20px !important;
@@ -47,6 +49,17 @@ body {
     font-size: 100px !important;
 }
 
+.smallShield
+{
+    width: 20px;
+    height: 23px;
+    margin: 0px;
+    padding: 0px;
+    margin-right: 8px;
+}
+/********* END ICON SIZE **********/
+
+
 
 /********* College Photos **********/
 .morse
@@ -54,7 +67,7 @@ body {
     background-image: url(../images/colleges/morse.jpg);
 }
 
-.stiles
+.ezra-stiles
 {
     background-image: url(../images/colleges/stiles.jpg);
 }
@@ -74,7 +87,7 @@ body {
     background-image: url(../images/colleges/trumbull.jpg);
 }
 
-.je
+.jonathan-edwards
 {
     background-image: url(../images/colleges/je.jpg);
 }
@@ -104,7 +117,7 @@ body {
     background-image: url(../images/colleges/davenport.jpg);
 }
 
-.td
+.timothy-dwight
 {
     background-image: url(../images/colleges/td.jpg);
 }

@@ -22,7 +22,8 @@ angular.module('yaleImsApp')
 			    	colleges.push({
 						name : object.get('College'),			
 						score : object.get('Score'),
-                        collegeAbbr: object.get('Abbreviation')
+                        collegeAbbr: object.get('Abbreviation'),
+                        collegeURL: object.get('CollegeURL')
 					});
 			    }   
 			    callback(colleges);
@@ -255,8 +256,12 @@ angular.module('yaleImsApp')
                     games.push({
                         sport : object.get('SportTest').get('Name'),
                         url : object.get('SportTest').get('URL'),
-                        team1 : object.get('Test1').get('Abbreviation'),
-                        team2 : object.get('Test2').get('Abbreviation'),
+                        team1 : object.get('Test1').get('College'),
+                        team1abbr : object.get('Test1').get('Abbreviation'),
+                        team1url : object.get('Test1').get('CollegeURL'),
+                        team2 : object.get('Test2').get('College'),
+                        team2abbr : object.get('Test2').get('Abbreviation'),
+                        team2url : object.get('Test2').get('CollegeURL'),
                         score1 : object.get('Score1'),
                         score2 : object.get('Score2'),
                         date : object.get('Date')
