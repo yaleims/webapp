@@ -1,214 +1,217 @@
+<div class="container" ng-controller="AdminCtrl" ng-init="getGames()">
+    <!--    
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
-
-    <title>IM Secretary Dashboard</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="jumbotron.css" rel="stylesheet">
-
-   
-
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-<!--    
-
- Main Dashboard
+     Main Dashboard
 
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Back to Main Site</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" role="form">
-            <a class="navbar-brand" href="#/profile">My Profile</a>
-            <button type="submit" class="btn btn-success">Sign Out</button>
-          </form>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="jumbotron">
-      <div class="container">
-        <h1>IM Secretary Dashboard</h1>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Update Scoreboard</h2>
-          <p>Enter scores for games played.</p>
-          <p><a class="btn btn-default" href="#" role="button">Update Now &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Schedule Games</h2>
-          <p>Assign and change dates for upcoming games (sends calendar alert to other IM secretaries). </p>
-          <p><a class="btn btn-default" href="#" role="button">Schedule Now &raquo;</a></p>
-       </div>
-        <div class="col-md-4">
-          <h2>Manage Teams</h2>
-          <p>Add and remove members from IM teams. Send emails to teams.</p>
-          <p><a class="btn btn-default" href="#" role="button">Manage Now &raquo;</a></p>
-        </div>
-      </div>
-
-      <hr> -->
-
-
-
-      <!--
-
-      Manage Teams
-
-
-
-  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Back to Main Site</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" role="form">
-            <a class="navbar-brand" href="#">Enter Scores</a>
-            <a class="navbar-brand" href="#">Schedule Games</a>
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <h2>Spring</h2>
-      <div class="row">
-        <div class="col-xs-12 col-sm-9">
-          <div class="row">
-            <div class="col-6 col-sm-6 col-lg-4">
-              <h2>Coed Softball</h2>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Back to Main Site</a>
             </div>
-             <div class="col-6 col-sm-6 col-lg-4">
-              <h2>Coed Ultimate</h2>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            <div class="navbar-collapse collapse">
+              <form class="navbar-form navbar-right" role="form">
+                <a class="navbar-brand" href="#/profile">My Profile</a>
+                <button type="submit" class="btn btn-success">Sign Out</button>
+              </form>
             </div>
-             <div class="col-6 col-sm-6 col-lg-4">
-              <h2>Coed Golf</h2>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-             <div class="col-6 col-sm-6 col-lg-4">
-              <h2>Coed Billiards</h2>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-             <div class="col-6 col-sm-6 col-lg-4">
-              <h2>Coed Volleyball</h2>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-             <div class="col-6 col-sm-6 col-lg-4">
-              <h2>Coed Badminton</h2>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-             <div class="col-6 col-sm-6 col-lg-4">
-              <h2>Coed Soccer</h2>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-            <div class="col-6 col-sm-6 col-lg-4">
-              <h2>Coed Dodgeball</h2>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-
           </div>
         </div>
 
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-          <h3>Other Seasons</h3>
-          <div class="list-group">
-            <a href="#" class="list-group-item active">Spring</a>
-            <a href="#" class="list-group-item">Winter</a>
-            <a href="#" class="list-group-item">Fall</a>
+
+        <div class="jumbotron">
+          <div class="container">
+            <h1>IM Secretary Dashboard</h1>
+          </div>
         </div>
-      </div>
 
-      <hr>-->
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <h2>Update Scoreboard</h2>
+              <p>Enter scores for games played.</p>
+              <p><a class="btn btn-default" href="#" role="button">Update Now &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+              <h2>Schedule Games</h2>
+              <p>Assign and change dates for upcoming games (sends calendar alert to other IM secretaries). </p>
+              <p><a class="btn btn-default" href="#" role="button">Schedule Now &raquo;</a></p>
+           </div>
+            <div class="col-md-4">
+              <h2>Manage Teams</h2>
+              <p>Add and remove members from IM teams. Send emails to teams.</p>
+              <p><a class="btn btn-default" href="#" role="button">Manage Now &raquo;</a></p>
+            </div>
+          </div>
 
+          <hr> -->
+
+
+
+          <!--
+
+          Manage Teams
+
+
+
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Back to Main Site</a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <form class="navbar-form navbar-right" role="form">
+                <a class="navbar-brand" href="#">Enter Scores</a>
+                <a class="navbar-brand" href="#">Schedule Games</a>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center"><h1>Manage Teams</h1></div>
+
+        <div class="container">
+          <h2>Spring</h2>
+          <div class="row">
+            <div class="col-xs-12 col-sm-9">
+              <div class="row">
+                <div class="col-6 col-sm-6 col-lg-4">
+                  <h2>Coed Softball</h2>
+                  <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                </div>
+                 <div class="col-6 col-sm-6 col-lg-4">
+                  <h2>Coed Ultimate</h2>
+                  <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                </div>
+                 <div class="col-6 col-sm-6 col-lg-4">
+                  <h2>Coed Golf</h2>
+                  <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                </div>
+                 <div class="col-6 col-sm-6 col-lg-4">
+                  <h2>Coed Billiards</h2>
+                  <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                </div>
+                 <div class="col-6 col-sm-6 col-lg-4">
+                  <h2>Coed Volleyball</h2>
+                  <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                </div>
+                 <div class="col-6 col-sm-6 col-lg-4">
+                  <h2>Coed Badminton</h2>
+                  <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                </div>
+                 <div class="col-6 col-sm-6 col-lg-4">
+                  <h2>Coed Soccer</h2>
+                  <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                </div>
+                <div class="col-6 col-sm-6 col-lg-4">
+                  <h2>Coed Dodgeball</h2>
+                  <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+              <h3>Other Seasons</h3>
+              <div class="list-group">
+                <a href="#" class="list-group-item active">Spring</a>
+                <a href="#" class="list-group-item">Winter</a>
+                <a href="#" class="list-group-item">Fall</a>
+            </div>
+          </div>
+
+          <hr>-->
+
+          <!--
+
+
+          Schedule Games
+
+
+          
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Back to Main Site</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <form class="navbar-form navbar-right" role="form">
+              <a class="navbar-brand" href="#">Enter Scores</a>
+              <a class="navbar-brand" href="#">Manage Teams</a>
+            </form>
+          </div>
+        </div>
+    </div>
+
+    <div class="text-center"><h1>Schedule Games</h1></div>
+
+
+      <div class="row">
+            <div class="col-md-10">
+              <h3>Add a Game</h3>
+              <form class="form-horizontal">
+                  <select ng-model="formTeam1" ng-options="c.get('College') for c in collegeObjects"></select>
+                  <select ng-model="formTeam2" ng-options="c.get('College') for c in collegeObjects"></select>
+                  <select ng-model="formSport" ng-options="c.get('Sport') for c in sportObjects"></select>
+                  <input type="date" ng-model="gameDate">
+                  <input type="time" ng-model="gameTime">
+                  <button class="btn" ng-click="addGames()"><i class="icon-plus"></i>Add</button>
+              </form>
+          </div>
+        </div>
+      -->
       <!--
 
 
-      Schedule Games
+      Enter Scores
 
 
-      -->
-  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Back to Main Site</a>
-      </div>
-      <div class="navbar-collapse collapse">
-        <form class="navbar-form navbar-right" role="form">
-          <a class="navbar-brand" href="#">Enter Scores</a>
-          <a class="navbar-brand" href="#">Manage Teams</a>
-        </form>
-      </div>
+    -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Back to Main Site</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <form class="navbar-form navbar-right" role="form">
+              <a class="navbar-brand" href="#">Enter Scores</a>
+              <a class="navbar-brand" href="#">Manage Teams</a>
+            </form>
+          </div>
+        </div>
     </div>
-</div>
 
+    <div class="text-center"><h1>Enter Scores</h1></div>
 
-<div class="container" ng-controller="AdminCtrl" ng-init="getGames()">
-  <div class="row">
-        <div class="col-md-10">
-          <h3>Add a Game</h3>
-          <form class="form-horizontal">
-              <select ng-model="formTeam1" ng-options="c.get('College') for c in collegeObjects"></select>
-              <select ng-model="formTeam2" ng-options="c.get('College') for c in collegeObjects"></select>
-              <select ng-model="formSport" ng-options="c.get('Sport') for c in sportObjects"></select>
-              <input type="date" ng-model="gameDate">
-              <input type="time" ng-model="gameTime">
-              <button class="btn" ng-click="addGames()"><i class="icon-plus"></i>Add</button>
-          </form>
-      </div>
-    </div>
 
       <div class="row">
         <div class="col-md-10">
-            <h2>Upcoming Games</h2>
+            <h2>Recent Games</h2>
+            <h4>Note:Filter this to be recent, not upcoming games. Also, filter so only admin's college games are listed</h4>
             <table class="table table-hover">
                  <thead>
                     <tr>
@@ -233,25 +236,13 @@
             </table>
         </div>
     </div>
+
 </div>
   
 
 
 
 
-      <footer>
-
-      </footer>
-    </div> <!-- /container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-  </body>
-</html>
 
 
 
