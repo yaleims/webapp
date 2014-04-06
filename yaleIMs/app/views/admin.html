@@ -2,8 +2,8 @@
     <!--    
 
      Main Dashboard
-
-
+    -->
+    <div ng-show="showDashboard()">
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -36,30 +36,31 @@
             <div class="col-md-4">
               <h2>Update Scoreboard</h2>
               <p>Enter scores for games played.</p>
-              <p><a class="btn btn-default" href="#" role="button">Update Now &raquo;</a></p>
+              <p><button ng-click="score()" >Update Now &raquo;</button></p>
             </div>
             <div class="col-md-4">
               <h2>Schedule Games</h2>
               <p>Assign and change dates for upcoming games (sends calendar alert to other IM secretaries). </p>
-              <p><a class="btn btn-default" href="#" role="button">Schedule Now &raquo;</a></p>
+              <p><button ng-click="schedule()" >Schedule Now &raquo;</button></p>
            </div>
             <div class="col-md-4">
               <h2>Manage Teams</h2>
               <p>Add and remove members from IM teams. Send emails to teams.</p>
-              <p><a class="btn btn-default" href="#" role="button">Manage Now &raquo;</a></p>
+              <p><button ng-click="team()" >Manage Now &raquo;</button></p>
             </div>
           </div>
-
-          <hr> -->
+    </div>
+</div>
 
 
 
           <!--
 
           Manage Teams
-
-
-
+        
+        
+          -->
+    <div ng-show="showTeam()">
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -69,7 +70,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">Back to Main Site</a>
+              <a class="navbar-brand" ng-click="dashboard()">Back to Dashboard</a>
             </div>
             <div class="navbar-collapse collapse">
               <form class="navbar-form navbar-right" role="form">
@@ -130,9 +131,11 @@
                 <a href="#" class="list-group-item">Winter</a>
                 <a href="#" class="list-group-item">Fall</a>
             </div>
-          </div>
+          </div>   
+      </div>
+    </div>
 
-          <hr>-->
+</div>
 
           <!--
 
@@ -141,6 +144,8 @@
 
 
           -->
+  <div ng-show="showSchedule()" >
+
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
@@ -150,7 +155,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Back to Main Site</a>
+            <a class="navbar-brand" ng-click="dashboard()">Back to Dashboard</a>
           </div>
           <div class="navbar-collapse collapse">
             <form class="navbar-form navbar-right" role="form">
@@ -179,6 +184,7 @@
 
         <h3>My IM Gcal</h3>
       <iframe src="https://www.google.com/calendar/embed?src=chr1u8ok860cen4lpr1mhpg1t0%40group.calendar.google.com&ctz=America/New_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+  </div>
       
       <!--
 
@@ -186,59 +192,60 @@
       Enter Scores
 
 
-    
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Back to Main Site</a>
+  -->
+  <div ng-show="showScore()">    
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" ng-click="dashboard()">Back to Dashboard</a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <form class="navbar-form navbar-right" role="form">
+                <a class="navbar-brand" href="#">Enter Scores</a>
+                <a class="navbar-brand" href="#">Manage Teams</a>
+              </form>
+            </div>
           </div>
-          <div class="navbar-collapse collapse">
-            <form class="navbar-form navbar-right" role="form">
-              <a class="navbar-brand" href="#">Enter Scores</a>
-              <a class="navbar-brand" href="#">Manage Teams</a>
-            </form>
+      </div>
+
+      <div class="text-center"><h1>Enter Scores</h1></div>
+
+
+        <div class="row">
+          <div class="col-md-10">
+              <h2>Recent Games</h2>
+              <h4>Note : Change this to be recent, not upcoming games. Also, filter so only admin's college games are listed</h4>
+              <table class="table table-hover">
+                   <thead>
+                      <tr>
+                          <th>Sport</th>
+                          <th>Date</th>
+                          <th>Colleges</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                          <tr game-row ng-repeat="game in upcomingGames | orderBy:'date'"
+                              date="{{game.date | date:'MM/dd @ h:mma'}}"
+                              sport="{{game.sport.get('Sport')}}"
+                              sporturl="{{game.sport.get('URL')}}"
+                              team1="{{game.team1.get('College')}}"
+                              team1abbr="{{game.team1.get('Abbreviation')}}"
+                              team1url="{{game.team1.get('URL')}}"
+                              team2="{{game.team2.get('College')}}"
+                              team2abbr="{{game.team2.get('Abbreviation')}}"
+                              team2url="{{game.team2.get('URL')}}">
+                          </tr>
+                      </tbody>
+              </table>
           </div>
-        </div>
+      </div>
     </div>
-
-    <div class="text-center"><h1>Enter Scores</h1></div>
-
-
-      <div class="row">
-        <div class="col-md-10">
-            <h2>Recent Games</h2>
-            <h4>Note : Change this to be recent, not upcoming games. Also, filter so only admin's college games are listed</h4>
-            <table class="table table-hover">
-                 <thead>
-                    <tr>
-                        <th>Sport</th>
-                        <th>Date</th>
-                        <th>Colleges</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr game-row ng-repeat="game in upcomingGames | orderBy:'date'"
-                            date="{{game.date | date:'MM/dd @ h:mma'}}"
-                            sport="{{game.sport.get('Sport')}}"
-                            sporturl="{{game.sport.get('URL')}}"
-                            team1="{{game.team1.get('College')}}"
-                            team1abbr="{{game.team1.get('Abbreviation')}}"
-                            team1url="{{game.team1.get('URL')}}"
-                            team2="{{game.team2.get('College')}}"
-                            team2abbr="{{game.team2.get('Abbreviation')}}"
-                            team2url="{{game.team2.get('URL')}}">
-                        </tr>
-                    </tbody>
-            </table>
-        </div>
-    </div>
-    -->
 
 
 

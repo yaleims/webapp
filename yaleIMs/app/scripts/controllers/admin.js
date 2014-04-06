@@ -2,7 +2,49 @@
 
 angular.module('yaleImsApp')
   .controller('AdminCtrl', ['$scope', 'ParseService', function ($scope, ParseService) {
-        
+    var showDashboard = true;
+    var showScore = false;
+    var showSchedule = false;
+    var showTeam =  false;
+
+    $scope.dashboard = function(){
+       showDashboard = true;
+       showScore = false;
+       showSchedule = false;
+       showTeam = false;
+    }   
+    $scope.score = function(){
+       showDashboard = false;
+       showScore = true;
+       showSchedule = false;
+       showTeam = false;
+    }
+    $scope.schedule = function(){
+       showDashboard = false;
+       showScore = false;
+       showSchedule = true;
+       showTeam = false;
+    }
+    $scope.team = function(){
+       showDashboard = false;
+       showScore = false;
+       showSchedule = false;
+       showTeam = true;
+    }
+
+    $scope.showDashboard = function(){
+       return showDashboard;
+    }
+    $scope.showScore = function(){
+       return showScore;
+    }
+    $scope.showSchedule = function(){
+       return showSchedule;
+    }
+    $scope.showTeam = function(){
+       return showTeam;
+    }
+
     ParseService.getSportObjects(undefined, true, function(results) {
         $scope.$apply(function() {
             $scope.sportObjects = results;
