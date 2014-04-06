@@ -10,14 +10,19 @@
 
                     <h2>{{season.season}}</h2>
                     <div class="row">
-                        <sport-select ng-repeat="sport in season.sport"  url="/#/sport/{{sport.url}}" sporturl="{{sport.url}}" sport="{{sport.name}}" iconsize="mediumSportIcon" colsize="col-sm-4"></sport-select>
+                        <sport-select ng-repeat="sport in season.sport"  
+                        url="/#/sport/{{sport.get('URL')}}" 
+                        sporturl="{{sport.get('URL')}}" 
+                        sport="{{sport.get('Sport')}}" 
+                        iconsize="mediumSportIcon" 
+                        colsize="col-sm-4">
+                    </sport-select>
                     </div>
             </div>
             <div class="col-md-1"></div>
         </div>
     </div>
 </div>
-
 
 <div ng-if="sportName" class="container">
 
@@ -37,13 +42,13 @@
         </tr>
         </thead>
         <tbody>
-            <tr collegelb-row ng-repeat="sport in sports | orderBy:['-points','-win','loss']"
+            <tr collegelb-row ng-repeat="team in teams | orderBy:['-points','-win','loss']"
                 rank="{{$index + 1}}"
-                college="{{sport.college}}"
-                collegeurl="{{sport.collegeURL}}"
-                points="{{sport.points}}"
-                wins="{{sport.win}}"
-                loss="{{sport.loss}}"></tr>
+                college="{{team.college.get('College')}}"
+                collegeurl="{{team.college.get('URL')}}"
+                points="{{team.points}}"
+                wins="{{team.win}}"
+                loss="{{team.loss}}"></tr>
         </tbody>
     </table>
     <hr class="featurette-divider">
@@ -61,12 +66,12 @@
         </thead>
         <tbody>
             <tr game-row ng-repeat="game in upcomingGames"
-                team1="{{game.team1}}"
-                team1abbr="{{game.team1}}"
-                team1url="{{game.team1url}}"
-                team2="{{game.team2}}"
-                team2abbr="{{game.team2}}"
-                team2url="{{game.team2url}}"
+                team1="{{game.team1.get('College')}}"
+                team1abbr="{{game.team1.get('Abbreviation')}}"
+                team1url="{{game.team1.get('URL')}}"
+                team2="{{game.team2.get('College')}}"
+                team2abbr="{{game.team2.get('Abbreviation')}}"
+                team2url="{{game.team2.get('URL')}}"
                 score1="{{game.score1}}"
                 score2="{{game.score2}}"
                 date="{{game.date | date:'MM/dd @ h:mma'}}"
@@ -87,12 +92,12 @@
         </thead>
         <tbody>
             <tr game-row ng-repeat="game in pastGames"
-                team1="{{game.team1}}"
-                team1abbr="{{game.team1}}"
-                team1url="{{game.team1url}}"
-                team2="{{game.team2}}"
-                team2abbr="{{game.team2}}"
-                team2url="{{game.team2url}}"
+                team1="{{game.team1.get('College')}}"
+                team1abbr="{{game.team1.get('Abbreviation')}}"
+                team1url="{{game.team1.get('URL')}}"
+                team2="{{game.team2.get('College')}}"
+                team2abbr="{{game.team2.get('Abbreviation')}}"
+                team2url="{{game.team2.get('URL')}}"
                 score1="{{game.score1}}"
                 score2="{{game.score2}}"
                 past="true"

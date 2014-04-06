@@ -19,15 +19,15 @@
             <table class="table table-hover">
                 <tbody>
                     <tr game-row ng-repeat="game in upcomingGames | orderBy:'date' | limitTo:6"
-                        date="{{game.date | date:'MM/dd @ h:mma'}}"
-                        sport="{{game.sport}}"
-                        sporturl="{{game.url}}"
-                        team1="{{game.team1}}"
-                        team1abbr="{{game.team1abbr}}"
-                        team1url="{{game.team1url}}"
-                        team2="{{game.team2}}"
-                        team2abbr="{{game.team2abbr}}"
-                        team2url="{{game.team2url}}"></tr>
+                        date="{{game.game.get('Date') | date:'MM/dd @ h:mma'}}"
+                        sport="{{game.sport.get('Sport')}}"
+                        sporturl="{{game.sport.get('URL')}}"
+                        team1="{{game.team1.get('College')}}"
+                        team1abbr="{{game.team1.get('Abbreviation')}}"
+                        team1url="{{game.team1.get('URL')}}"
+                        team2="{{game.team2.get('College')}}"
+                        team2abbr="{{game.team2.get('Abbreviation')}}"
+                        team2url="{{game.team2.get('URL')}}"></tr>
                 </tbody>
             </table>
         </div>
@@ -40,9 +40,9 @@
                     <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score' | limitTo:6"
                         noWinLoss="true"
                         rank="{{$index + 1}}"
-                        college="{{college.name}}"
-                        collegeurl="{{college.collegeURL}}"
-                        points="{{college.score}}"></tr>
+                        college="{{college.get('College')}}"
+                        collegeurl="{{college.get('URL')}}"
+                        points="{{college.get('Score')}}"></tr>
                 </tbody>
             </table>
         </div>
@@ -52,7 +52,10 @@
             <h3>Player Leaderboard</h3>
             <table class="table table-hover">
                 <tbody>
-                    <tr playerlb-row ng-repeat="player in players | orderBy:'-points' | limitTo:6" rank="{{$index + 1}}" player="{{player.name}}" points="{{player.points}}"></tr>
+                    <tr playerlb-row ng-repeat="player in players | orderBy: player : get('Points') | limitTo:6" 
+                        rank="{{$index + 1}}" 
+                        player="{{player.get('FirstName')}} {{player.get('LastName')}}" 
+                        points="{{player.get('Points')}}"></tr>
                 </tbody>
             </table>
         </div>
@@ -67,7 +70,13 @@
 
                 <h2>{{season.season}}</h2>
                 <div class="row">
-                    <sport-select ng-repeat="sport in season.sport"  url="/#/sport/{{sport.url}}" sporturl="{{sport.url}}" sport="{{sport.name}}" iconsize="mediumSportIcon" colsize="col-sm-4"></sport-select>
+                    <sport-select ng-repeat="sport in season.sport" 
+                        url="/#/sport/{{sport.get('URL')}}" 
+                        sporturl="{{sport.get('URL')}}" 
+                        sport="{{sport.get('Sport')}}" 
+                        iconsize="mediumSportIcon" 
+                        colsize="col-sm-4">
+                    </sport-select>
                 </div>
             </div>
             <div class="col-md-1"></div>

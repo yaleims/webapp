@@ -50,11 +50,11 @@
                         team2="{{game.team2.get('College')}}"
                         team2abbr="{{game.team2.get('Abbreviation')}}"
                         team2url="{{game.team2.get('URL')}}"
-                        score1="{{game.game.get('Score1')}}"
-                        score2="{{game.game.get('Score2')}}"
+                        score1="{{game.score1}}"
+                        score2="{{game.score2}}"
                         past="true"
                         noicon="true"
-                        date="{{game.game.get('Date') | date:'MM/dd @ h:mma'}}"
+                        date="{{game.date | date:'MM/dd @ h:mma'}}"
                         outcome="{{outcome}}"></tr>
                     </tbody>
                 </table>
@@ -76,7 +76,7 @@
                         team2abbr="{{game.team2.get('Abbreviation')}}"
                         team2url="{{game.team2.get('URL')}}"
 
-                        date="{{game.game.get('Date') | date:'MM/dd @ h:mma'}}"
+                        date="{{game.date | date:'MM/dd @ h:mma'}}"
                         noicon="true"
                         rsvp="true"></tr>
                     </tbody>
