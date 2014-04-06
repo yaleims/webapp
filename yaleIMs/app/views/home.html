@@ -13,13 +13,6 @@
 </div>
 <div class="container" ng-controller='HomeCtrl'>
 
-    <form class="form-horizontal">
-        <select class="form-group" ng-model="formTeam1" ng-options="c.get('College') for c in collegeObjects"></select>
-        <select class="form-group" ng-model="formTeam2" ng-options="c.get('College') for c in collegeObjects"></select>
-        <select ng-model="formSport" ng-options="c.get('Sport') for c in sportObjects"></select>
-        <button class="btn" ng-click="addGames()"><i class="icon-plus"></i>Add</button>
-    </form>
-
     <div class="row">
         <!-- Upcoming -->
         <div class="col-md-4">

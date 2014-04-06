@@ -280,12 +280,12 @@ angular.module('yaleImsApp')
             });
         },
 
-        addGame: function addGame(team1, team2, sport, callback) {
+        addGame: function addGame(team1, team2, sport, date, callback) {
             
             var object = Parse.Object.extend('Game');
             var object = new object();
 
-            object.save({Team1:team1, Team2:team2, Sport:sport}, {
+            object.save({Team1:team1, Team2:team2, Sport:sport, Date:date, Completed:false}, {
               success: function(object) {
                 callback();
               },

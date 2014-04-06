@@ -26,22 +26,4 @@ angular.module('yaleImsApp')
             $scope.allSports = results;
         })
     });
-
-    ParseService.getSportObjects(undefined, function(results) {
-        $scope.$apply(function() {
-            $scope.sportObjects = results;
-            console.log($scope.sportObjects);
-        })
-    });
-
-    ParseService.getCollegeObjects(undefined, function(results) {
-        $scope.$apply(function() {
-            $scope.collegeObjects = results;
-        })
-    });
-
-    $scope.addGames = function() {
-        ParseService.addGame($scope.formTeam1, $scope.formTeam2, $scope.formSport, function() {
-        });
-    }
 }]);
