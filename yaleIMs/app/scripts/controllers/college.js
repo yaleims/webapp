@@ -12,19 +12,23 @@ angular.module('yaleImsApp')
 
         $scope.updateSchedule = function (sportName, sportUrl)
         {
-            console.log(sportName);
             $scope.sportURL = sportUrl;
             $scope.sportName = sportName;
-            sport = sportName;
-
-            ParseService.getSports(function(results) {
+            
+            ParseService.getSportFromUrl(sportUrl, function(results) {
                 $scope.$apply(function() {
-                    $scope.sportWins = results[0].win;
-                    $scope.sportLosses = results[0].loss;
-                    $scope.sportTyngPoints = results[0].points;
-                    console.log(results);
-                });
-            }, sport, college);
+                    sport = results[0];
+                })
+            
+                ParseService.getTeams(function(results) {
+                    $scope.$apply(function() {
+                        $scope.sportWins = results[0].team.get('Win');
+                        $scope.sportLosses = results[0].team.get('Loss');
+                        $scope.sportTyngPoints = results[0].team.get('Points');
+                        console.log(results);
+                    });
+                }, sport, college);
+            });
         }
 
         ParseService.getAllSports(function(results) {
@@ -32,9 +36,11 @@ angular.module('yaleImsApp')
         });
 
         ParseService.getCollegeFromUrl(college, function(results) {
-            college = results[0].collegeName;
-            $scope.totalTyngPoints = results[0].totalTyngPoints;
-            $scope.collegeName = results[0].collegeName;
+            college = results[0];
+            $scope.totalTyngPoints = results[0].get('Score');
+            $scope.collegeName = results[0].get('College');
+
+     
 
             ParseService.getGames(function(results) {
                 $scope.$apply(function() {

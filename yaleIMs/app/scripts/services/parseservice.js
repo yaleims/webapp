@@ -9,7 +9,8 @@ angular.module('yaleImsApp')
       name: 'Parse',
 
       getColleges: function GetColleges(callback) {
-		var parseClass = Parse.Object.extend('College');
+		
+        var parseClass = Parse.Object.extend('College');
 		var query = new Parse.Query(parseClass);
 		var colleges = [];
 
@@ -19,12 +20,7 @@ angular.module('yaleImsApp')
 		  	  	//Do something with the returned Parse.Object values
 			  	for (var i = 0; i < results.length; i++) { 
 			    	var object = results[i];
-			    	colleges.push({
-						name : object.get('College'),			
-						score : object.get('Score'),
-                        collegeAbbr: object.get('Abbreviation'),
-                        collegeURL: object.get('CollegeURL')
-					});
+			    	colleges.push(object);
 			    }   
 			    callback(colleges);
 				},
@@ -34,11 +30,14 @@ angular.module('yaleImsApp')
 			});
 		},
 
-        getCollegeFromUrl: function GetCollegeFromUrl(college, callback) {
+        //should return college object        
+        getCollegeFromUrl: function GetCollegeFromUrl(collegeURL, callback) {
+
             var parseClass = Parse.Object.extend('College');
             var query = new Parse.Query(parseClass);
-            query.equalTo('CollegeURL', college);
-            var collegeData = [];
+            
+            query.equalTo('URL', collegeURL);
+            var college = [];
 
             query.find({
                 success: function(results) {
@@ -46,14 +45,9 @@ angular.module('yaleImsApp')
                     //Do something with the returned Parse.Object values
                     for (var i = 0; i < results.length; i++) {
                         var object = results[i];
-                        collegeData.push({
-                            collegeName: object.get('College'),
-                            totalTyngPoints: object.get('Score'),
-                            collegeAbbr: object.get('Abbreviation')
-                        });
-
+                        college.push(object);
                     }
-                    callback(collegeData);
+                    callback(college);
                 },
                 error: function(error) {
                     alert('Error: ' + error.code + ' ' + error.message);
@@ -61,11 +55,38 @@ angular.module('yaleImsApp')
             });
         },
 
+        getSportFromUrl: function GetSportsFromUrl(sportURL, callback) {
+            
+            var parseClass = Parse.Object.extend('Sport');
+            var query = new Parse.Query(parseClass);
+            
+            query.equalTo('URL', sportURL);
+            
+            var sports = [];
+
+            query.find({
+                success: function(results) {
+
+                    //Do something with the returned Parse.Object values
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        sports.push(object);
+                    }
+                    callback(sports);
+                },
+                error: function(error) {
+                    alert('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        },
+        
         getAllSports: function GetAllSports(callback) {
+
             var parseClass = Parse.Object.extend('Sport');
             var query = new Parse.Query(parseClass);
       
             var sports = [];
+
             var fall = [];
             var winter = [];
             var spring = [];
@@ -78,26 +99,14 @@ angular.module('yaleImsApp')
                         var object = results[i];
                         var season = object.get('Season');
 
-                        if (season == 'Fall') {
-                            fall.push({
-                                name: object.get('Name'),
-                                url : object.get('URL')
-                            });
-                        }
+                        if (season == 'Fall')
+                            fall.push(object);
 
-                        else if (season == 'Winter') {
-                            winter.push({
-                                name: object.get('Name'),
-                                url : object.get('URL')
-                            });
-                        }
+                        else if (season == 'Winter')
+                            winter.push(object);
 
-                        else if (season == 'Spring') {
-                            spring.push({
-                                name: object.get('Name'),
-                                url : object.get('URL')
-                            });
-                        }
+                        else if (season == 'Spring')
+                            spring.push(object);
                     }
 
                     sports.push({season : 'Fall', sport : fall});
@@ -111,8 +120,9 @@ angular.module('yaleImsApp')
                 }
             });
         },
-
-        getSports: function GetSports(callback, sport, college) {
+        
+        getTeams: function GetTeams(callback, sport, college) {
+           
             var parseClass = Parse.Object.extend('Team');
             var query = new Parse.Query(parseClass);
 
@@ -120,86 +130,38 @@ angular.module('yaleImsApp')
                 query.equalTo('College', college);
 
             if (typeof sport !== 'undefined')
-                query.equalTo('Name', sport);
+                query.equalTo('Sport', sport);
 
-            var sports = [];
+            var teams = [];
 
-
-            query.include("Test2")
+            query.include('College');
+            query.include('Sport');
 
             query.find({
                 success: function(results) {
                 
                 //Do something with the returned Parse.Object values
-                for (var i = 0; i < results.length; i++) { 
-                    var object = results[i];
-                    sports.push({
-                        college : object.get('College'),
-                        //collegeURL: //fill in,
-                        win : object.get('Win'),   
-                        loss : object.get('Loss'),
-                        points : object.get('Points')
-                    });
-                }   
-                callback(sports);
-                },
-                error: function(error) {
-                    alert('Error: ' + error.code + ' ' + error.message);
-                }
-            });
-        },
-
-        getSportFromUrl: function GetSportsFromUrl(sport, callback) {
-            var parseClass = Parse.Object.extend('Sport');
-            var query = new Parse.Query(parseClass);
-            query.equalTo('URL', sport);
-            var sportName = "";
-
-            query.find({
-                success: function(results) {
-
-                    //Do something with the returned Parse.Object values
-                    for (var i = 0; i < results.length; i++) {
+                    for (var i = 0; i < results.length; i++) { 
                         var object = results[i];
-                        sportName = object.get('Name');
-
-                    }
-                    callback(sportName);
+                        teams.push({
+                            team : object,
+                            sport : object.get('Sport'),
+                            college : object.get('College')
+                        })
+                    }   
+                    callback(teams);
                 },
                 error: function(error) {
                     alert('Error: ' + error.code + ' ' + error.message);
                 }
             });
         },
-
-        getSeasonalSports: function GetSeasonalSports(season, callback) {
-            var parseClass = Parse.Object.extend('Sport');
-            var query = new Parse.Query(parseClass);
-            query.equalTo('Season', season);
-            var sports = [];
-
-            query.find({
-                success: function(results) {
-
-                    //Do something with the returned Parse.Object values
-                    for (var i = 0; i < results.length; i++) {
-                        var object = results[i];
-                        sports.push({
-                            name : object.get('Name'),
-                            url : object.get('URL'),
-                        });
-                    }
-                    callback(sports);
-                },
-                error: function(error) {
-                    alert('Error: ' + error.code + ' ' + error.message);
-                }
-            });
-        },
-
+    
         getPlayers: function GetPlayers(callback) {
+
             var parseClass = Parse.Object.extend('Player');
             var query = new Parse.Query(parseClass);
+            
             var players = [];
 
             query.find({
@@ -208,10 +170,7 @@ angular.module('yaleImsApp')
                     //Do something with the returned Parse.Object values
                     for (var i = 0; i < results.length; i++) {
                         var object = results[i];
-                        players.push({
-                            name : object.get('FirstName') + ' ' + object.get('LastName'),
-                            points : object.get('Points')
-                        });
+                        players.push(object);
                     }
                     callback(players);
                 },
@@ -221,30 +180,6 @@ angular.module('yaleImsApp')
             });
         },
 
-
-        getSportsObjects: function getSportsObjects(callback) {
-            
-            var parseClass = Parse.Object.extend('Sport');
-            var query = new Parse.Query(parseClass);
-      
-            var sports = [];
-            
-            query.find({
-                success: function(results) {
-
-                    //Do something with the returned Parse.Object values
-                    for (var i = 0; i < results.length; i++) {
-                        var object = results[i];
-                        
-                        //sports.push(object);
-                    }
-                    callback(sports);
-                },
-                error: function(error) {
-                    alert('Error: ' + error.code + ' ' + error.message);
-                }
-            });
-        },
         //get game by sport, college
         getGames: function GetGames(callback, sport, college, past) {
             
@@ -252,12 +187,15 @@ angular.module('yaleImsApp')
             var query = new Parse.Query(parseClass);
 
             if (typeof college !== 'undefined') {
+
                 var query1 = new Parse.Query(parseClass);
                 var query2 = new Parse.Query(parseClass);
+
                 query1.equalTo('Team1', college);
                 query2.equalTo('Team2', college);
+
                 query = Parse.Query.or(query1, query2);
-            } 
+            }
 
             if (typeof sport !== 'undefined')
                 query.equalTo('Sport', sport);
@@ -271,9 +209,10 @@ angular.module('yaleImsApp')
 
             var games = [];
   
-            query.include("Sport")
-            query.include("Team1")
-            query.include("Team2")
+            query.include('Sport');
+            query.include('Team1');
+            query.include('Team2');
+            
             query.find({
                 success: function(results) {
                 
@@ -281,18 +220,12 @@ angular.module('yaleImsApp')
                 for (var i = 0; i < results.length; i++) { 
                     var object = results[i];
 
+                    //alert(object.id);
                     games.push({
-                        sport : object.get('Sport').get('Name'),
-                        url : object.get('Sport').get('URL'),
-                        team1 : object.get('Team1').get('College'),
-                        team1abbr : object.get('Team1').get('Abbreviation'),
-                        team1url : object.get('Team1').get('CollegeURL'),
-                        team2 : object.get('Team2').get('College'),
-                        team2abbr : object.get('Team2').get('Abbreviation'),
-                        team2url : object.get('Team2').get('CollegeURL'),
-                        score1 : object.get('Score1'),
-                        score2 : object.get('Score2'),
-                        date : object.get('Date')
+                        game : object,
+                        team1 : object.get('Team1'),
+                        team2 : object.get('Team2'),
+                        sport : object.get('Sport')
                     });
                 }   
                 callback(games);
@@ -303,6 +236,7 @@ angular.module('yaleImsApp')
             });
         },
 
+        /*
         getCollegeId: function getCollegeId(college, callback) {
 
             var parseClass = Parse.Object.extend('College');
@@ -349,7 +283,7 @@ angular.module('yaleImsApp')
                     alert('Error: ' + error.code + ' ' + error.message);
                 }
             });
-        },
+        },*/
 
         addGame: function addGame(team1, team2, sport, callback) {
             
@@ -364,8 +298,71 @@ angular.module('yaleImsApp')
                 alert("Error: " + error.message);
               }
             });
-        }
-     };
+        },
+        
+        getSportObjects: function getSportObjects(callback) {
+            
+            var parseClass = Parse.Object.extend('Sport');
+            var query = new Parse.Query(parseClass);
+      
+            var sports = [];
+          
+            query.find({
+                success: function(results) {
 
-     return ParseService;
+                    //Do something with the returned Parse.Object values
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        
+                        sports.push(object);
+                    }
+                    callback(sports);
+                },
+                error: function(error) {
+                    alert('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        },
+        /*
+        getCollegeObjects: function getCollegeObjects(callback) {
+            
+            var parseClass = Parse.Object.extend('College');
+            var query = new Parse.Query(parseClass);
+      
+            var colleges = [];
+            
+            query.find({
+                success: function(results) {
+
+                    //Do something with the returned Parse.Object values
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        
+                        colleges.push(object);
+                    }
+                    callback(colleges);
+                },
+                error: function(error) {
+                    alert('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        },
+        */
+        updateTable: function updateTable(sport, college, points, win, loss, callback) {
+            
+            var object = Parse.Object.extend('Team');
+            var object = new object();
+
+            object.save({Sport:sport, College:college, Points:points, Win:win, Loss:loss}, {
+              success: function(object) {
+                callback();
+              },
+              error: function(error) {
+                alert("Error: " + error.message);
+              }
+            });
+        }
+    };
+
+    return ParseService;
 });

@@ -16,11 +16,11 @@
                 <h3>{{season.season}}</h3>
                 <div class="row">
                     <sport-select ng-repeat="sport in season.sport"
-                                  dial="updateSchedule(sport.name, sport.url)"
+                                  dial="updateSchedule(sport.get('Sport'), sport.get('URL'))"
                                   updatepage="true"
                                   url=""
-                                  sporturl="{{sport.url}}"
-                                  sport="{{sport.name}}"
+                                  sporturl="{{sport.get('URL')}}"
+                                  sport="{{sport.get('Sport')}}"
                                   iconsize="mediumSportIcon"
                                   colsize="col-md-4"></sport-select>
                 </div>
@@ -43,18 +43,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr game-row ng-repeat="game in pastGames"
-                        team1="{{game.team1}}"
-                        team1abbr="{{game.team1}}"
-                        team1url="{{game.team1url}}"
-                        team2="{{game.team2}}"
-                        team2abbr="{{game.team2}}"
-                        team2url="{{game.team2url}}"
-                        score1="{{game.score1}}"
-                        score2="{{game.score2}}"
+                    <tr game-row ng-repeat="game in pastGames | filter:sportURL"
+                        team1="{{game.team1.get('College')}}"
+                        team1abbr="{{game.team1.get('Abbreviation')}}"
+                        team1url="{{game.team1.get('URL')}}"
+                        team2="{{game.team2.get('College')}}"
+                        team2abbr="{{game.team2.get('Abbreviation')}}"
+                        team2url="{{game.team2.get('URL')}}"
+                        score1="{{game.game.get('Score1')}}"
+                        score2="{{game.game.get('Score2')}}"
                         past="true"
                         noicon="true"
-                        date="{{game.date | date:'MM/dd @ h:mma'}}"
+                        date="{{game.game.get('Date') | date:'MM/dd @ h:mma'}}"
                         outcome="{{outcome}}"></tr>
                     </tbody>
                 </table>
@@ -68,15 +68,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr game-row ng-repeat="game in upcomingGames"
-                        team1="{{game.team1}}"
-                        team1abbr="{{game.team1}}"
-                        team1url="{{game.team1url}}"
-                        team2="{{game.team2}}"
-                        team2abbr="{{game.team2}}"
-                        team2url="{{game.team2url}}"
+                    <tr game-row ng-repeat="game in upcomingGames | filter:sportURL"
+                        team1="{{game.team1.get('College')}}"
+                        team1abbr="{{game.team1.get('Abbreviation')}}"
+                        team1url="{{game.team1.get('URL')}}"
+                        team2="{{game.team2.get('College')}}"
+                        team2abbr="{{game.team2.get('Abbreviation')}}"
+                        team2url="{{game.team2.get('URL')}}"
 
-                        date="{{game.date | date:'MM/dd @ h:mma'}}"
+                        date="{{game.game.get('Date') | date:'MM/dd @ h:mma'}}"
                         noicon="true"
                         rsvp="true"></tr>
                     </tbody>
