@@ -16,7 +16,7 @@
                     </thead>
                     <tbody>
                         <tr game-row ng-repeat="game in pastGames | orderBy:'date' | limitTo:6"
-                            date="{{game.game.get('Date') | date:'MM/dd @ h:mma'}}"
+                            date="{{game.date | date:'MM/dd @ h:mma'}}"
                             sport="{{game.sport.get('Sport')}}"
                             sporturl="{{game.sport.get('URL')}}"
                             team1="{{game.team1.get('College')}}"
@@ -26,8 +26,8 @@
                             team2abbr="{{game.team2.get('Abbreviation')}}"
                             team2url="{{game.team2.get('URL')}}"
                             past="true"
-                            score1="{{game.game.get('Score1')}}"
-                            score2="{{game.game.get('Score2')}}"></tr>
+                            score1="{{game.score1}}"
+                            score2="{{game.score2}}"></tr>
                     </tbody>
                 </table>
             <h2>Overall Leaderboard</h2>
@@ -43,9 +43,9 @@
                     <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score' | limitTo:6"
                         noWinLoss="true"
                         rank="{{$index + 1}}"
-                        college="{{college.get('College')}}"
-                        collegeurl="{{college.get('URL')}}"
-                        points="{{college.get('Score')}}"></tr>
+                        college="{{college.college}}"
+                        collegeurl="{{college.url}}"
+                        points="{{college.score}}"></tr>
                 </tbody>
             </table>
         </div>
@@ -63,7 +63,7 @@
                     </thead>
                     <tbody>
                         <tr game-row ng-repeat="game in upcomingGames | orderBy:'date' | limitTo:6"
-                            date="{{game.game.get('Date') | date:'MM/dd @ h:mma'}}"
+                            date="{{game.date | date:'MM/dd @ h:mma'}}"
                             sport="{{game.sport.get('Sport')}}"
                             sporturl="{{game.sport.get('URL')}}"
                             team1="{{game.team1.get('College')}}"

@@ -4,30 +4,36 @@ angular.module('yaleImsApp')
   .controller('SportCtrl', ['$scope', 'ParseService', '$routeParams', function ($scope, ParseService, $routeParams) {
 
 
-        ParseService.getAllSports(function(results) {
-            $scope.allSports = results;
+        var sportURL = $routeParams.sport;
+
+        ParseService.getSportsBySeason(function(results) {
+            $scope.$apply(function() {
+                $scope.allSports = results;
+            })
         });
+        
+        ParseService.getSportObjects(sportURL, function(results){
+            var sport;
+            $scope.$apply(function() {
+                sport = results[0];
+                $scope.sportName = results[0].get('Sport');
+            })
 
-        var sport = $routeParams.sport;
-        ParseService.getSportFromUrl(sport, function(sportName){
-            sport = sportName;
-            $scope.sportName = sportName;
-
-            ParseService.getSports(function(results) {
+            ParseService.getTeams(function(results) {
                 $scope.$apply(function() {
-                $scope.sports = results;
+                    $scope.teams = results;
                 })
             }, sport, undefined);
 
             ParseService.getGames(function(results) {
                 $scope.$apply(function() {
-                $scope.pastGames = results;
+                    $scope.pastGames = results;
                 })
             }, sport, undefined, true);
 
             ParseService.getGames(function(results) {
                 $scope.$apply(function() {
-                $scope.upcomingGames = results;
+                    $scope.upcomingGames = results;
                 })
             }, sport, undefined, false);
       });

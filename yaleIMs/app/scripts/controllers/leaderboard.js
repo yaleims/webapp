@@ -9,9 +9,9 @@ angular.module('yaleImsApp')
       })
     });
 
-        ParseService.getPlayers(function(results) {
-            $scope.$apply(function() {
-                $scope.players = results;
-            })
-        });
+    ParseService.getPlayers(function(results) {
+      $scope.$apply(function() {
+        $scope.players = results;
+      })
+    });
 }]);

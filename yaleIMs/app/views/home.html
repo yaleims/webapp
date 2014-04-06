@@ -1,4 +1,12 @@
 <div class="container">
+
+    <form class="form-horizontal">
+        <select ng-model="formTeam1" ng-options="c.name for c in colleges"></select>
+        <select ng-model="formTeam2" ng-options="c.name for c in colleges"></select>
+        <input type="text" ng-model="formSport" ng-model-instant>
+        <button class="btn" ng-click="addGames()"><i class="icon-plus"></i>Add</button>
+    </form>
+
     <div class="jumbotron">
         <center>
             <h1>Yale IMs</h1>
@@ -19,7 +27,7 @@
             <table class="table table-hover">
                 <tbody>
                     <tr game-row ng-repeat="game in upcomingGames | orderBy:'date' | limitTo:6"
-                        date="{{game.game.get('Date') | date:'MM/dd @ h:mma'}}"
+                        date="{{game.date | date:'MM/dd @ h:mma'}}"
                         sport="{{game.sport.get('Sport')}}"
                         sporturl="{{game.sport.get('URL')}}"
                         team1="{{game.team1.get('College')}}"
@@ -40,9 +48,9 @@
                     <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score' | limitTo:6"
                         noWinLoss="true"
                         rank="{{$index + 1}}"
-                        college="{{college.get('College')}}"
-                        collegeurl="{{college.get('URL')}}"
-                        points="{{college.get('Score')}}"></tr>
+                        college="{{college.college}}"
+                        collegeurl="{{college.url}}"
+                        points="{{college.score}}"></tr>
                 </tbody>
             </table>
         </div>
@@ -54,8 +62,8 @@
                 <tbody>
                     <tr playerlb-row ng-repeat="player in players | orderBy: player : get('Points') | limitTo:6" 
                         rank="{{$index + 1}}" 
-                        player="{{player.get('FirstName')}} {{player.get('LastName')}}" 
-                        points="{{player.get('Points')}}"></tr>
+                        player="{{player.name}}" 
+                        points="{{player.points}}"></tr>
                 </tbody>
             </table>
         </div>
