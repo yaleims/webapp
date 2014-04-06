@@ -20,19 +20,4 @@ angular.module('yaleImsApp')
           $scope.upcomingGames = results;
         })
     }, undefined, undefined, false);
-
-    /*$scope.addGames = function() {
-      
-      ParseService.getCollegeId($scope.formTeam1.name, function(results) {
-        var team1 = results;
-        ParseService.getCollegeId($scope.formTeam2.name, function(results) {
-          var team2 = results;
-          ParseService.getSportId($scope.formSport, function(results) {
-            var sport = results;
-            ParseService.addGame(team1, team2, sport, function() {
-            });
-          });
-        });
-      });
-  }*/
 }]);

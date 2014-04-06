@@ -41,7 +41,7 @@ angular.module('yaleImsApp')
             var parseClass = Parse.Object.extend('College');
             var query = new Parse.Query(parseClass);
 	       	
-            if (typeof collegeURL !== undefined) 
+            if (typeof collegeURL !== 'undefined') 
                 query.equalTo('URL', collegeURL);
             
             var colleges = [];
@@ -95,7 +95,7 @@ angular.module('yaleImsApp')
             var parseClass = Parse.Object.extend('Sport');
             var query = new Parse.Query(parseClass);
             
-            if (typeof collegeURL !== undefined) 
+            if (typeof collegeURL !== 'undefined') 
                 query.equalTo('URL', sportURL);
             
             var sports = [];
@@ -285,7 +285,7 @@ angular.module('yaleImsApp')
             var object = Parse.Object.extend('Game');
             var object = new object();
 
-            object.save({Test1:team1, Test2:team2, SportTest:sport}, {
+            object.save({Team1:team1, Team2:team2, Sport:sport}, {
               success: function(object) {
                 callback();
               },

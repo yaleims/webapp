@@ -1,12 +1,5 @@
 <div class="container">
 
-    <form class="form-horizontal">
-        <select ng-model="formTeam1" ng-options="c.name for c in colleges"></select>
-        <select ng-model="formTeam2" ng-options="c.name for c in colleges"></select>
-        <input type="text" ng-model="formSport" ng-model-instant>
-        <button class="btn" ng-click="addGames()"><i class="icon-plus"></i>Add</button>
-    </form>
-
     <div class="jumbotron">
         <center>
             <h1>Yale IMs</h1>
@@ -18,7 +11,14 @@
 
     <hr class="featurette-divider">
 </div>
-<div class="container">
+<div class="container" ng-controller='HomeCtrl'>
+
+    <form class="form-horizontal">
+        <select class="form-group" ng-model="formTeam1" ng-options="c.get('College') for c in collegeObjects"></select>
+        <select class="form-group" ng-model="formTeam2" ng-options="c.get('College') for c in collegeObjects"></select>
+        <select ng-model="formSport" ng-options="c.get('Sport') for c in sportObjects"></select>
+        <button class="btn" ng-click="addGames()"><i class="icon-plus"></i>Add</button>
+    </form>
 
     <div class="row">
         <!-- Upcoming -->
