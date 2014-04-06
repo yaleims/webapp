@@ -3,7 +3,7 @@
 angular.module('yaleImsApp')
   .controller('AdminCtrl', ['$scope', 'ParseService', function ($scope, ParseService) {
         
-    ParseService.getSportObjects(undefined, function(results) {
+    ParseService.getSportObjects(undefined, true, function(results) {
         $scope.$apply(function() {
             $scope.sportObjects = results;
             console.log($scope.sportObjects);

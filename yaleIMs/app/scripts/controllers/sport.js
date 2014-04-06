@@ -5,7 +5,6 @@ angular.module('yaleImsApp')
 
 
         var sportURL = $routeParams.sport;
-        alert(sportURL);
 
         ParseService.getSportsBySeason(function(results) {
             $scope.$apply(function() {
@@ -13,7 +12,7 @@ angular.module('yaleImsApp')
             })
         });
         
-        ParseService.getSportObjects(sportURL, function(results){
+        ParseService.getSportObjects(sportURL, false, function(results){
             var sport;
             $scope.$apply(function() {
                 sport = results[0];

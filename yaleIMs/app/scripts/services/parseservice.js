@@ -90,12 +90,12 @@ angular.module('yaleImsApp')
             });
         },
 
-        getSportObjects: function GetSportObjects(sportURL, callback) {
+        getSportObjects: function GetSportObjects(sportURL, getAll, callback) {
             
             var parseClass = Parse.Object.extend('Sport');
             var query = new Parse.Query(parseClass);
             
-            if (typeof collegeURL !== 'undefined') 
+            if (typeof collegeURL !== 'undefined' || !getAll) 
                 query.equalTo('URL', sportURL);
             
             var sports = [];
