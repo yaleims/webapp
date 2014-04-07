@@ -1,7 +1,14 @@
 'use strict';
 
 angular.module('yaleImsApp')
-  .controller('AdminCtrl', ['$scope', 'ParseService', function ($scope, ParseService) {
+  .controller('AdminCtrl', ['$scope', 'ParseService', '$rootScope', function ($scope, ParseService, $rootScope) {
+    $rootScope.adminPage = true;
+
+        $scope.$on('$locationChangeStart', function ()
+        {
+            $rootScope.adminPage = false;
+        });
+
     var showDashboard = true;
     var showScore = false;
     var showSchedule = false;
