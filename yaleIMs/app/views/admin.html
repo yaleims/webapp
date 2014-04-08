@@ -1,5 +1,5 @@
     <!-- Splash for Admin Dashboard -->
-    <div class="container">
+    <div class="container" ng-controller = "AdminCtrl" ng-init="getGames()">
         <div class="jumbotron">
             <h1 class="text-center">Administrative Dashboard</h1>
         </div>
@@ -19,12 +19,49 @@
                 <div class="page-header">
                     <h1>Update Scoreboard <span class="badge badge-danger">42</span></h1>
                 </div>
-
-
                 <div class="page-header">
                     <h1>Update Schedule</h1>
+                    <div class ="row">
+                       <div class="col-md-10">
+                          <h3>Add a Game</h3>
+                            <form class="form-horizontal">
+                              <select ng-model="formTeam1" ng-options="c.get('College') for c in collegeObjects"></select>
+                              <select ng-model="formTeam2" ng-options="c.get('College') for c in collegeObjects"></select>
+                              <select ng-model="formSport" ng-options="c.get('Sport') for c in sportObjects"></select><br>
+                              <input type="date" ng-model="gameDate">
+                              <input type="time" ng-model="gameTime">
+                              <button class="btn" ng-click="addGames()"><i class="icon-plus"></i>Add</button>
+                          </form>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-10">
+                            <h3>Upcoming Games</h3>
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th>Sport</th>
+                                  <th>Date</th>
+                                  <th>Colleges</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr game-row ng-repeat="game in upcomingGames | orderBy:'date'"
+                                    date="{{game.date | date:'MM/dd @ h:mma'}}"
+                                    sport="{{game.sport.get('Sport')}}"
+                                    sporturl="{{game.sport.get('URL')}}"
+                                    team1="{{game.team1.get('College')}}"
+                                    team1abbr="{{game.team1.get('Abbreviation')}}"
+                                    team1url="{{game.team1.get('URL')}}"
+                                    team2="{{game.team2.get('College')}}"
+                                    team2abbr="{{game.team2.get('Abbreviation')}}"
+                                    team2url="{{game.team2.get('URL')}}">
+                                 </tr>
+                               </tbody>
+                            </table>
+                        </div>
+                  </div>
                 </div>
-
 
                 <div class="page-header">
                     <h1>Manage Teams</h1>
