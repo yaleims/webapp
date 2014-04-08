@@ -52,6 +52,10 @@ angular.module('yaleImsApp')
        return showTeam;
     }
 
+    ParseService.getSportsBySeason(function(results) {
+        $scope.allSports = results;
+    });
+
     ParseService.getSportObjects(undefined, true, function(results) {
         $scope.$apply(function() {
             $scope.sportObjects = results;

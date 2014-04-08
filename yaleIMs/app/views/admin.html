@@ -20,12 +20,32 @@
                     <h1>Update Scoreboard <span class="badge badge-danger">42</span></h1>
                 </div>
 
-                <div class="page-header">
-                    <h1>Manage Teams</h1>
-                </div>
 
                 <div class="page-header">
                     <h1>Update Schedule</h1>
+                </div>
+
+
+                <div class="page-header">
+                    <h1>Manage Teams</h1>
+                </div>
+                <div class="row">
+                    <div ng-repeat="season in allSports">
+                        <div class="col-md-3">
+                            <h3>{{season.season}}</h3>
+                            <div class="row">
+                                <sport-select ng-repeat="sport in season.sport"
+                                              dial="updateSchedule(sport.get('Sport'), sport.get('URL'))"
+                                              updatepage="true"
+                                              url=""
+                                              sporturl="{{sport.get('URL')}}"
+                                              sport="{{sport.get('Sport')}}"
+                                              iconsize="adminSportIcon"
+                                              colsize="col-md-4"></sport-select>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
                 </div>
             </div>
 
