@@ -1,0 +1,176 @@
+body {
+    padding-top: 70px;
+    font-size: 16px;
+    font-weight: 200;
+}
+
+.coverPhoto
+{
+    margin-top: -20px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    /* Text style for over photo */
+    color: #fff;
+    text-shadow: 0 0 3px rgba(0,0,0,0.8);
+}
+
+.profileData
+{
+    width: 100%;
+    height: 200px;
+    -transform: translate(0px,125px);
+    -webkit-transform: translate(0px,125px); /** Chrome & Safari **/
+    -o-transform: translate(0px,125px); /** Opera **/
+    -moz-transform: translate(0px,125px); /** Firefox **/
+}
+
+
+.affix
+{
+    -webkit-transform: translateZ(0);
+}
+
+
+/*********** ICON SIZE ************/
+.smallSportIcon
+{
+    font-size: 20px !important;
+}
+
+.mediumSportIcon
+{
+    font-size: 60px !important;
+}
+
+.largeSportIcon
+{
+    font-size: 100px !important;
+}
+
+.adminSportIcon
+{
+    font-size: 40px !important;
+}
+
+.smallShield
+{
+    width: 20px;
+    height: 23px;
+    margin: 0px;
+    padding: 0px;
+    margin-right: 8px;
+}
+/********* END ICON SIZE **********/
+
+
+
+/********* College Photos **********/
+.morse
+{
+    background-image: image-url("colleges/morse.jpg");
+}
+
+/*.ezra-stiles
+{
+    background-image: image-url("colleges/ezra-stiles.jpg");
+}
+
+.pierson
+{
+    background-image: image-url("colleges/pierson.jpg");
+}
+
+.silliman
+{
+    background-image: image-url("colleges/silliman.jpg");
+}
+
+.trumbull
+{
+    background-image: image-url("colleges/trumbull.jpg");
+}
+
+.jonathan-edwards
+{
+    background-image: image-url("colleges/jonathan-edwards.jpg");
+}
+
+.branford
+{
+    background-image: image-url("colleges/branford.jpg");
+}
+
+.saybrook
+{
+    background-image: image-url("colleges/saybrook.jpg");
+}
+
+.calhoun
+{
+    background-image: image-url("colleges/calhoun.jpg");
+}
+
+.berkeley
+{
+    background-image: image-url("colleges/berkeley.jpg");
+}
+
+.davenport
+{
+    background-image: image-url("colleges/davenport.jpg");
+}
+
+.timothy-dwight
+{
+    background-image: image-url("colleges/timothy-dwight.jpg");
+}*/
+/******* End College Photos ********/
+
+
+/******* Badge Centering inside Headings *******/
+h1,h2,h3 {
+    vertical-align:middle;
+}
+h1>.badge, h2>.badge, h3>.badge {
+    vertical-align:middle;
+    margin-top: -0.5em;
+}
+
+/******* Badge Colors *******/
+.badge:hover {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+}
+.badge-danger {
+    background-color: #d9534f;
+}
+.badge-danger:hover {
+    background-color: #d9534f;
+}
+.badge-warning {
+    background-color: #f0ad4e;
+}
+.badge-warning:hover {
+    background-color: #f0ad4e;
+}
+.badge-success {
+    background-color: #5cb85c;
+}
+.badge-success:hover {
+    background-color: #5cb85c;
+}
+.badge-info {
+    background-color: #5bc0de;
+}
+.badge-info:hover {
+    background-color: #5bc0de;
+}
+.badge-inverse {
+    background-color: #333333;
+}
+.badge-inverse:hover {
+    background-color: #333333;
+}

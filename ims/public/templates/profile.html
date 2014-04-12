@@ -1,0 +1,39 @@
+<div class="jumbotron coverPhoto morse">
+    <div class="container">
+        <h1>{{playerName}}</h1>
+        <h2>{{playerCollege}} {{playerYear}}</h2>
+    </div>
+</div>
+
+<div class="container">
+
+    <h2>Your Teams<button type="button" class="btn btn-danger pull-right">Add Team</button></h2>
+
+    <div class="row">
+        <div ng-repeat="team in playerTeams | orderBy:'sport'" class="col-md-3">
+            <flaticon  sport="{{team.sport}}" sporturl="{{team.sporturl}}" size="largeSportIcon" center="true"></flaticon>
+        </div>
+    </div>
+
+    <h2>Games Attended</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Sport</th>
+                    <th>Date</th>
+                    <th>Colleges</th>
+                    <th>Score</th>
+                    <th>Outcome</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
