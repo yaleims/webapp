@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('yaleImsApp')
-  .controller('SportCtrl', ['$scope', 'ParseService', '$routeParams', function ($scope, ParseService, $routeParams) {
+  .controller('SportCtrl', ['$scope', 'ParseService', '$stateParams', function ($scope, ParseService, $stateParams) {
 
-
-        var sportURL = $routeParams.sport;
+        var sportURL = $stateParams.sport;
 
         ParseService.getSportsBySeason(function(results) {
             $scope.$apply(function() {
@@ -16,7 +15,8 @@ angular.module('yaleImsApp')
             var sport;
             $scope.$apply(function() {
                 sport = results[0];
-                $scope.sportName = results[0].get('Sport');
+                if(sport)
+                    $scope.sportName = results[0].get('Sport');
             })
 
             ParseService.getTeams(function(results) {

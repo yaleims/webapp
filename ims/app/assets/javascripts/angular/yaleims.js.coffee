@@ -27,23 +27,23 @@ window.patientbank = angular.module('yaleImsApp',
         )
         
         # Access Controls States
-        .state('sport.none',
+        .state('sport',
           url: '/sport'
           templateUrl: '/templates/sport'
           controller: 'SportCtrl'
         )
         .state('sport.selected'
-          url: '/sport/:sport'
+          url: '/:sport'
           templateUrl: '/templates/sport'
           controller: 'SportCtrl'
         )
-        .state('college.nosport',
+        .state('college',
           url: '/college/:college'
           templateUrl: '/templates/college'
           controller: 'CollegeCtrl'
         )
         .state('college.sport',
-          url: '/college/:college/:sport'
+          url: '/:sport'
           templateUrl: '/templates/college'
           controller: 'CollegeCtrl'
         )

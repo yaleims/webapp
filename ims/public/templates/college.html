@@ -18,7 +18,7 @@
                     <sport-select ng-repeat="sport in season.sport"
                                   dial="updateSchedule(sport.get('Sport'), sport.get('URL'))"
                                   updatepage="true"
-                                  url=""
+                                  url="college.sport({sport: '{{sport.get('URL')}}' })"
                                   sporturl="{{sport.get('URL')}}"
                                   sport="{{sport.get('Sport')}}"
                                   iconsize="mediumSportIcon"

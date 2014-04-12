@@ -1,11 +1,13 @@
 'use strict';
 
 angular.module('yaleImsApp')
-  .controller('CollegeCtrl', ['$scope', 'ParseService', '$routeParams', function ($scope, ParseService, $routeParams) {
+  .controller('CollegeCtrl', ['$scope', 'ParseService', '$stateParams', function ($scope, ParseService, $stateParams) {
 
         // Get the data from the url
-        var college = $routeParams.college;
-        var sport = $routeParams.sport;
+        var college = $stateParams.college;
+        var sport = "";
+        if($stateParams.sport)
+            sport = $stateParams.sport;
 
         $scope.collegeURL = college;
         $scope.sportURL = sport;
