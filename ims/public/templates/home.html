@@ -72,7 +72,7 @@
                 <h2>{{season.season}}</h2>
                 <div class="row">
                     <sport-select ng-repeat="sport in season.sport" 
-                        url="sport.selected({sport: '{{sport.get('URL')}}' })" 
+                        url="sportSelected({sport: '{{sport.get('URL')}}' })" 
                         sporturl="{{sport.get('URL')}}" 
                         sport="{{sport.get('Sport')}}" 
                         iconsize="mediumSportIcon" 

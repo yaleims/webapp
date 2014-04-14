@@ -32,10 +32,10 @@ window.patientbank = angular.module('yaleImsApp',
           templateUrl: '/templates/sport'
           controller: 'SportCtrl'
         )
-        .state('sport.selected'
-          url: '/:sport'
+        .state('sportSelected'
+          url: '^/sport/:sport'
           templateUrl: '/templates/sport'
-          controller: 'SportCtrl'
+          controller: 'SportSelectedCtrl'
         )
         .state('college',
           url: '/college/:college'
