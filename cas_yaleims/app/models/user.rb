@@ -53,7 +53,7 @@ protected
     self.year = ( p['class'] ? p['class'][0].to_i : 0 )
     self.college = ( p['college'] ? p['college'][0] : '' )
     self.save!
- 
+    p self
   end
  
   # not a yale email, just make best guess at it 

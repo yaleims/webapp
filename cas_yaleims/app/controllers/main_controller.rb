@@ -1,6 +1,6 @@
 class MainController < ApplicationController
+  
   def index
-  	p session[:cas_user]
   end
 
   def uncas
@@ -10,6 +10,7 @@ class MainController < ApplicationController
   end
 
   def logout
+  	session[:cas_user] = nil
     CASClient::Frameworks::Rails::Filter.logout(self)
   end
 end

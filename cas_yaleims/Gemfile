@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
+source 'https://rails-assets.org' # This site is super cool!
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
+gem 'rake'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -30,3 +32,5 @@ gem 'actionpack-action_caching'
 
 gem 'net-ldap'
 gem 'rubycas-client'
+gem 'nokogiri'
+gem 'mechanize'
