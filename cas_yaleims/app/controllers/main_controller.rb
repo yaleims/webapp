@@ -2,7 +2,7 @@ class MainController < ApplicationController
   
   def index
   	@current_user ||= User.where(netid: session[:cas_user]).first
-  	p @current_user
+  	p @current_user.fullCollegeName
   end
 
   def current_user

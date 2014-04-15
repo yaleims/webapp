@@ -28,7 +28,7 @@ gem 'jasmine-rails'
 
 # Rails 4 compatibility
 gem 'rails-observers'
-gem 'actionpack-action_caching'
+#gem 'actionpack-action_caching'
 
 gem 'net-ldap'
 gem 'rubycas-client'

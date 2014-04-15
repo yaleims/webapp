@@ -13,6 +13,11 @@ class User < ActiveRecord::Base
   def name
     self.fname.capitalize + " " + self.lname.capitalize
   end
+
+  def fullCollegeName
+    colleges = Hash["" => "", "BK" => "Berkeley", "BR" => "Branford", "CC" => "Calhoun", "DC" => "Davenport", "ES" => "Ezra Stiles", "JE"=> "Jonathan Edwards", "MC" => "Morse",  "PC" => "Pierson", "SY" => "Saybrook", "SM" => "Silliman", "TD" => "Timothy Dwight", "TC" => "Trumbull"]
+    self.college = colleges[self.college]
+  end
   
  
 protected
