@@ -1,6 +1,12 @@
 class MainController < ApplicationController
   
   def index
+  	@current_user ||= User.where(netid: session[:cas_user]).first
+  	p @current_user
+  end
+
+  def current_user
+    @current_user ||= User.where(netid: session[:cas_user]).first
   end
 
   def uncas
