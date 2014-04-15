@@ -29,7 +29,7 @@
                     <li><a href="/#/profile">My Profile</a></li>
                     <li><a href="/#/admin">Admin</a></li>
                     <% if session[:cas_user] %>
-                        <li><a ui-sref="logout" target="_self">Logout (<%= session[:cas_user] %>) </a></li>
+                        <li><a ui-sref="logout" target="_self">Logout (<%= @current_user.name %>) </a></li>
                     <% end %>
                 </ul>
             </div>

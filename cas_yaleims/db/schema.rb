@@ -19,16 +19,10 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "users", force: true do |t|
     t.string   "fname"
     t.string   "lname"
-    t.string   "nickname"
     t.string   "email"
     t.string   "college"
     t.string   "year"
-    t.string   "picture"
     t.string   "netid"
-    t.integer  "gender",     default: 0
-    t.integer  "preference", default: 0
-    t.string   "major",      default: "Undecided"
-    t.boolean  "active",     default: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
   end
