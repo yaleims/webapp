@@ -14,9 +14,32 @@ class User < ActiveRecord::Base
     self.fname.capitalize + " " + self.lname.capitalize
   end
 
-  def fullCollegeName
-    colleges = Hash["" => "", "BK" => "Berkeley", "BR" => "Branford", "CC" => "Calhoun", "DC" => "Davenport", "ES" => "Ezra Stiles", "JE"=> "Jonathan Edwards", "MC" => "Morse",  "PC" => "Pierson", "SY" => "Saybrook", "SM" => "Silliman", "TD" => "Timothy Dwight", "TC" => "Trumbull"]
-    self.college = colleges[self.college]
+  def collegeName
+    colleges = Hash["" => "", "BK" => "Berkeley", "BR" => "Branford", "CC" => "Calhoun", 
+                    "DC" => "Davenport", "ES" => "Ezra Stiles", "JE"=> "Jonathan Edwards", 
+                    "MC" => "Morse",  "PC" => "Pierson", "SY" => "Saybrook", 
+                    "SM" => "Silliman", "TD" => "Timothy Dwight", "TC" => "Trumbull"]
+    colleges[self.college]
+  end
+
+  def collegeURL
+    collegeURLs = Hash["" => "", "BK" => "berkeley", "BR" => "branford", "CC" => "calhoun", 
+                    "DC" => "davenport", "ES" => "ezra-stiles", "JE"=> "jonathan-edwards", 
+                    "MC" => "morse",  "PC" => "pierson", "SY" => "saybrook", 
+                    "SM" => "silliman", "TD" => "timothy-dwight", "TC" => "trumbull"]
+    collegeURLs[self.college]
+  end
+
+  def graduationYear
+    self.year
+  end
+
+  def studentEmail
+    self.email
+  end
+
+  def studentNetid
+    self.netid
   end
   
  
