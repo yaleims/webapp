@@ -1,6 +1,6 @@
 CasYaleims::Application.routes.draw do
  root 'main#index'
- get 'logout' => 'main#logout'
+ get '/logout' => 'main#logout'
  get '/users/me' => 'users#whois'
 
   # The priority is based upon order of creation: first created -> highest priority.
