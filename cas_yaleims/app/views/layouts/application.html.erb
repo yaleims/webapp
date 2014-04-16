@@ -22,15 +22,35 @@
             <div class="collapse navbar-collapse" id="imsNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/home">Home</a></li>
-                    <li><a href="/#/newsfeed">Newsfeed</a></li>
-                    <li><a href="/#/leaderboard">Leaderboards</a></li>
-                    <li><a href="/#/college/morse/">Colleges</a></li>
-                    <li><a href="/#/sport">Sports</a></li>
-                    <li><a href="/#/profile">My Profile</a></li>
-                    <li><a href="/#/admin">Admin</a></li>
-                    <% if session[:cas_user] %>
-                        <li><a ui-sref="logout" target="_self">Logout (<%= @current_user.name %>) </a></li>
-                    <% end %>
+                    <li><a href="/newsfeed">Newsfeed</a></li>
+                    <li><a href="/leaderboard">Leaderboards</a></li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Colleges <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="/college/berkeley">Berkeley</a></li>
+                        <li><a href="/college/branford">Branford</a></li>
+                        <li><a href="/college/calhoun">Calhoun</a></li>
+                        <li><a href="/college/davenport">Davenport</a></li>
+                        <li><a href="/college/ezra-stiles">Ezra Stiles</a></li>
+                        <li><a href="/college/jonathan-edwards">Jonathan Edwards</a></li>
+                        <li><a href="/college/morse">Morse</a></li>
+                        <li><a href="/college/pierson">Pierson</a></li>
+                        <li><a href="/college/saybrook">Saybrook</a></li>
+                        <li><a href="/college/silliman">Silliman</a></li>
+                        <li><a href="/college/timothy-dwight">Timothy Dwight</a></li>
+                        <li><a href="/college/trumbull">Trumbull</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/sport">Sports</a></li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= @current_user.name %> <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="/profile">My Profile</a></li>
+                        <li><a href="/college/<%= @current_user.collegeURL %>/">My College</a></li>
+                        <li><a href="/logout" target="_self">Logout</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/admin">Admin</a></li>
                 </ul>
             </div>
         </div>

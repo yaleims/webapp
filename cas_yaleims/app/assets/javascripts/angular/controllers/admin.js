@@ -4,7 +4,7 @@ angular.module('yaleImsApp')
   .controller('AdminCtrl', ['$scope', 'ParseService', '$rootScope', function ($scope, ParseService, $rootScope) {
     $rootScope.adminPage = true;
 
-        $scope.$on('$locationChangeStart', function ()
+        $scope.$on('$stateChangeStart', function ()
         {
             $rootScope.adminPage = false;
         });
