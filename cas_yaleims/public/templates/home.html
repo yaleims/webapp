@@ -51,7 +51,7 @@
             <h3>Player Leaderboard</h3>
             <table class="table table-hover">
                 <tbody>
-                    <tr playerlb-row ng-repeat="player in players | orderBy: player : get('Points') | limitTo:6" 
+                    <tr playerlb-row ng-repeat="player in players | orderBy: '-points'| limitTo:6" 
                         rank="{{$index + 1}}" 
                         player="{{player.name}}" 
                         points="{{player.points}}"></tr>
