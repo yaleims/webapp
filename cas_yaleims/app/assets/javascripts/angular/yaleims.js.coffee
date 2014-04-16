@@ -57,9 +57,12 @@ window.yaleImsApp = angular.module('yaleImsApp',
           controller: 'LogoutCtrl'
         )
       $locationProvider.html5Mode(true)
-      $urlRouterProvider.otherwise('/home')
+      $urlRouterProvider.otherwise('/newsfeed')
   ])
 
-  .run(['$rootScope', ($rootScope) ->
+  .run(['$rootScope', 'Student', ($rootScope, Student) ->
     yaleImsApp.apiPrefix = '/api/v1'
+    Student.get((response) ->
+      $rootScope.student = response.person
+    )
   ])

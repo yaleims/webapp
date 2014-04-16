@@ -2,5 +2,5 @@
 
 angular.module('yaleImsApp')
 	.factory('Student', function($resource) {
-        return $resource(yaleImsApp.apiPrefix + '/users/me', {});
+        return $resource('/api/v1' + '/users/me', {});
 });

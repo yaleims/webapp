@@ -6,18 +6,18 @@
 
         <div class="row">
             <!-- Side Menu Bar -->
-            <div class="col-md-3">
-                <ul class="nav nav-pills nav-stacked">
-                    <li><a>Update Scores</a></li>
-                    <li><a>Manage Teams</a></li>
-                    <li><a>Add Games</a></li>
+            <div class="col-md-3" id="leftCol">
+                <ul class="nav nav-pills nav-stacked" id="sidebar">
+                    <li><a>Update Scores <span ng-if="updateScoreRequests" class="badge badge-danger">{{updateScoreRequests}}</span></a></li>
+                    <li><a>Manage Teams <span ng-if="manageTeamRequests" class="badge badge-danger">{{manageTeamRequests}}</span></a></li>
+                    <li><a>Add Games </a></li>
                 </ul>
             </div>
 
             <!-- Page Content -->
             <div class="col-md-9">
                 <div class="page-header">
-                    <h1>Update Scoreboard <span class="badge badge-danger">42</span></h1>
+                    <h1>Update Scoreboard</h1>
                 </div>
 
 
