@@ -1,4 +1,4 @@
-window.patientbank = angular.module('yaleImsApp', 
+window.yaleImsApp = angular.module('yaleImsApp', 
   ['ngResource', 'ui.router', 'ngStorage', 'ui.bootstrap'])
   .config(['$stateProvider', '$locationProvider', '$urlRouterProvider',
     ($stateProvider, $locationProvider, $urlRouterProvider) ->
@@ -58,4 +58,8 @@ window.patientbank = angular.module('yaleImsApp',
         )
       $locationProvider.html5Mode(true)
       $urlRouterProvider.otherwise('/home')
+  ])
+
+  .run(['$rootScope', ($rootScope) ->
+    yaleImsApp.apiPrefix = '/api/v1'
   ])

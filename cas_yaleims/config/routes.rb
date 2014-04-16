@@ -1,7 +1,6 @@
 CasYaleims::Application.routes.draw do
  root 'main#index'
  get '/logout' => 'main#logout'
- get '/users/me' => 'users#whois'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -57,6 +56,25 @@ CasYaleims::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+
+   namespace :api, defaults: {format: :json} do
+    
+    # API Version 1
+    namespace :v1 do
+
+      # Patient Authentication
+      scope '/users' do
+        get '/me', to: 'userdata#me'
+        #post '/authenticate', to: 'userdata#authenticate'
+      end
+
+      # Resources
+      resources :userdata
+                
+    end
+  end
+
 
   # Whitelisted Routes
   get '/home', to: 'main#index'
