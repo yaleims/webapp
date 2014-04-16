@@ -16,6 +16,7 @@
 //= require angular-resource
 //= require angular-ui-router.min
 //= require angular-ui-bootstrap-tpls
+//= require bootstrap
 //= require ngstorage.min
 //= require parse.min
 //= require angular/yaleims
