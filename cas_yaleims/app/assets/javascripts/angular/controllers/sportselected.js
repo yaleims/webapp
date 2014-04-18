@@ -1,9 +1,12 @@
 'use strict';
 
 angular.module('yaleImsApp')
-  .controller('SportSelectedCtrl', ['$scope', 'ParseService', '$stateParams', function ($scope, ParseService, $stateParams) {
+  .controller('SportSelectedCtrl', ['$scope', '$rootScope', 'ParseService', '$stateParams', function ($scope, $rootScope, ParseService, $stateParams) {
 
+        $scope.student = $rootScope.student;
         var sportURL = $stateParams.sport;
+        $scope.onTeam = false;
+
         console.log(sportURL);
         
         ParseService.getSportObjects(sportURL, false, function(results){

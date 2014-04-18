@@ -17,12 +17,12 @@ angular.module('yaleImsApp')
         deleteGame: function(gameid) {
             // Parse service
             console.log('Deleted this motherfucker: ' + id);
-        }
+        },
 
         attendGame: function(netid, gameid) {
             // Parse service
             console.log('User: ' + netid + ' is attending: ' + gameid);
-        }
+        },
 
         unattendGame: function(netid, gameid) {
             // Parse service
