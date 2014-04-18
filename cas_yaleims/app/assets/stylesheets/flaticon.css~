@@ -22,10 +22,10 @@ Not as good an icon
 [class$="coed-golf"]:before {
 	content: "\e611";
 }
-[class$="coed-badminton"]:before {
-	content: "\e61c";
+[class$="coed-swimming"]:before {
+	content: "\e609";
 }
-[class$="coed-waterpolo"]:before {
+[class$="coed-water-polo"]:before {
 	content: "\e602";
 }
 [class$="coed-softball"]:before {
@@ -50,9 +50,9 @@ Not as good an icon
 	content: "\e615";
 }
 [class$="womens-squash"]:before {
-	content: "\e60a";
+	content: "\e603";
 }
-[class$="womens-squash"]:before {
+[class$="mens-squash"]:before {
 	content: "\e60b";
 }
 [class$="mens-volleyball"]:before {
@@ -86,7 +86,7 @@ Not as good an icon
 	content: "\e601";
 }
 [class$="womens-xc"]:before {
-	content: "\e602";
+	content: "\e600";
 }
 [class$="coed-volleyball"]:before {
 	content: "\e606";

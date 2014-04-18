@@ -49,11 +49,12 @@ Not as good an icon
 [class$="coed-dodgeball"]:before {
 	content: "\e615";
 }
-[class$="womens-squash"]:before {
-	content: "\e60a";
-}
 [class$="mens-squash"]:before {
 	content: "\e60b";
+}
+
+[class$="womens-squash"]:before {
+	content: "\e60a";
 }
 [class$="mens-volleyball"]:before {
 	content: "\e604";
