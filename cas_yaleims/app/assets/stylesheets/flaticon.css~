@@ -52,7 +52,7 @@ Not as good an icon
 [class$="womens-squash"]:before {
 	content: "\e60a";
 }
-[class$="mens-squash"]:before {
+[class$="womens-squash"]:before {
 	content: "\e60b";
 }
 [class$="mens-volleyball"]:before {
