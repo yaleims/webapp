@@ -10,7 +10,7 @@
 
                     <h2>{{season.season}}</h2>
                     <div class="row">
-                        <sport-select ng-repeat="sport in season.sport"  
+                        <sport-select ng-repeat="sport in season.sport | orderBy: '-sport.get(\'Sport\')[1]'"  
                         url="sportSelected({sport: '{{sport.get('URL')}}' })" 
                         sporturl="{{sport.get('URL')}}" 
                         sport="{{sport.get('Sport')}}" 

@@ -12,6 +12,10 @@ angular.module('yaleImsApp')
         leaveTeam: function(netid, college, teamid) {
             // Parse service
             console.log('Player: ' + netid + ' left team: ' + college + ' ' + teamid);
+        },
+
+        joinedTeams: function(netid) {
+            return ['b-hoops'];
         }
 
     };
