@@ -14,7 +14,7 @@
                     </thead>
                     <tbody>
                         <tr game-row ng-repeat="game in pastGames | orderBy:'date' | limitTo:6"
-                            date="{{game.date | date:'MM/dd @ h:mma'}}"
+                            date="{{game.date | date:'MM/dd'}}"
                             sport="{{game.sport.get('Sport')}}"
                             sporturl="{{game.sport.get('URL')}}"
                             team1="{{game.team1.get('College')}}"
