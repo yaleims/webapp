@@ -18,6 +18,7 @@ angular.module('yaleImsApp')
         })
     });
 
+
     $scope.toggleModal = function() {
     	 var modalInstance = $modal.open({
 	      templateUrl: 'templates/profileModalContent.html',
