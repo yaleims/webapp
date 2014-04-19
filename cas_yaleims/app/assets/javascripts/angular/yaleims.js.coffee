@@ -60,10 +60,11 @@ window.yaleImsApp = angular.module('yaleImsApp',
       $urlRouterProvider.otherwise('/home')
   ])
 
-  .run(['$rootScope', 'Student', ($rootScope, Student) ->
+  .run(['$rootScope', 'Student', 'ParseService', ($rootScope, Student, ParseService) ->
     yaleImsApp.apiPrefix = '/api/v1'
     Student.get((response) ->
       $rootScope.student = response.person
       console.log(response.person)
+      ParseService.addPerson(response.person.id, response.person.name, response.person.collegeurl, response.person.year, undefined);
     )
   ])
