@@ -1,12 +1,20 @@
 'use strict';
 
 angular.module('yaleImsApp')
-  .controller('ProfileCtrl', ['$scope', '$rootScope', '$modal', 'Student', 'ParseService', function ($scope, $rootScope, $modal, Student, ParseService) {
+  .controller('ProfileCtrl', ['$scope', '$rootScope', '$modal', 'Student', 'ParseService', 'TeamsService', function ($scope, $rootScope, $modal, Student, ParseService, TeamsService) {
     $scope.student = $rootScope.student;
 
     ParseService.getSportsBySeason(function(results) {
         $scope.$apply(function() {
             $scope.allTeams = results;
+        })
+    });
+
+
+    TeamsService.joinedTeams($scope.student.id, function(results) {
+        $scope.$apply(function() {
+            $scope.playerTeams = results;
+            console.log($scope.playerTeams);
         })
     });
 
