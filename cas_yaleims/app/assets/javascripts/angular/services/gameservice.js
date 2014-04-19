@@ -27,6 +27,11 @@ angular.module('yaleImsApp')
         unattendGame: function(netid, gameid) {
             // Parse service
             console.log('User: ' + netid + ' is no longer attending: ' + gameid);
+        },
+
+        getGamesAttended: function(netid) {
+            // Parse service
+            console.log('User: ' + netid + ' attended these games: ' + gameid);
         }
 
     };
