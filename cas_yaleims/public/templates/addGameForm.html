@@ -1,0 +1,46 @@
+<form ng-submit="addGame()" class="addGameForm">
+	<div class="row">
+		<div class="col-sm-5">
+			<input type="text" ng-model="gameData.team1" placeholder="Home Team" typeahead="team as college.name for college in colleges | filter:{name:$viewValue}" typeahead-template-url="templates/teamTypeahead.html" class="form-control">
+		</div>
+
+		<div class="col-sm-2"><center>vs.</center></div>
+
+		<div class="col-sm-5">
+			<input type="text" ng-model="gameData.team2" placeholder="Away Team" typeahead="team as college.name for college in colleges | filter:{name:$viewValue}" typeahead-template-url="templates/teamTypeahead.html" class="form-control">
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-sm-12">
+			<input type="text" ng-model="gameData.sport" placeholder="Sport" typeahead="sport as sport.name for sport in sports | filter:{name:$viewValue}" typeahead-template-url="templates/sportTypeahead.html" class="form-control">
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<!-- <div class="col-sm-5">
+		    <p class="input-group">
+		      <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="gameDate.date" is-open="openedCalendar" min="minDate"  datepicker-options="dateOptions" ng-required="true" show-button-bar="false" />
+		      <span class="input-group-btn">
+		        <button class="btn btn-default" ng-click="openCalendar($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+		      </span>
+		    </p>
+		</div> -->
+		<div class="col-sm-5 col-lg-4">
+	      <div ng-model="gameData.date">
+	          <datepicker min="minDate" show-weeks="showWeeks"></datepicker>
+	      </div>
+	    </div>
+		<div ng-model="gameData.time" ng-change="timeChanged()" class="col-sm-4">
+	    	<timepicker hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+		</div>
+		<div class="col-sm-3 col-lg-4"></div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-sm-12">
+			<button type="submit" class="btn btn-danger">Add Game</button>
+		</div>
+	</div>
+
+</form>

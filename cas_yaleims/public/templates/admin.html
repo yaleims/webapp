@@ -28,14 +28,7 @@
                 <div class ="row">
                    <div class="col-md-12">
                       <h3>Add a Game</h3>
-                        <form class="form-horizontal">
-                          <select ng-model="formTeam1" ng-options="c.get('College') for c in collegeObjects"></select>
-                          <select ng-model="formTeam2" ng-options="c.get('College') for c in collegeObjects"></select>
-                          <select ng-model="formSport" ng-options="c.get('Sport') for c in sportObjects"></select><br>
-                          <input type="date" ng-model="gameDate">
-                          <input type="time" ng-model="gameTime">
-                          <button class="btn" ng-click="addGames()"><i class="icon-plus"></i>Add</button>
-                      </form>
+                      <add-game-form></add-game-form>
                     </div>
                   </div>
                   <div class="row">
@@ -66,7 +59,7 @@
                     </div>
               </div>
 
-                <div class="page-header">
+                <!-- <div class="page-header">
                     <h1>Manage Teams</h1>
                 </div>
                 <div class="row">
@@ -90,7 +83,7 @@
             </div>
 
 
-        </div>
+        </div> -->
 
 
     </div>
