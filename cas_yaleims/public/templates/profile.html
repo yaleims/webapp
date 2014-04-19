@@ -7,7 +7,7 @@
 
 <div class="container">
 
-    <h2>Your Teams<button type="button" class="btn btn-danger pull-right">Add Team</button></h2>
+    <h2>Your Teams<button type="button" ng-click="toggleModal()" class="btn btn-danger pull-right">Add Team</button></h2>
 
     <div class="row">
         <div ng-repeat="team in playerTeams | orderBy:'sport'" class="col-md-3">
