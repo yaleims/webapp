@@ -10,8 +10,8 @@
     <h2>Your Teams<button type="button" ng-click="toggleModal()" class="btn btn-danger pull-right">Add Team</button></h2>
 
     <div class="row">
-        <div ng-repeat="team in playerTeams | orderBy:'sport'" class="col-md-3">
-            <flaticon  sport="{{team.sport}}" sporturl="{{team.sporturl}}" size="largeSportIcon" center="true"></flaticon>
+        <div ng-repeat="team in playerTeams | orderBy: ['season','sport']" class="col-md-3">
+            <flaticon  sport="{{team.sport}}" sporturl="{{team.sporturl}}" size="mediumSportIcon" center="true"></flaticon>
         </div>
     </div>
 
