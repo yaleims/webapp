@@ -30,6 +30,11 @@ angular.module('yaleImsApp')
 
         joinedTeams: function(netid) {
             return ['b-hoops'];
+        },
+
+        allTeamsWithJoined: function(netid) 
+        {
+            // return 
         }
 
     };

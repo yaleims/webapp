@@ -5,6 +5,7 @@ angular.module('yaleImsApp')
 
         $scope.student = $rootScope.student;
         var sportURL = $stateParams.sport;
+        $scope.sportURL = sportURL;
 
         $scope.onTeam = false;
 
