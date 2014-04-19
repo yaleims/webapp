@@ -45,20 +45,17 @@ angular.module('yaleImsApp')
                 query.equalTo('URL', collegeURL);
             
             var colleges = [];
-
-            query.find({
-		  	   success: function(results) {
+            
+            query.find().then(function(results) {
 		  		
-		  	  	//Do something with the returned Parse.Object value
-                    for (var i = 0; i < results.length; i++) { 
-                        var object = results[i];
-			    	    colleges.push(object);
-                    }   
-                    callback(colleges);
-                },
-		  		error: function(error) {
-		    		alert('Error: ' + error.code + ' ' + error.message);
-		  		}
+                for (var i = 0; i < results.length; i++) { 
+                    var object = results[i];
+			    	colleges.push(object);
+                }   
+                callback(colleges);
+                promise = Parse.Promise.as("The good result.");
+            }, function(error) {
+		    	alert('Error: ' + error.code + ' ' + error.message);
 			});
 		},
 
@@ -307,6 +304,50 @@ angular.module('yaleImsApp')
               error: function(error) {
                 alert("Error: " + error.message);
               }
+            });
+        },
+
+        addPerson: function addPerson(netid, name, collegeurl, year) {
+            
+            var parseClass = Parse.Object.extend('Player');
+            var query = new Parse.Query(parseClass);
+
+            query.equalTo('netid', netid);
+            var found = false;
+            var collegeObject;
+
+            query.find().then(function(results) {
+                if (results.length > 0)
+                    found = true;
+            }, function(error) {
+                alert('Error: ' + error.code + ' ' + error.message);
+            }).then(function(results) {
+                if (!found) {           
+                    var parseClass = Parse.Object.extend('College');
+                    var query = new Parse.Query(parseClass);
+
+                    query.equalTo('URL', collegeurl);
+            
+                    query.find().then(function(results) {
+                
+                        for (var i = 0; i < results.length; i++) { 
+                            collegeObject = results[i];
+                        }   
+                    }, function(error) {
+                        alert('Error: ' + error.code + ' ' + error.message);
+                    }).then(function(results) {
+                        var object = Parse.Object.extend('Player');
+                        var object = new object();
+
+                        object.save({netid:netid, College:collegeObject, Name:name, Year:year}, {
+                            success: function(object) {
+                            },
+                            error: function(error) {
+                                alert("Error: " + error.message + "FUCK");
+                            }
+                        });
+                    });
+                }
             });
         }
     };
