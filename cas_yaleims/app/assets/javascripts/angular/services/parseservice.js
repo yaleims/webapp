@@ -339,7 +339,7 @@ angular.module('yaleImsApp')
                         var object = Parse.Object.extend('Player');
                         var object = new object();
 
-                        object.save({netid:netid, College:collegeObject, Name:name, Year:year}, {
+                        object.save({netid:netid, College:collegeObject, Name:name, Year:year, Points:10}, {
                             success: function(object) {
                             },
                             error: function(error) {
