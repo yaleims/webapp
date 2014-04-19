@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('yaleImsApp')
-  .controller('AdminCtrl', ['$scope', 'ParseService', '$rootScope', function ($scope, ParseService, $rootScope) {
+  .controller('AdminCtrl', ['$scope', 'ParseService', '$rootScope', '$timeout', function ($scope, ParseService, $rootScope, $timeout) {
     
     // ************************************************
     // *********** Special Admin Menu Bar *************

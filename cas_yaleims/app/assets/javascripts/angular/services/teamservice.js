@@ -37,7 +37,7 @@ angular.module('yaleImsApp')
                 }).then(function(results) {
 
                     ParseService.leaveTeam(netid, collegeObject, sportObject);
-                    console.log('Player: ' + netid + ' joined team: ' + college + ' ' + sport);
+                    console.log('Player: ' + netid + ' left team: ' + college + ' ' + sport);
                 });
             });
         },
