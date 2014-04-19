@@ -16,7 +16,7 @@
                         <tr game-row ng-repeat="game in pastGames | orderBy:'date' | limitTo:6"
                             date="{{game.date | date:'MM/dd'}}"
                             sport="{{game.sport.get('Sport')}}"
-                            sporturl="{{game.sport.get('URL')}}"
+                            sporturl="sportSelected({sport: '{{game.sport.get('URL')}}' })"
                             team1="{{game.team1.get('College')}}"
                             team1abbr="{{game.team1.get('Abbreviation')}}"
                             team1url="{{game.team1.get('URL')}}"
@@ -63,13 +63,16 @@
                         <tr game-row ng-repeat="game in upcomingGames | orderBy:'date' | limitTo:6"
                             date="{{game.date | date:'MM/dd @ h:mma'}}"
                             sport="{{game.sport.get('Sport')}}"
-                            sporturl="{{game.sport.get('URL')}}"
+                            sporturl="sportSelected({sport: '{{game.sport.get('URL')}}' })"
                             team1="{{game.team1.get('College')}}"
                             team1abbr="{{game.team1.get('Abbreviation')}}"
                             team1url="{{game.team1.get('URL')}}"
                             team2="{{game.team2.get('College')}}"
                             team2abbr="{{game.team2.get('Abbreviation')}}"
-                            team2url="{{game.team2.get('URL')}}">
+                            team2url="{{game.team2.get('URL')}}"
+                            netid="{{student.id}}"
+                            gameid="{{game.object}}"
+                            attending="{{game.attending}}">
                         </tr>
                     </tbody>
             </table>
