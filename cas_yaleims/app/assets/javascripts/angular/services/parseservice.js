@@ -247,7 +247,8 @@ angular.module('yaleImsApp')
                         complete : object.get('Completed'),
                         team1 : object.get('Team1'),
                         team2 : object.get('Team2'),
-                        sport : object.get('Sport')
+                        sport : object.get('Sport'),
+                        object : object
                     });
                 }   
                 callback(games);
