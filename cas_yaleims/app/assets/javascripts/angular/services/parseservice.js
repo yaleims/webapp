@@ -204,15 +204,48 @@ angular.module('yaleImsApp')
                     })
                 }   
                 callback(teams);
-                proimse.resolve();
+                promise.resolve();
 
             }, function(error) {
                 alert('Error: ' + error.code + ' ' + error.message);
-                proimse.reject();
+                promise.reject();
             });
 
             return promise;
         },
+
+        getTeamObjects: function GetTeamObjects(sport, college, callback) {
+           
+            var parseClass = Parse.Object.extend('Team');
+            var query = new Parse.Query(parseClass);
+
+            var promise = new Parse.Promise();
+
+            if (typeof college !== 'undefined')
+                query.equalTo('College', college);
+
+            if (typeof sport !== 'undefined')
+                query.equalTo('Sport', sport);
+
+            var teams = [];
+
+            query.find().then(function(results) {
+                
+                for (var i = 0; i < results.length; i++) { 
+                    var object = results[i];
+                    teams.push(object);
+                }   
+                callback(teams);
+                promise.resolve();
+
+            }, function(error) {
+                alert('Error: ' + error.code + ' ' + error.message);
+                promise.reject();
+            });
+
+            return promise;
+        },
+
     
         getPlayers: function GetPlayers(callback) {
 
@@ -234,6 +267,34 @@ angular.module('yaleImsApp')
                 }
                callback(players);
                promise.resolve();
+
+            }, function(error) {
+                alert('Error: ' + error.code + ' ' + error.message);
+                promise.reject();
+            });
+
+            return promise;
+        },
+
+        getPlayerObjects: function GetPlayerObjects(netid, callback) {
+
+            var parseClass = Parse.Object.extend('Player');
+            var query = new Parse.Query(parseClass);
+            
+            var promise = new Parse.Promise();
+
+            query.equalTo('netid', netid);
+
+            var players = [];
+
+            query.find().then(function(results) {
+
+                for (var i = 0; i < results.length; i++) {
+                    var object = results[i];
+                    players.push(object);
+                }
+                callback(players);
+                promise.resolve();
 
             }, function(error) {
                 alert('Error: ' + error.code + ' ' + error.message);
@@ -338,7 +399,7 @@ angular.module('yaleImsApp')
                         Points:points, 
                         Win:win, 
                         Loss:loss}
-                        
+
             ).then(function(object) {
                 promise.resolve();
             }, function(error) {
@@ -354,33 +415,44 @@ angular.module('yaleImsApp')
             var parseClass = Parse.Object.extend('Player');
             var query = new Parse.Query(parseClass);
 
+            var promise = new Parse.Promise();
+
             query.equalTo('netid', netid);
+            
+            var CollegeObject;
             var found = false;
-            var collegeObject;
 
             query.find().then(function(results) {
                 if (results.length > 0)
                     found = true;
             }, function(error) {
+                proimse.reject();
                 alert('Error: ' + error.code + ' ' + error.message);
             }).then(function(results) {
                 if (!found) {
                     ParseService.getCollegeObjects(collegeurl, function(results) {
                         collegeObject = results[0];
                     }).then(function(results) {
+        
                         var object = Parse.Object.extend('Player');
                         var object = new object();
 
-                        object.save({netid:netid, College:collegeObject, Name:name, Year:year, Points:10}, {
-                            success: function(object) {
-                            },
-                            error: function(error) {
-                                alert("Error: " + error.message);
-                            }
+                        object.save({netid:netid, 
+                                    College:collegeObject, 
+                                    Name:name, 
+                                    Year:year, 
+                                    Points:10}
+                        ).then(function(object) {
+                            promise.resolve();
+                        }, function(error) {
+                            alert("Error: " + error.message);
+                            promise.reject();
                         });
-                    });
+                    });        
                 }
             });
+
+            return promise;
         },
 
         joinTeam: function joinTeam(netid, college, team) {
@@ -388,6 +460,48 @@ angular.module('yaleImsApp')
             var parseClass = Parse.Object.extend('Team');
             var query = new Parse.Query(parseClass);
 
+            var promise = new Parse.Promise();
+            
+            var teamObject;
+            var playerObject;
+            var sportObject;
+            var collegeObject;
+
+
+            ParseService.getSportObjects('coed-tennis', false, function(results) {
+                sportObject = results[0];
+            }).then(function(results) {
+
+                ParseService.getCollegeObjects('morse', function(results) {
+                    collegeObject = results[0];
+                }).then(function(results) {
+            
+                ParseService.getTeamObjects(sportObject, collegeObject, function(results) {
+                    teamObject = results[0];
+                }).then(function(results) {
+
+                    ParseService.getPlayerObjects(netid, function(results) {
+                        playerObject = results[0];
+                    }).then(function(results) {
+                        
+                        var object = Parse.Object.extend('Joined');
+                        var object = new object();
+
+                        object.save({Player: playerObject,
+                                    Team: teamObject}
+                        ).then(function(object) {
+                            promise.resolve();
+                        }, function(error) {
+                            alert("Error: " + error.message);
+                            promise.reject();
+                        });
+                });
+            });
+                      });
+            });
+
+
+            return promise;
         }
     };
 
