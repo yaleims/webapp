@@ -53,7 +53,6 @@ angular.module('yaleImsApp')
 
             if (typeof sportURL !== 'undefined') {
                 query.equalTo('URL', sportURL);
-                console.log('whoa');
             }
       
             var sports = [];
@@ -275,7 +274,7 @@ angular.module('yaleImsApp')
             }).then(function(results) {
                     
                 query.equalTo('Player', playerObject);
-                console.log(playerObject)
+                // console.log(playerObject)
 
                 if (typeof team !== 'undefined') 
                    query.equalTo('Team', team);
@@ -287,7 +286,7 @@ angular.module('yaleImsApp')
                    
                    for (var i = 0; i < results.length; i++) { 
                         var object = results[i];
-                        console.log(object.get('Team').get('Sport').get('Sport'));
+                        // console.log(object.get('Team').get('Sport').get('Sport'));
                         joined.push({
                             sport : object.get('Team').get('Sport').get('Sport'),
                             season : object.get('Team').get('Sport').get('season'),
@@ -462,7 +461,7 @@ angular.module('yaleImsApp')
                     
                     for (var i = 0; i < joined.length; i++) {
                         var object = joined[i];
-                        console.log(object);
+                        // console.log(object);
 
                         object.destroy().then(function(object) {
                             promise.resolve();

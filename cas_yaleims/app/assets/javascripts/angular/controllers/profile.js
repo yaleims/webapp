@@ -3,21 +3,48 @@
 angular.module('yaleImsApp')
   .controller('ProfileCtrl', ['$scope', '$rootScope', '$modal', 'Student', 'ParseService', 'TeamsService', function ($scope, $rootScope, $modal, Student, ParseService, TeamsService) {
     $scope.student = $rootScope.student;
+    var netid = $rootScope.student.id;
 
     ParseService.getSportsBySeason(function(results) {
-        $scope.$apply(function() {
-            $scope.allTeams = results;
-        })
+        TeamsService.joinedTeams(netid, function(joinedTeams) {
+	        $scope.$apply(function() {
+	            $scope.playerTeams = joinedTeams;
+	            for(var i = 0; i < results.length; i++) {
+	            	for(var j = 0; j < results[i].sport.length; j++) {
+	            		results[i].sport[j].joined = false;
+	            		for(var k = 0; k < joinedTeams.length; k++) {
+	            			if(results[i].sport[j].get('URL') == joinedTeams[k].url) {
+	            				results[i].sport[j].join = true;
+	            			}
+	            		}
+	            	}
+	            }
+			    $scope.allTeams = results;
+	        })
+	    });
     });
 
-
-    TeamsService.joinedTeams($scope.student.id, function(results) {
-        $scope.$apply(function() {
-            $scope.playerTeams = results;
-            console.log($scope.playerTeams);
-        })
-    });
-
+    $scope.requeryTeams = function () {
+    	ParseService.getSportsBySeason(function(results) {
+	        TeamsService.joinedTeams(netid, function(joinedTeams) {
+		        $scope.$apply(function() {
+		            $scope.playerTeams = joinedTeams;
+		            for(var i = 0; i < results.length; i++) {
+		            	for(var j = 0; j < results[i].sport.length; j++) {
+		            		results[i].sport[j].joined = false;
+		            		for(var k = 0; k < joinedTeams.length; k++) {
+		            			if(results[i].sport[j].get('URL') == joinedTeams[k].url) {
+		            				results[i].sport[j].join = true;
+		            			}
+		            		}
+		            	}
+		            }
+				    $scope.allTeams = results;
+		        })
+		    });
+	    });
+	    console.log("Requery");
+    };
 
     $scope.toggleModal = function() {
     	 var modalInstance = $modal.open({
@@ -25,9 +52,10 @@ angular.module('yaleImsApp')
 	      controller: ['$scope', '$rootScope',  '$modalInstance', 'allTeams', function ($scope, $rootScope, $modalInstance, allTeams) {
 	      	$scope.student = $rootScope.student;
 			$scope.allTeams = allTeams;
+			// console.log($scope.allTeams);
 
 			$scope.close = function () {
-				$modalInstance.close('closed');
+				$modalInstance.close();
 			};
 
 	      }],
@@ -38,8 +66,9 @@ angular.module('yaleImsApp')
 	      }
 	    });
 
-	    modalInstance.result.then(function (selectedItem) {
-	      console.log('Closed Modal')
+	    modalInstance.result.then(function () {
+	    	console.log("CLOSED");
+	    	$scope.requeryTeams();
 	    });
     };
 
