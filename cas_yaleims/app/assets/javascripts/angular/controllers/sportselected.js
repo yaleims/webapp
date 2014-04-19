@@ -9,16 +9,6 @@ angular.module('yaleImsApp')
 
         $scope.onTeam = false;
 
-        var joinedTeams = TeamsService.joinedTeams();
-        for (var i in joinedTeams)
-        {
-            if(sportURL == joinedTeams[i])
-                $scope.onTeam = true;
-            console.log(sportURL, joinedTeams[i]);
-        }
-
-        console.log(sportURL);
-        
         ParseService.getSports(sportURL, function(results){
             var sport;
             $scope.$apply(function() {
@@ -43,6 +33,16 @@ angular.module('yaleImsApp')
                 $scope.$apply(function() {
                     $scope.upcomingGames = results;
                 })
+            });
+
+
+           TeamsService.joinedTeams($rootScope.student.id, function(results) {
+                $scope.$apply(function() {
+                    for (var i = 0; i < results.length; i++) {
+                        if(sportURL == results[i].url)
+                        $scope.onTeam = true;
+                    }   
+                });
             });
       });
 }]);

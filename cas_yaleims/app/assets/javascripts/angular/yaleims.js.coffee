@@ -35,8 +35,7 @@ window.yaleImsApp = angular.module('yaleImsApp',
         .state('sportSelected'
           url: '^/sport/:sport'
           templateUrl: '/templates/sport'
-          controller: 'SportSelectedCtrl'
-        )
+          controller: 'SportSelectedCtrl'        )
         .state('college',
           url: '/college/:college'
           templateUrl: '/templates/college'

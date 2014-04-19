@@ -261,6 +261,52 @@ angular.module('yaleImsApp')
             return promise;
         },
 
+        getJoined: function getJoined(netid, team, callback) {
+
+            var parseClass = Parse.Object.extend('Joined');
+            var query = new Parse.Query(parseClass);
+
+            var promise = new Parse.Promise();
+
+            var playerObject;
+                    
+            ParseService.getPlayers(netid, function(results) {
+                playerObject = results[0].object;
+            }).then(function(results) {
+                    
+                query.equalTo('Player', playerObject);
+                console.log(playerObject)
+
+                if (typeof team !== 'undefined') 
+                   query.equalTo('Team', team);
+                    
+                var joined = [];
+
+                query.include(['Team.Sport']);
+                query.find().then(function(results) {
+                   
+                   for (var i = 0; i < results.length; i++) { 
+                        var object = results[i];
+                        console.log(object.get('Team').get('Sport').get('Sport'));
+                        joined.push({
+                            sport : object.get('Team').get('Sport').get('Sport'),
+                            season : object.get('Team').get('Sport').get('season'),
+                            url : object.get('Team').get('Sport').get('URL'),
+                            object : object
+                        });
+                    }   
+                    callback(joined);
+                    promise.resolve();
+
+                }, function(error) {
+                    alert('Error: ' + error.code + ' ' + error.message);
+                    promise.reject();
+                });
+            });
+
+            return promise;
+        },
+
         addGame: function addGame(team1, team2, sport, date) {
             
             var object = Parse.Object.extend('Game');
@@ -358,26 +404,37 @@ angular.module('yaleImsApp')
             
             var teamObject;
             var playerObject;
+            var found = false;
 
             ParseService.getTeams(sport, college, function(results) {
                 teamObject = results[0].object;
             }).then(function(results) {
 
-                ParseService.getPlayers(netid, function(results) {
-                    playerObject = results[0].object;
+                ParseService.getJoined(netid, teamObject, function(results) {
+                    if (results.length <= 0)
+                        found = true;
                 }).then(function(results) {
-                    
-                    var parseClass = Parse.Object.extend('Joined');
-                    var object = new parseClass();
+                    if (found) {
+                        ParseService.getPlayers(netid, function(results) {
+                            playerObject = results[0].object;
+                        }).then(function(results) {
+                            
+                            var parseClass = new Parse.Object.extend('Joined');
+                            var object = new parseClass();
 
-                    object.save({Player: playerObject,
-                                Team: teamObject}
-                    ).then(function(object) {
-                        promise.resolve();
-                    }, function(error) {
-                        alert("Error: " + error.message);
-                        promise.reject();
-                    });
+                            object.save({Player: playerObject,
+                                        Team: teamObject}
+                            ).then(function(object) {
+                                promise.resolve();
+                            }, function(error) {
+                                alert("Error: " + error.message);
+                                promise.reject();
+                            });
+                        }, function(error) {
+                            alert('Error: ' + error.code + ' ' + error.message);
+                            promise.reject();
+                        });
+                    }
                 });
             });
 
@@ -391,27 +448,32 @@ angular.module('yaleImsApp')
             var teamObject;
             var playerObject;
 
+            var joined = [];
+
             ParseService.getTeams(sport, college, function(results) {
                 teamObject = results[0].object;
             }).then(function(results) {
 
-                ParseService.getPlayers(netid, function(results) {
-                    playerObject = results[0].object;
+                ParseService.getJoined(netid, teamObject, function(results) {
+                    for (var i = 0; i < results.length; i++) {
+                        joined.push(results[i].object);
+                    }
                 }).then(function(results) {
                     
-                    var parseClass = Parse.Object.extend('Joined');
-                    var query = new Parse.Query(parseClass);
+                    for (var i = 0; i < joined.length; i++) {
+                        var object = joined[i];
+                        console.log(object);
 
-                    query.find
-
-                    object.save({Player: playerObject,
-                                Team: teamObject}
-                    ).then(function(object) {
-                        promise.resolve();
-                    }, function(error) {
-                        alert("Error: " + error.message);
-                        promise.reject();
-                    });
+                        object.destroy().then(function(object) {
+                            promise.resolve();
+                        }, function(error) {
+                            alert("Error: " + error.message);
+                            promise.reject();
+                        })
+                    }  
+                }, function(error) {
+                    alert('Error: ' + error.code + ' ' + error.message);
+                    promise.reject();
                 });
             });
 
