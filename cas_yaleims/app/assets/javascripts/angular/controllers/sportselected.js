@@ -31,6 +31,16 @@ angular.module('yaleImsApp')
 
             ParseService.getGames(sport, undefined, false, function(results) {
                 $scope.$apply(function() {
+                    for(var game in results)
+                    {
+                        if(results[game].team1.get('URL') == $rootScope.student.collegeurl 
+                            || results[game].team2.get('URL') == $rootScope.student.collegeurl) {
+                            results[game].showrsvp = true;
+                        }
+                        else {
+                            results[game].showrsvp = false;
+                        }
+                    }
                     $scope.upcomingGames = results;
                 })
             });

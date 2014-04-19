@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('yaleImsApp')
-  .controller('NewsfeedCtrl', ['$scope', 'ParseService', function ($scope, ParseService) {
+  .controller('NewsfeedCtrl', ['$scope', '$rootScope', 'ParseService', function ($scope, $rootScope, ParseService) {
 
     ParseService.getColleges(undefined, function(results) {
         $scope.$apply(function() {
@@ -17,6 +17,16 @@ angular.module('yaleImsApp')
 
   ParseService.getGames(undefined, undefined, false, function(results) {
         $scope.$apply(function() {
+          for(var game in results)
+          {
+              if(results[game].team1.get('URL') == $rootScope.student.collegeurl 
+                  || results[game].team2.get('URL') == $rootScope.student.collegeurl) {
+                  results[game].showrsvp = true;
+              }
+              else {
+                  results[game].showrsvp = false;
+              }
+          }
           $scope.upcomingGames = results;
         })
     });

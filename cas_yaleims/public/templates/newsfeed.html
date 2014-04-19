@@ -57,6 +57,7 @@
                         <th>Sport</th>
                         <th>Date</th>
                         <th>Colleges</th>
+                        <th>RSVP</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -69,7 +70,12 @@
                             team1url="{{game.team1.get('URL')}}"
                             team2="{{game.team2.get('College')}}"
                             team2abbr="{{game.team2.get('Abbreviation')}}"
-                            team2url="{{game.team2.get('URL')}}">
+                            team2url="{{game.team2.get('URL')}}"
+                            netid="{{student.id}}"
+                            gameid="{{game.object}}"
+                            attending="{{game.attending}}"
+                            rsvp="true"
+                            showrsvp="{{game.showrsvp}}">
                         </tr>
                     </tbody>
             </table>

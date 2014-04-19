@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('yaleImsApp')
-  .controller('CollegeCtrl', ['$scope', 'ParseService', '$stateParams', function ($scope, ParseService, $stateParams) {
+  .controller('CollegeCtrl', ['$scope', '$rootScope', 'ParseService', '$stateParams', function ($scope, $rootScope, ParseService, $stateParams) {
 
         // Get the data from the url
         var college = $stateParams.college;
@@ -45,13 +45,25 @@ angular.module('yaleImsApp')
             ParseService.getGames(undefined, college, true, function(results) {
                 $scope.$apply(function() {
                     $scope.pastGames = results;
-                    console.log(results);
+                    // console.log(results);
                 })
             });
 
             ParseService.getGames(undefined, college, false, function(results) {
                 $scope.$apply(function() {
+                    // console.log(results);
+                    for(var game in results)
+                    {
+                        if(results[game].team1.get('URL') == $rootScope.student.collegeurl 
+                            || results[game].team2.get('URL') == $rootScope.student.collegeurl) {
+                            results[game].showrsvp = true;
+                        }
+                        else {
+                            results[game].showrsvp = false;
+                        }
+                    }
                     $scope.upcomingGames = results;
+                    console.log(results);
                 })
             });
         });

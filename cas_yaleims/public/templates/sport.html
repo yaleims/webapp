@@ -77,7 +77,11 @@
                 score2="{{game.score2}}"
                 date="{{game.date | date:'MM/dd @ h:mma'}}"
                 noicon="true"
-                rsvp="true"></tr>
+                rsvp="true"
+                showrsvp="{{game.showrsvp}}"
+                netid="{{student.id}}"
+                gameid="{{game.object}}"
+                attending="{{game.attending}}"></tr>
         </tbody>
     </table>
 
