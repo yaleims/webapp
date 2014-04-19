@@ -25,30 +25,30 @@ angular.module('yaleImsApp')
         $scope.allSports = results;
     });
 
-    ParseService.getSportObjects(undefined, true, function(results) {
+    ParseService.getSports(undefined, function(results) {
         $scope.$apply(function() {
             $scope.sportObjects = results;
         })
     });
 
-    ParseService.getCollegeObjects(undefined, function(results) {
+    ParseService.getColleges(undefined, function(results) {
         $scope.$apply(function() {
             $scope.collegeObjects = results;
         })
     });
 
-   	ParseService.getGames(function(results) {
+   	ParseService.getGames(undefined, undefined, true, function(results) {
         $scope.$apply(function() {
           $scope.pastGames = results;
       	})
-  	}, undefined, undefined, true);
+  	});
 
   	$scope.getGames = function() {
-	 	 ParseService.getGames(function(results) {
+	 	 ParseService.getGames(undefined, undefined, false, function(results) {
 	        $scope.$apply(function() {
 	          $scope.upcomingGames = results;
 	        })
-	    }, undefined, undefined, false);
+	    });
  	}
 
     $scope.addGames = function() {

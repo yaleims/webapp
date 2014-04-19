@@ -8,12 +8,15 @@ angular.module('yaleImsApp')
     var ParseService = {
         name: 'Parse',
 
-        getColleges: function GetColleges(callback) {
+        getColleges: function GetColleges(collegeURL, callback) {
         
             var parseClass = Parse.Object.extend('College');
             var query = new Parse.Query(parseClass);
 
             var promise = new Parse.Promise();
+
+            if (typeof collegeURL !== 'undefined') 
+                query.equalTo('URL', collegeURL);
 
             var colleges = [];
             
@@ -25,7 +28,8 @@ angular.module('yaleImsApp')
                         college : object.get('College'),
                         abbreviation : object.get('Abbreviation'),
                         url : object.get('URL'),
-                        score : object.get('Score')
+                        score : object.get('Score'),
+                        object : object
                     });
                 }
 
@@ -40,41 +44,17 @@ angular.module('yaleImsApp')
             return promise;
         },
 
-        getCollegeObjects: function GetCollegeObjects(collegeURL, callback) {
-
-            var parseClass = Parse.Object.extend('College');
-            var query = new Parse.Query(parseClass);
-            
-            var promise = new Parse.Promise();
-
-            if (typeof collegeURL !== 'undefined') 
-                query.equalTo('URL', collegeURL);
-            
-            var colleges = [];
-            
-            query.find().then(function(results) {
-		  		
-                for (var i = 0; i < results.length; i++) { 
-                    var object = results[i];
-			    	colleges.push(object);
-                }   
-                callback(colleges);
-                promise.resolve();
-
-            }, function(error) {
-		    	alert('Error: ' + error.code + ' ' + error.message);
-                promise.reject();
-			});
-
-            return promise;
-		},
-
-        getSports: function GetSports(callback) {
+        getSports: function GetSports(sportURL, callback) {
 
             var parseClass = Parse.Object.extend('Sport');
             var query = new Parse.Query(parseClass);
 
             var promise = new Parse.Promise();
+
+            if (typeof sportURL !== 'undefined') {
+                query.equalTo('URL', sportURL);
+                console.log('whoa');
+            }
       
             var sports = [];
           
@@ -86,7 +66,8 @@ angular.module('yaleImsApp')
                     sports.push({
                         sport : object.get('Sport'),
                         season : object.get('Season'),
-                        url : object.get('URL') 
+                        url : object.get('URL'),
+                        object : object
                     });
                 }
                 callback(sports);
@@ -97,35 +78,6 @@ angular.module('yaleImsApp')
                 promise.reject();
             });
 
-            return promise;
-        },
-
-        getSportObjects: function GetSportObjects(sportURL, getAll, callback) {
-            
-            var parseClass = Parse.Object.extend('Sport');
-            var query = new Parse.Query(parseClass);
-            
-            var promise = new Parse.Promise();
-
-            if (typeof collegeURL !== 'undefined' || !getAll) 
-                query.equalTo('URL', sportURL);
-            
-            var sports = [];
-
-            query.find().then(function(results) {
-
-                for (var i = 0; i < results.length; i++) {
-                    var object = results[i];
-                    sports.push(object);
-                }
-                callback(sports);
-                promise.resolve();
-
-            }, function(error) {
-                alert('Error: ' + error.code + ' ' + error.message);
-                promise.reject();
-            });
-            
             return promise;
         },
         
@@ -173,7 +125,7 @@ angular.module('yaleImsApp')
             return promise;
         },
         
-        getTeams: function GetTeams(callback, sport, college) {
+        getTeams: function GetTeams(sport, college, callback) {
            
             var parseClass = Parse.Object.extend('Team');
             var query = new Parse.Query(parseClass);
@@ -200,7 +152,8 @@ angular.module('yaleImsApp')
                         win : object.get('Win'),
                         loss : object.get('Loss'),
                         sport : object.get('Sport'),
-                        college : object.get('College')
+                        college : object.get('College'),
+                        object : object
                     })
                 }   
                 callback(teams);
@@ -213,44 +166,14 @@ angular.module('yaleImsApp')
 
             return promise;
         },
-
-        getTeamObjects: function GetTeamObjects(sport, college, callback) {
-           
-            var parseClass = Parse.Object.extend('Team');
-            var query = new Parse.Query(parseClass);
-
-            var promise = new Parse.Promise();
-
-            if (typeof college !== 'undefined')
-                query.equalTo('College', college);
-
-            if (typeof sport !== 'undefined')
-                query.equalTo('Sport', sport);
-
-            var teams = [];
-
-            query.find().then(function(results) {
-                
-                for (var i = 0; i < results.length; i++) { 
-                    var object = results[i];
-                    teams.push(object);
-                }   
-                callback(teams);
-                promise.resolve();
-
-            }, function(error) {
-                alert('Error: ' + error.code + ' ' + error.message);
-                promise.reject();
-            });
-
-            return promise;
-        },
-
     
-        getPlayers: function GetPlayers(callback) {
+        getPlayers: function GetPlayers(netid, callback) {
 
             var parseClass = Parse.Object.extend('Player');
             var query = new Parse.Query(parseClass);
+
+            if (typeof netid !== 'undefined')
+                query.equalTo('netid', netid);
             
             var promise = new Parse.Promise();
 
@@ -262,7 +185,8 @@ angular.module('yaleImsApp')
                     var object = results[i];
                     players.push({
                         name : object.get('Name'),
-                        points : object.get('Points')
+                        points : object.get('Points'),
+                        object : object
                     });
                 }
                callback(players);
@@ -276,36 +200,8 @@ angular.module('yaleImsApp')
             return promise;
         },
 
-        getPlayerObjects: function GetPlayerObjects(netid, callback) {
-
-            var parseClass = Parse.Object.extend('Player');
-            var query = new Parse.Query(parseClass);
-            
-            var promise = new Parse.Promise();
-
-            query.equalTo('netid', netid);
-
-            var players = [];
-
-            query.find().then(function(results) {
-
-                for (var i = 0; i < results.length; i++) {
-                    var object = results[i];
-                    players.push(object);
-                }
-                callback(players);
-                promise.resolve();
-
-            }, function(error) {
-                alert('Error: ' + error.code + ' ' + error.message);
-                promise.reject();
-            });
-
-            return promise;
-        },
-
         //get game by sport, college
-        getGames: function GetGames(callback, sport, college, past) {
+        getGames: function GetGames(sport, college, past, callback) {
             
             var parseClass = Parse.Object.extend('Game');
             var query = new Parse.Query(parseClass);
@@ -410,7 +306,7 @@ angular.module('yaleImsApp')
             return promise;
         },
 
-        addPerson: function addPerson(netid, name, collegeurl, year) {
+        addPerson: function addPerson(netid, name, collegeURL, year) {
             
             var parseClass = Parse.Object.extend('Player');
             var query = new Parse.Query(parseClass);
@@ -419,7 +315,7 @@ angular.module('yaleImsApp')
 
             query.equalTo('netid', netid);
             
-            var CollegeObject;
+            var collegeObject;
             var found = false;
 
             query.find().then(function(results) {
@@ -430,8 +326,8 @@ angular.module('yaleImsApp')
                 alert('Error: ' + error.code + ' ' + error.message);
             }).then(function(results) {
                 if (!found) {
-                    ParseService.getCollegeObjects(collegeurl, function(results) {
-                        collegeObject = results[0];
+                    ParseService.getColleges(collegeURL, function(results) {
+                        collegeObject = results[0].object;
                     }).then(function(results) {
         
                         var object = Parse.Object.extend('Player');
@@ -455,51 +351,68 @@ angular.module('yaleImsApp')
             return promise;
         },
 
-        joinTeam: function joinTeam(netid, college, team) {
-
-            var parseClass = Parse.Object.extend('Team');
-            var query = new Parse.Query(parseClass);
+        joinTeam: function joinTeam(netid, college, sport) {
 
             var promise = new Parse.Promise();
             
             var teamObject;
             var playerObject;
-            var sportObject;
-            var collegeObject;
 
-
-            ParseService.getSportObjects('coed-tennis', false, function(results) {
-                sportObject = results[0];
+            ParseService.getTeams(sport, college, function(results) {
+                teamObject = results[0].object;
             }).then(function(results) {
 
-                ParseService.getCollegeObjects('morse', function(results) {
-                    collegeObject = results[0];
+                ParseService.getPlayers(netid, function(results) {
+                    playerObject = results[0].object;
                 }).then(function(results) {
-            
-                ParseService.getTeamObjects(sportObject, collegeObject, function(results) {
-                    teamObject = results[0];
-                }).then(function(results) {
+                    
+                    var parseClass = Parse.Object.extend('Joined');
+                    var object = new parseClass();
 
-                    ParseService.getPlayerObjects(netid, function(results) {
-                        playerObject = results[0];
-                    }).then(function(results) {
-                        
-                        var object = Parse.Object.extend('Joined');
-                        var object = new object();
-
-                        object.save({Player: playerObject,
-                                    Team: teamObject}
-                        ).then(function(object) {
-                            promise.resolve();
-                        }, function(error) {
-                            alert("Error: " + error.message);
-                            promise.reject();
-                        });
+                    object.save({Player: playerObject,
+                                Team: teamObject}
+                    ).then(function(object) {
+                        promise.resolve();
+                    }, function(error) {
+                        alert("Error: " + error.message);
+                        promise.reject();
+                    });
                 });
             });
-                      });
-            });
 
+            return promise;
+        },
+
+        leaveTeam: function leaveTeam(netid, college, sport) {
+
+            var promise = new Parse.Promise();
+            
+            var teamObject;
+            var playerObject;
+
+            ParseService.getTeams(sport, college, function(results) {
+                teamObject = results[0].object;
+            }).then(function(results) {
+
+                ParseService.getPlayers(netid, function(results) {
+                    playerObject = results[0].object;
+                }).then(function(results) {
+                    
+                    var parseClass = Parse.Object.extend('Joined');
+                    var query = new Parse.Query(parseClass);
+
+                    query.find
+
+                    object.save({Player: playerObject,
+                                Team: teamObject}
+                    ).then(function(object) {
+                        promise.resolve();
+                    }, function(error) {
+                        alert("Error: " + error.message);
+                        promise.reject();
+                    });
+                });
+            });
 
             return promise;
         }

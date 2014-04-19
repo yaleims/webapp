@@ -5,27 +5,41 @@ angular.module('yaleImsApp')
  
   	var TeamsService = {
         joinTeam: function(netid, college, sport) {
-
+            
             var sportObject;
             var collegeObject;
 
-            ParseService.getSportObjects(sport, false, function(results) {
-                sportObject = results[0];
+            ParseService.getSports(sport, function(results) {
+                sportObject = results[0].object;
             }).then(function(results) {
 
-                ParseService.getCollegeObjects(college, function(results) {
-                    collegeObject = results[0];
+                ParseService.getColleges(college, function(results) {
+                    collegeObject = results[0].object;
                 }).then(function(results) {
-            
-                    ParseService.joinTeam(netid, college, teamid);
-                    console.log('Player: ' + netid + ' joined team: ' + college + ' ' + teamid);
+
+                    ParseService.joinTeam(netid, collegeObject, sportObject);
+                    console.log('Player: ' + netid + ' joined team: ' + college + ' ' + sport);
                 });
             });
         },
 
-        leaveTeam: function(netid, college, teamid) {
-            // Parse service
-            console.log('Player: ' + netid + ' left team: ' + college + ' ' + teamid);
+        leaveTeam: function(netid, college, sport) {
+             
+            var sportObject;
+            var collegeObject;
+
+            ParseService.getSports(sport, function(results) {
+                sportObject = results[0].object;
+            }).then(function(results) {
+
+                ParseService.getColleges(college, function(results) {
+                    collegeObject = results[0].object;
+                }).then(function(results) {
+
+                    ParseService.leaveTeam(netid, collegeObject, sportObject);
+                    console.log('Player: ' + netid + ' joined team: ' + college + ' ' + sport);
+                });
+            });
         },
 
         joinedTeams: function(netid) {

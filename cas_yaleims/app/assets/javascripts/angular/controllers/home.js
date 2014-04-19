@@ -3,19 +3,19 @@
 angular.module('yaleImsApp')
   .controller('HomeCtrl', ['$scope', 'ParseService', function ($scope, ParseService) {
     
-    ParseService.getColleges(function(results) {
+    ParseService.getColleges(undefined, function(results) {
         $scope.$apply(function() {
             $scope.colleges = results;
         })
     });
 
-    ParseService.getGames(function(results) {
+    ParseService.getGames(undefined, undefined, false, function(results) {
         $scope.$apply(function() {
             $scope.upcomingGames = results;
         })
-    }, undefined, undefined, false);
+    });
     
-    ParseService.getPlayers(function(results) {
+    ParseService.getPlayers(undefined, function(results) {
         $scope.$apply(function() {
             $scope.players = results;
         })
