@@ -66,6 +66,7 @@ angular.module('yaleImsApp')
                game.time.getHours(), game.time.getMinutes(), game.time.getSeconds());
           // console.log(datetime);
           GamesService.addGame(game.team1, game.team2, game.sport, datetime);
+          $scope.$parent.alerts.push({type: 'success', msg: "The game was successfully added to the schedule."});
         }
 
         $scope.deleteGame = function() {

@@ -13,7 +13,10 @@ angular.module('yaleImsApp')
         $rootScope.adminPage = false;
     });
 
-
+    $scope.alerts = [];
+    $scope.closeAlert = function(index) {
+      $scope.alerts.splice(index, 1);
+    };
 
     // ************************************************
     // *************  Parse Integration  **************

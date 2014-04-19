@@ -175,9 +175,42 @@ h1>.badge, h2>.badge, h3>.badge {
     background-color: #333333;
 }
 
+
 /******* Forms *********/
 .addGameForm
 {
     margin: 20px 0px 40px 0px;
     display: block;
+}
+
+
+/******* Animation for Alert **********/
+
+.fade-out-alert
+{
+  -webkit-animation: fade-out 2s forwards ease-out;
+  -moz-animation:    fade-out 2s forwards ease-out;
+  -o-animation:      fade-out 2s forwards ease-out;
+  animation:         fade-out 2s forwards ease-out;
+}
+
+@-webkit-keyframes fade-out {
+  0%   { opacity: 1; }
+  50%  { opacity: 1; }          
+  100% { opacity: 0; display: "none";}
+}
+@-moz-keyframes fade-out {
+  0%   { opacity: 1; }
+  50%  { opacity: 1; }          
+  100% { opacity: 0; display: "none";}
+}
+@-o-keyframes fade-out {
+  0%   { opacity: 1; }
+  50%  { opacity: 1; }          
+  100% { opacity: 0; display: "none";}
+}
+@keyframes fade-out {
+  0%   { opacity: 1; }
+  50%  { opacity: 1; }          
+  100% { opacity: 0; display: "none";}
 }
