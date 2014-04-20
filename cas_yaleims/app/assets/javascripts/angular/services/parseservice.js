@@ -503,6 +503,34 @@ angular.module('yaleImsApp')
             });
         },
 
+        editGame: function editGame(id, team1, team2, sport, date) {
+
+            var parseClass = Parse.Object.extend('Game');
+            var query = new Parse.Query(parseClass);
+
+            var promise = new Parse.Promise();
+
+            query.equalTo('objectId', id.id); 
+
+            console.log(sport);
+
+            query.first().then(function(results) {
+                
+                console.log(sport);
+                var object = results;
+                console.log(object);
+                
+                object.set('Team1', team1);
+                object.set('Team2', team2);
+                object.set('Sport', sport);
+                object.set('Date', date);
+                object.save();    
+            }, function(error) {
+                alert("Error: " + error.message);
+                promise.reject();
+            });
+        },
+
         attendGame: function attendGame(netid, game) {
 
             var promise = new Parse.Promise();
