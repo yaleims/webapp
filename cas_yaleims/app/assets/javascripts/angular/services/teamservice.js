@@ -11,14 +11,12 @@ angular.module('yaleImsApp')
 
             ParseService.getSports(sport, function(results) {
                 sportObject = results[0].object;
-            }).then(function(results) {
-
-                ParseService.getColleges(college, function(results) {
-                    collegeObject = results[0].object;
                 }).then(function(results) {
-
+                    ParseService.getColleges(college, function(results) {
+                        collegeObject = results[0].object;
+                }).then(function(results) {
                     ParseService.joinTeam(netid, collegeObject, sportObject);
-                    console.log('Player: ' + netid + ' joined team: ' + college + ' ' + sport);
+                        console.log('Player: ' + netid + ' joined team: ' + college + ' ' + sport);
                 });
             });
         },
