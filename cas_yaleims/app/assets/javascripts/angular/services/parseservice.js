@@ -277,6 +277,7 @@ angular.module('yaleImsApp')
                         team1 : object.get('Team1'),
                         team2 : object.get('Team2'),
                         sport : object.get('Sport'),
+                        winner : object.get('Winner'),
                         object : object
                     });
                 }   
@@ -516,13 +517,8 @@ angular.module('yaleImsApp')
 
             query.first().then(function(results) {
                 
-                console.log(sport);
                 var object = results;
-                console.log(object);
-
-                console.log('SPORT' + typeof sport);
-                console.log('TEAM1' + typeof team1);
-                console.log('TEAM2' + typeof team2);
+                
                 if (typeof team1 == 'object')
                     object.set('Team1', team1.object);
                 if (typeof team2 == 'object')
@@ -558,6 +554,11 @@ angular.module('yaleImsApp')
                     object.set('Score1', score1);
                 if (typeof score2 == 'number')
                     object.set('Score2', score2);
+
+                if (score1 > score2)
+                    object.set('Winner', object.get('Team1'));
+                else if (score2 > score1)
+                    object.set('Winner', object.get('Team2'));
 
                 object.save(); 
                 
