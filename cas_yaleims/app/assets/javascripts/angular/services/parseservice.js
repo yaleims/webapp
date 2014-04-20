@@ -308,9 +308,6 @@ angular.module('yaleImsApp')
             query.include(['Game.Team2']);
             query.include(['Game.College']);
 
-            console.log(player);
-            console.log(game);
-
             query.find().then(function(results) {
                   
                 for (var i = 0; i < results.length; i++) { 
