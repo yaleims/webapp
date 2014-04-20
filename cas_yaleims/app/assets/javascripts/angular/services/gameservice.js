@@ -27,12 +27,12 @@ angular.module('yaleImsApp')
             ParseService.getGameById(gameid, function(results) {
                 gameObject = results[0];
             }).then(function(results) {
-                return ParseService.getPlayers(netid, function(results) {
+                ParseService.getPlayers(netid, function(results) {
                     playerObject = results[0].object;
+                }).then(function(results) {
+                    ParseService.attendGame(playerObject, gameObject);
+                    console.log('User: ' + netid + ' is attending: ' + gameid);   
                 });
-            }).then(function(results) {
-                ParseService.attendGame(playerObject, gameObject);
-                console.log('User: ' + netid + ' is attending: ' + gameid);
             });
         },
 
@@ -44,43 +44,60 @@ angular.module('yaleImsApp')
             ParseService.getGameById(gameid, function(results) {
                 gameObject = results[0];
             }).then(function(results) {
-                return ParseService.getPlayers(netid, function(results) {
+                ParseService.getPlayers(netid, function(results) {
                     playerObject = results[0].object;
-                });
-            }).then(function(results) {
-                ParseService.unattendGame(playerObject, gameObject);
+                }).then(function(results) {
+                    ParseService.unattendGame(playerObject, gameObject);
                     console.log('User: ' + netid + ' no longer attending: ' + gameid);   
+                });
             });
         },
 
-        getGamesAttended: function(netid, sport, college, callback) {
+        getGamesAttended: function(netid, college, sport, callback) {
 
             var playerObject;
+            var collegeObject;
+            var sportObject;
 
             var upcoming = [];
             var attend = [];
-            
+
             ParseService.getPlayers(netid, function(results) {
                 playerObject = results[0].object;
             }).then(function() {
-                return ParseService.getGames(sport, college, false, function(results) {
+                return ParseService.getColleges(college, function(results) {
+                    if (typeof college !== 'undefined')  
+                        collegeObject = results[0].object;
+                    console.log(collegeObject);
+                })
+            }).then(function() {
+                return ParseService.getSports(sportObject, function(results) {
+                    if (typeof sport !== 'undefined')
+                        sportObject = results[0].object;
+                    console.log(sportObject);
+                });  
+            }).then(function() {
+                return ParseService.getGames(sportObject, collegeObject, false, function(results) {
                     upcoming = results;
+                    console.log(upcoming);
                 });
             }).then(function() {
                 return ParseService.getAttending(playerObject, undefined, function(results) {
                     attend = results; 
+                    console.log(attend);
                 });
             }).then(function() {                             
                 console.log(upcoming)  
                 for (var i = 0; i < upcoming.length; i++) {
-                    upcoming[i].going = false;
+//                    upcoming[i].penis = false;
                     for (var j = 0; j < attend.length; j++) {
-                        if (upcoming[i].object.id == attend[j].game.object.id) {
-                            console.log('Attending');
-                            upcoming[i].going = true;
+                        if (upcoming[i].object == attend[j].game.object) {
+                            //upcoming[i].penis = true;
                         }
                     }
                 }
+                console.log('Upcoming')
+                console.log(upcoming)
                 callback(upcoming);
             });
         }
