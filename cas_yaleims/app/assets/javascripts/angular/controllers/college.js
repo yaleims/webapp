@@ -27,6 +27,7 @@ angular.module('yaleImsApp')
                     $scope.$apply(function() {
                         $scope.sportWins = results[0].win;
                         $scope.sportLosses = results[0].loss;
+                        $scope.sportTies = results[0].tie;
                         $scope.sportTyngPoints = results[0].points;
                         console.log(results);
                     });
