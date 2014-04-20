@@ -13,6 +13,12 @@ angular.module('yaleImsApp')
         $scope.collegeURL = college;
         $scope.sportURL = sport;
 
+        $scope.filterAllSports = function ()
+        {
+            $scope.sportURL = null;
+            $scope.sportName = null;
+        }
+
         $scope.updateSchedule = function (sportName, sportUrl)
         {
             $scope.sportURL = sportUrl;
