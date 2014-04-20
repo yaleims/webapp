@@ -5,21 +5,15 @@ angular.module('yaleImsApp')
  
   	var GamesService = {
         addGame: function(team1, team2, sport, datetime) {
-            console.log(team1);
-            console.log(team2);
-            console.log(sport);
-            console.log(datetime);
-            ParseService.addGame(team1.object, team2.object, sport.object, datetime);
-            console.log('Added game');
+            return ParseService.addGame(team1.object, team2.object, sport.object, datetime);
         },
 
         editGame: function(gameid, team1, team2, sport, datetime) {
-            console.log(gameid);
-            console.log(team1);
-            console.log(team2);
-            console.log(sport);
-            console.log(datetime);
-            ParseService.editGame(gameid, team1, team2, sport.object, datetime);
+            return ParseService.editGame(gameid, team1, team2, sport, datetime);
+        },
+
+        scoreGame: function(gameid, score1, score2) {
+            return ParseService.scoreGame(gameid, score1, score2);
         },
 
         deleteGame: function(gameid) {
