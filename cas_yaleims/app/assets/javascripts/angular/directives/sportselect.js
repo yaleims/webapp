@@ -13,7 +13,8 @@ angular.module('yaleImsApp')
             colsize: '@',
             url: '@',
             dial: "&",
-            updatepage: '@'
+            updatepage: '@',
+            adminmanage: '@'
         }
       }
   });

@@ -85,6 +85,7 @@ CasYaleims::Application.routes.draw do
   get '/college/:college', to: 'main#index'
   get '/college/:college/:sport', to: 'main#index'
   get '/admin', to: 'main#index'
+  get '/admin/:tab', to: 'main#index'
   get '/profile', to: 'main#index'
   get '/logout', to: 'main#logout'
 end
