@@ -54,7 +54,7 @@ angular.module('yaleImsApp')
         },
 
         
-        getGamesAttended: function(netid, college, sport, callback) {
+        getGamesAttended: function(netid, sport, college, callback) {
 
             var playerObject;
             var collegeObject;
@@ -66,17 +66,7 @@ angular.module('yaleImsApp')
             ParseService.getPlayers(netid, function(results) {
                 playerObject = results[0].object;
             }).then(function() {
-                return ParseService.getColleges(college, function(results) {
-                    if (typeof college !== 'undefined')  
-                        collegeObject = results[0].object;
-                });
-            }).then(function() {
-                return ParseService.getSports(sportObject, function(results) {
-                    if (typeof sport !== 'undefined')
-                        sportObject = results[0].object;
-                });  
-            }).then(function() {
-                return ParseService.getGames(sportObject, collegeObject, false, function(results) {
+                return ParseService.getGames(sportObject, college, false, function(results) {
                     upcoming = results;
                 });
             }).then(function() {
@@ -86,10 +76,10 @@ angular.module('yaleImsApp')
             }).then(function() {                             
                 console.log(upcoming)  
                 for (var i = 0; i < upcoming.length; i++) {
-                    upcoming[i].penis = false;
+                    upcoming[i].going = false;
                     for (var j = 0; j < attend.length; j++) {
                         if (upcoming[i].object == attend[j].game.object) {
-                            upcoming[i].penis = true;
+                            upcoming[i].going = true;
                         }
                     }
                 }
