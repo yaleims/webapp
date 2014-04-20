@@ -36,6 +36,7 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
+                        <th>Sport</th>
                         <th>Date</th>
                         <th>Colleges</th>
                         <th>RSVP</th>
@@ -43,6 +44,8 @@
                     </thead>
                     <tbody>
                     <tr game-row ng-repeat="game in upcomingGames | filter:sportURL | limitTo: 10"
+                        sport="{{game.sport.get('Sport')}}"
+                        sporturl="{{game.sport.get('URL')}}"
                         team1="{{game.team1.get('College')}}"
                         team1abbr="{{game.team1.get('Abbreviation')}}"
                         team1url="{{game.team1.get('URL')}}"
@@ -52,9 +55,8 @@
                         netid="{{student.id}}"
                         gameid="{{game.object.id}}"
                         attending="{{game.going}}"
-
+                        
                         date="{{game.date | date:'MM/dd @ h:mma'}}"
-                        noicon="true"
                         rsvp="true"
                         showrsvp="{{game.showrsvp}}"></tr>
                     </tbody>
@@ -63,6 +65,7 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
+                        <th>Sport</th>
                         <th>Date</th>
                         <th>Colleges</th>
                         <th>Score</th>
@@ -71,6 +74,8 @@
                     </thead>
                     <tbody>
                     <tr game-row ng-repeat="game in pastGames | filter:sportURL | limitTo: 10"
+                        sport="{{game.sport.get('Sport')}}"
+                        sporturl="{{game.sport.get('URL')}}"
                         team1="{{game.team1.get('College')}}"
                         team1abbr="{{game.team1.get('Abbreviation')}}"
                         team1url="{{game.team1.get('URL')}}"
@@ -80,7 +85,6 @@
                         score1="{{game.score1}}"
                         score2="{{game.score2}}"
                         past="true"
-                        noicon="true"
                         date="{{game.date | date:'MM/dd'}}"
                         outcome="{{game.outcome}}"></tr>
                     </tbody>

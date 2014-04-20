@@ -345,12 +345,14 @@ angular.module('yaleImsApp')
             ParseService.getSports(undefined, function (results) {
                 $scope.$apply(function () {
                     $scope.sports = results;
+                    // $scope.gameData.team1players = results;
                 });
             });
 
             ParseService.getColleges(undefined, function (results) {
                 $scope.$apply(function () {
                     $scope.colleges = results;
+                    // $scope.gameData.team2players = results;
                     console.log(results);
                 });
             });
@@ -368,11 +370,11 @@ angular.module('yaleImsApp')
                               };
 
             $scope.playerHere = function(playerObject, gameid) {
-                console.log(playerObject.name + ' is present!');
+                console.log(playerObject.netid + ' is present!');
             };
 
             $scope.playerNotHere = function(playerObject, gameid) {
-                console.log(playerObject.name + ' is NOT present!');
+                console.log(playerObject.netid + ' is NOT present!');
             };
 
 

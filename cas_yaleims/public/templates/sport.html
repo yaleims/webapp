@@ -38,7 +38,7 @@
             <th>#</th>
             <th>Colleges</th>
             <th>Score</th>
-            <th>Win-Loss</th>
+            <th>W-L-T</th>
         </tr>
         </thead>
         <tbody>
@@ -48,7 +48,8 @@
                 collegeurl="{{team.college.get('URL')}}"
                 points="{{team.points}}"
                 wins="{{team.win}}"
-                loss="{{team.loss}}">
+                loss="{{team.loss}}"
+                tie="{{team.tie}}">
             </tr>
         </tbody>
     </table>
