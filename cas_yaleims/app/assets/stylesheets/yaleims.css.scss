@@ -37,8 +37,6 @@ body {
 {
   color: #fff !important;
   text-shadow: 0 0 3px rgba(0,0,0,0.8);
-  vertical-align: center;
-  font-size: 5em;
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -49,16 +47,39 @@ body {
 .rank-1
 {
   padding: 60px 0px;
+  font-size: 2.5em;
 }
 
 .rank-2
 {
-  padding: 40px 0px;
+  padding: 35px 0px;
+  font-size: 2.5em;
 }
 
 .rank-3
 {
-  padding: 30px 0px;
+  padding: 20px 0px;
+  font-size: 2.5em;
+}
+
+@media (min-width: 979px) {
+  .rank-1
+  {
+    padding: 60px 0px;
+    font-size: 4.5em;
+  }
+
+  .rank-2
+  {
+    padding: 35px 0px;
+    font-size: 3.75em;
+  }
+
+  .rank-3
+  {
+    padding: 20px 0px;
+    font-size: 3em;
+  }
 }
 
 

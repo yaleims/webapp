@@ -8,7 +8,7 @@
                     <div ng-repeat="college in colleges | orderBy:'-score' | limitTo: 3" class="row {{college.url}} rank-{{$index+1}}">
                         <div class="col-xs-2 text-center">{{$index + 1}}</div>
                         <div class="col-xs-7 text-left">
-                           <shield college="{{college.college}}" collegeurl="{{college.url}}" size="largeShield"></shield><a style="color:#fff;" ng-href="/#/college/{{college.url}}">{{college.college}}</a>
+                           <shield college="{{college.college}}" collegeurl="{{college.url}}" size="largeShield hidden-xs"></shield><a style="color:#fff;" ng-href="/#/college/{{college.url}}">{{college.college}}</a>
                         </div>
                         <div class="col-xs-3 text-left">{{college.score}}</div>
                     </div>
