@@ -150,6 +150,7 @@ angular.module('yaleImsApp')
                         points : object.get('Points'),
                         win : object.get('Win'),
                         loss : object.get('Loss'),
+                        tie : object.get('Tie'),
                         sport : object.get('Sport'),
                         college : object.get('College'),
                         object : object
@@ -555,12 +556,28 @@ angular.module('yaleImsApp')
                 if (typeof score2 == 'number')
                     object.set('Score2', score2);
 
-                if (score1 > score2)
-                    object.set('Winner', object.get('Team1'));
-                else if (score2 > score1)
-                    object.set('Winner', object.get('Team2'));
+                var team1 = object.get('Team1');
+                var team2 = object.get('Team2');
+                var sport = object.get('Sport');
 
-                object.save(); 
+                var winner = 0;
+
+                if (score1 > score2) {
+                    object.set('Winner', team1);
+                    winner = 1;
+                }
+                else if (score2 > score1) {
+                    object.set('Winner', team2);
+                    winner = 2;
+                }
+
+                object.save().then(function() {
+                    console.log('updatingTeam1')
+                    return ParseService.updateTeam(team1, sport, 1, winner);
+                }).then(function() {
+                    console.log('updatingTeam2')
+                    return ParseService.updateTeam(team2, sport, 2, winner);
+                });
                 
                 promise.resolve();   
             }, function(error) {
@@ -568,6 +585,91 @@ angular.module('yaleImsApp')
                 promise.reject();
             });
 
+            return promise;
+        },
+
+        updateTeam: function updateTeam(college, sport, number, winner) {
+
+            var teamObject;
+            var promise = new Parse.Promise();
+
+            ParseService.getTeams(sport, college, function(results) {
+                teamObject = results[0].object;
+            }).then(function() {
+
+                var parseClass = Parse.Object.extend('Team');
+                var query = new Parse.Query(parseClass);
+
+                query.equalTo('objectId', teamObject.id);
+
+                query.first().then(function(results) {                
+                    var object = results;
+                    
+                    var currTie = object.get('Tie');
+                    var currWin = object.get('Win');
+                    var currLoss = object.get('Loss');
+                    var currPoints = object.get('Points');
+
+                    if (winner == 0) {
+                        object.set('Tie', currTie + 1);
+                    }
+                    else if (winner == number) {
+                        object.set('Win', currWin + 1);
+                        object.set('Points', currPoints + 10);
+                    }
+                    else {
+                        object.set('Loss', currLoss + 1);
+                    }
+
+                    object.save().then(function() {
+                        if(winner == 0) {
+                            return ParseService.updateCollege(object.get('College'), 2);
+                        }
+                        else if(winner == number) {
+                            return ParseService.updateCollege(object.get('College'), 10);
+                        }
+                    });
+
+                    promise.resolve();
+
+                }, function(error) {
+                    alert("Error: " + error.message);
+                    promise.reject();
+                });
+            });
+
+            return promise;
+        },
+
+        updateCollege: function updateCollege(college, points) {
+
+            var promise = new Parse.Promise();
+
+            console.log('Updateing College');
+
+            var parseClass = Parse.Object.extend('College');
+            var query = new Parse.Query(parseClass);
+
+            query.equalTo('objectId', college.id);
+
+            query.first().then(function(results) {
+
+                console.log(college);
+
+                var object = results;
+                var currPoints = object.get('Score');
+
+                console.log(object);
+                object.set('Score', currPoints + points);
+
+                object.save();
+                promise.resolve();
+                    
+            }, function(error) {
+                alert("Error: " + error.message);
+                promise.reject();
+            });
+            
             return promise;
         },
 
