@@ -13,10 +13,14 @@ angular.module('yaleImsApp')
         $rootScope.adminPage = false;
     });
 
-    $scope.alerts = [];
     $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
-      };
+    };
+
+    $scope.closeScoreAlert = function(index) {
+        $scope.scoreAlerts.splice(index, 1);
+    };
+
 
     // ************************************************
     // *********** Active tab- admin page *************
@@ -123,6 +127,7 @@ angular.module('yaleImsApp')
 
        modalInstance.result.then(function (alert) {
           $scope.getUpcoming();
+          $scope.alerts = [];
           $scope.alerts.push(alert);
         }, function () {
           console.log('Modal dismissed at: ' + new Date());
@@ -221,6 +226,7 @@ angular.module('yaleImsApp')
        modalInstance.result.then(function (alert) {
           $scope.getUpcoming();
           console.log("EDITTED");
+          $scope.alerts = [];
           $scope.alerts.push(alert);
         }, function () {
           console.log('Modal dismissed at: ' + new Date());
@@ -309,7 +315,7 @@ angular.module('yaleImsApp')
               var datetime = new Date(game.date.getFullYear(), game.date.getMonth(), game.date.getDate(), 
                    game.time.getHours(), game.time.getMinutes(), game.time.getSeconds());
               GamesService.scoreGame(game.gameid, game.score1, game.score2).then(function() {
-                $modalInstance.close({ type: 'success', msg: 'Success! The edits to the game were saved.' });
+                $modalInstance.close({ type: 'success', msg: 'Success! The scores for the game were saved.' });
               });
             }
 
@@ -321,7 +327,8 @@ angular.module('yaleImsApp')
 
        modalInstance.result.then(function (alert) {
           $scope.getCompleted();
-          $scope.alerts.push(alert);
+          $scope.scoreAlerts = [];
+          $scope.scoreAlerts.push(alert);
         }, function () {
           console.log('Modal dismissed at: ' + new Date());
         });
