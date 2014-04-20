@@ -105,6 +105,7 @@ angular.module('yaleImsApp')
         });
 
        modalInstance.result.then(function (alert) {
+          $scope.getGames();
           $scope.alerts.push(alert);
         }, function () {
           console.log('Modal dismissed at: ' + new Date());
@@ -134,13 +135,12 @@ angular.module('yaleImsApp')
 
             $scope.student = $scope.$parent.student;
 
-            $scope.gameData = { team1: team1,
-                                team2: team2,
+            $scope.gameData = { team1: team1.get('College'),
+                                team2: team2.get('College'),
                                 date: new Date(datetime),
                                 time: new Date(datetime),
-                                sport: sport,
-                                student: student,
-                                gameid: gameid
+                                sport: sport.get('Sport'),
+                                student: student
                               };
 
 
@@ -190,7 +190,7 @@ angular.module('yaleImsApp')
               var game = $scope.gameData;
               var datetime = new Date(game.date.getFullYear(), game.date.getMonth(), game.date.getDate(), 
                    game.time.getHours(), game.time.getMinutes(), game.time.getSeconds());
-              GamesService.editGame(game.gameid, game.team1, game.team2, game.sport, datetime);
+              GamesService.editGame(gameid, game.team1, game.team2, game.sport, datetime);
             }
 
             $scope.cancel = function() {
@@ -201,6 +201,7 @@ angular.module('yaleImsApp')
         });
 
        modalInstance.result.then(function (alert) {
+          $scope.getGames();
           $scope.alerts.push(alert);
         }, function () {
           console.log('Modal dismissed at: ' + new Date());

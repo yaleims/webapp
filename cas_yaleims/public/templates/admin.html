@@ -70,7 +70,7 @@
                             netid="{{student.id}}"
                             gameid="{{game.object.id}}"
                             dateunfiltered="{{game.date | date:'medium'}}"
-                            adminfxn="toggleEditModal(team1, team2, date, sport, student, gameid)"
+                            adminfxn="toggleEditModal(game.team1, game.team2, game.date, game.sport, student, game.object)"
                             adminEdit="true">
                          </tr>
                        </tbody>
