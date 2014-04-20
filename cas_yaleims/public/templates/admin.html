@@ -98,6 +98,43 @@
               </div>
             
           </tab>
+
+          <tab>
+            <tab-heading>Check-In Players <span ng-if="checkinRequests" class="badge badge-danger">{{checkinRequests}}</span></tab-heading>
+            <div class="row">
+                  <div class="col-md-12">
+                    <h3>Today's Games</h3>
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>Sport</th>
+                          <th>Date</th>
+                          <th>Colleges</th>
+                          <th>Add Score</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr game-row ng-repeat="game in upcomingGames | orderBy:'date' | filter:sportURL"
+                            date="{{game.date | date:'MM/dd @ h:mma'}}"
+                            sport="{{game.sport.get('Sport')}}"
+                            sporturl="{{game.sport.get('URL')}}"
+                            team1="{{game.team1.get('College')}}"
+                            team1abbr="{{game.team1.get('Abbreviation')}}"
+                            team1url="{{game.team1.get('URL')}}"
+                            team2="{{game.team2.get('College')}}"
+                            team2abbr="{{game.team2.get('Abbreviation')}}"
+                            team2url="{{game.team2.get('URL')}}"
+                            netid="{{student.id}}"
+                            gameid="{{game.object.id}}"
+                            dateunfiltered="{{game.date | date:'medium'}}"
+                            adminfxn="toggleCheckinModal(team1, team2, team1url, team2url, date, sport, game.object)"
+                            adminCheckin="true">
+                         </tr>
+                       </tbody>
+                    </table>
+                  </div>
+              </div>
+          </tab>
         </tabset>
 
 

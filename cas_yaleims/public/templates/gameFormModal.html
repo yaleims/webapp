@@ -3,10 +3,11 @@
     <h4 class="modal-title" ng-if="add">New Game</h4>
     <h4 class="modal-title" ng-if="edit">Edit Game</h4>
     <h4 class="modal-title" ng-if="score">Score Game</h4>
+    <h4 class="modal-title" ng-if="checkin">Check-In Players</h4>
 </div>
 
 <div class="modal-body">
-    <form ng-if="!score">
+    <form ng-if="!score && !checkin">
         <div class="row">
             <div class="col-sm-5">
                 <input type="text" ng-model="gameData.team1" placeholder="Home Team" typeahead="college as college.college for college in colleges | filter:{college:$viewValue} | limitTo:8" typeahead-template-url="templates/teamTypeahead.html" typeahead-editable="true" class="form-control">
@@ -47,7 +48,61 @@
         <div class="row">
             <div class="col-xs-5"><input class="form-control input-lg scoreLarge" ng-model="gameData.score1" type="number" ng-min="1" ng-max="3"></div>
             <div class="col-xs-2"></div>
-            <div class="col-xs-5"><input class="form-control input-lg scoreLarge" ng-model="gameData.score2" type="number" ng-min="1" ng-max="3"></img></h2></div>
+            <div class="col-xs-5"><input class="form-control input-lg scoreLarge" ng-model="gameData.score2" type="number" ng-min="1" ng-max="3"></h2></div>
+        </div>
+    </div>
+
+    <div ng-if="checkin">
+        <h1 class="text-center">{{gameData.sport}}<br><small>{{gameData.date | date:'EEEE, MMMM d, y @ h:mm a'}}</small></h1>
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 class="text-center"><img ng-src="/assets/shields/{{gameData.team1url}}.png" class="mediumShield"></img>{{gameData.team1}}</h2>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                          <th>Player</th>
+                          <th>Here</th>
+                          <th>Not Here</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                            <tr ng-repeat="player in gameData.team1players">
+                                <td>{{player.name}}</td>
+                                <td><button class="btn btn-success glyphicon glyphicon-ok" ng-click="playerHere(player.object, gameData.gameid)"></button></td>
+                                <td><button class="btn btn-danger glyphicon glyphicon-remove" ng-click="playerNotHere(player.object, gameData.gameid)"></button></td>
+                            </tr>
+                      </tbody>
+                </table>
+            </div>
+            
+            <div class="col-xs-12"><h2 class="text-center">vs.</h2></div>
+            
+            <div class="col-xs-12">
+                <h2 class="text-center"><img ng-src="/assets/shields/{{gameData.team2url}}.png" class="mediumShield"></img>{{gameData.team2}}</h2>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                          <th>Player</th>
+                          <th>Here</th>
+                          <th>Not Here</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                            <tr ng-repeat="player in gameData.team2players">
+                                <td>{{player.name}}</td>
+                                <td><button class="btn btn-success glyphicon glyphicon-ok" ng-click="playerHere(player.object, gameData.gameid)"></button></td>
+                                <td><button class="btn btn-danger glyphicon glyphicon-remove" ng-click="playerNotHere(player.object, gameData.gameid)"></button></td>
+                            </tr>
+                      </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="col-sm-2"></div>
+            <div class="col-sm-5">
+
+            </div>
         </div>
     </div>
 
@@ -66,4 +121,8 @@
 <div class="modal-footer" ng-if="score">
     <button class="btn btn-primary" ng-click="scoreGame()">Save</button>
     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
+
+<div class="modal-footer" ng-if="checkin">
+    <button class="btn btn-primary" ng-click="cancel()">Done</button>
 </div>
