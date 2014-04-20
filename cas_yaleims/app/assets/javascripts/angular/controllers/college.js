@@ -34,7 +34,8 @@ angular.module('yaleImsApp')
             });
         }
 
-        GamesService.getGamesAttended(netid, college, sport, function(results) {
+        GamesService.getGamesAttended(netid, college, undefined, function(results) {
+            console.log(netid);
             $scope.$apply(function() {
                 for(var game in results)
                 {
