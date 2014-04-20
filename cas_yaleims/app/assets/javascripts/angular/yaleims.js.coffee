@@ -63,7 +63,7 @@ window.yaleImsApp = angular.module('yaleImsApp',
     yaleImsApp.apiPrefix = '/api/v1'
     Student.get((response) ->
       $rootScope.student = response.person
-      console.log(response.person)
+      console.log($rootScope.student)
       ParseService.addPerson(response.person.id, response.person.name, response.person.collegeurl, response.person.year);
     )
   ])

@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
     
   # Accessors 
   def name
-    self.fname.capitalize + " " + self.lname.capitalize
+    self.fname.capitalize + " " + self.lname.split("-").map(&:capitalize).join("-")
   end
 
   def collegeName
