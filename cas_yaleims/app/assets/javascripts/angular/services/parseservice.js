@@ -514,8 +514,6 @@ angular.module('yaleImsApp')
 
             query.equalTo('objectId', id.id); 
 
-            console.log(sport);
-
             query.first().then(function(results) {
                 
                 var object = results;
@@ -538,6 +536,48 @@ angular.module('yaleImsApp')
 
             return promise;
         },
+
+
+        deleteGame: function deleteGame(id) {
+
+            var date = new Date;
+
+            var parseClass = Parse.Object.extend('Game');
+            var query = new Parse.Query(parseClass);
+
+            var promise = new Parse.Promise();
+
+            query.equalTo('objectId', id.id); 
+
+            query.first().then(function(results) {
+                var object = results;
+
+                object.destroy().then(function() {
+
+                    parseClass = Parse.Object.extend('Attend');
+                    query = new Parse.Query(parseClass);
+
+                    query.equalTo('Game', id); 
+
+                    query.first().then(function(results) {
+                        var object = results;
+
+                        object.destroy().then(function() {
+                            promise.resolve()
+                        }, function(error) {
+                            promise.reject();
+                        });
+                    }, function(error) {
+                        promise.reject();
+                    });
+                }, function(error) {
+                    promise.reject();
+                });    
+            });
+
+            return promise;
+        },
+
 
         scoreGame: function scoreGame(id, score1, score2) {
 
