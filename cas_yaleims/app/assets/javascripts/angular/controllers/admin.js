@@ -168,6 +168,7 @@ angular.module('yaleImsApp')
                                 date: new Date(datetime),
                                 time: new Date(datetime),
                                 sport: sport.get('Sport'),
+                                gameid: gameid,
                                 student: student
                               };
 
@@ -225,7 +226,7 @@ angular.module('yaleImsApp')
             $scope.deleteGame = function() {
               // Add game to parse
               var game = $scope.gameData;
-              GamesService.deleteGame(game.gameid).then(function() {
+              GamesService.deleteGame(gameData.gameid).then(function() {
                 $modalInstance.close({ type: 'danger', msg: 'Success! The game was deleted.'});
               });
             }
