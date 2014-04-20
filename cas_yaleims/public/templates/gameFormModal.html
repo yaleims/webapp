@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" ng-if="!edit">New Game</h4>
+    <h4 class="modal-title" ng-if="edit">Edit Game</h4>
+</div>
+
+<div class="modal-body">
+    <form>
+        <div class="row">
+            <div class="col-sm-5">
+                <input type="text" ng-model="gameData.team1" placeholder="Home Team" typeahead="college as college.college for college in colleges | filter:{college:$viewValue} | limitTo:8" typeahead-template-url="templates/teamTypeahead.html" class="form-control">
+            </div>
+
+            <div class="col-sm-2"><center>vs.</center></div>
+
+            <div class="col-sm-5">
+                <input type="text" ng-model="gameData.team2" placeholder="Away Team" typeahead="college as college.college for college in colleges | filter:{college:$viewValue} | limitTo:8" typeahead-template-url="templates/teamTypeahead.html" class="form-control">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="text" ng-model="gameData.sport" placeholder="Sport" typeahead="sport as sport.sport for sport in sports | filter:{sport:$viewValue} | limitTo:8" typeahead-template-url="templates/sportTypeahead.html" class="form-control">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-6">
+              <div ng-model="gameData.date">
+                  <datepicker min="minDate" show-weeks="showWeeks"></datepicker>
+              </div>
+            </div>
+            <div ng-model="gameData.time" ng-change="timeChanged()" class="col-sm-6">
+                <timepicker hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<div class="modal-footer" ng-if="!edit">
+    <button class="btn btn-primary" ng-click="addGame()">Add</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
+
+<div class="modal-footer" ng-if="edit">
+    <button class="btn btn-primary" ng-click="editGame()">Update</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
