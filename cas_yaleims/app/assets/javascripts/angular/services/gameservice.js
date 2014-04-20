@@ -16,9 +16,8 @@ angular.module('yaleImsApp')
             return ParseService.scoreGame(gameid, score1, score2);
         },
 
-        deleteGame: function(gameid) {
-            // Parse service
-            console.log('Deleted this motherfucker: ' + id);
+        deleteGame: function(gameid) {     
+            return ParseService.deleteGame(gameid);
         },
 
         attendGame: function(netid, gameid) {
