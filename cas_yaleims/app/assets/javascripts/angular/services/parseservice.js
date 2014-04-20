@@ -199,6 +199,34 @@ angular.module('yaleImsApp')
             return promise;
         },
 
+        getGameById: function GetGameById(id, callback) {
+
+            var parseClass = Parse.Object.extend('Game');
+            var query = new Parse.Query(parseClass);
+
+            var promise = new Parse.Promise();
+
+            query.equalTo('objectId', id);
+
+            var games = [];
+
+            query.find().then(function(results) {
+                
+                for (var i = 0; i < results.length; i++) { 
+                    var object = results[i];
+
+                    games.push(object);
+                }   
+                callback(games);
+                promise.resolve();
+            }, function(error) {
+                alert('Error: ' + error.code + ' ' + error.message);
+                promise.reject();    
+            });
+
+            return promise;
+        },
+
         //get game by sport, college
         getGames: function GetGames(sport, college, past, callback) {
             
@@ -255,6 +283,65 @@ angular.module('yaleImsApp')
             }, function(error) {
                 alert('Error: ' + error.code + ' ' + error.message);
                 promise.reject();    
+            });
+
+            return promise;
+        },
+
+        getAttending: function getAttending(player, game, callback) {
+
+            var parseClass = Parse.Object.extend('Attend');
+            var query = new Parse.Query(parseClass);
+
+            var promise = new Parse.Promise();
+
+            if (typeof game !== 'undefined') 
+               query.equalTo('Game', game);
+
+            if (typeof player !== 'undefined') 
+              query.equalTo('Player', player);
+                    
+            var attending = [];
+
+            query.include(['Player.College']);
+            query.include(['Game.Team1']);
+            query.include(['Game.Team2']);
+            query.include(['Game.College']);
+
+            console.log(player);
+            console.log(game);
+
+            query.find().then(function(results) {
+                  
+                for (var i = 0; i < results.length; i++) { 
+                    var object = results[i];
+                    
+                    attending.push({
+                        player : {
+                            netid : object.get('Player').get('netid'),
+                            name : object.get('Player').get('Name'),
+                            college : object.get('Player').get('College').get('College'),
+                            collegeurl : object.get('Player').get('College').get('URL'),
+                            object : object.get('Player')
+                        },
+                        game : {
+                            date : object.get('Game').get('Date'),
+                            score1 : object.get('Game').get('Score1'),
+                            score2 : object.get('Game').get('Score2'),
+                            complete : object.get('Game').get('Completed'),
+                            team1 : object.get('Game').get('Team1'),
+                            team2 : object.get('Game').get('Team2'),
+                            sport : object.get('Game').get('Sport'),
+                            object : object.get('Game')
+                        },
+                        object : object        
+                    });
+                } 
+                callback(attending);
+                promise.resolve();
+            }, function(error) {
+                alert('Error: ' + error.code + ' ' + error.message);
+                promise.reject();
             });
 
             return promise;
@@ -326,6 +413,73 @@ angular.module('yaleImsApp')
                 promise.reject();
             });
 
+            return promise;
+        },
+
+        attendGame: function attendGame(netid, game) {
+
+            var promise = new Parse.Promise();
+
+            var found = false;
+
+            ParseService.getAttending(netid, game, function(results) {    
+                if (results.length > 0)
+                    found = true;
+            }).then(function(results) {
+                if (!found) {
+
+                    console.log(game);
+
+                    var object = Parse.Object.extend('Attend');
+                    var object = new object();
+
+                    object.save({Player: netid,
+                                Game: game,
+                                Attended: false}
+                    ).then(function(object) {
+                        promise.resolve();
+                    }, function(error) {
+                        alert("Error: " + error.message);
+                        promise.reject();
+                    });
+                }
+            }, function(error) {
+                alert('Error: ' + error.code + ' ' + error.message);
+                promise.reject();
+            });
+            
+            return promise;
+        },
+
+        unattendGame: function unattendGame(netid, game) {
+
+            var promise = new Parse.Promise();
+
+            var found = false;
+            var attending = [];
+
+            ParseService.getAttending(netid, game, function(results) {    
+                for (var i = 0; i < results.length; i++) {
+                    attending.push(results[i].object);
+                }
+                console.log(results.length);
+            }).then(function(results) {
+                for (var i = 0; i < attending.length; i++) {
+                    var object = attending[i];
+
+                    object.destroy().then(function(object) {
+                        }, function(error) {
+                            alert("Error: " + error.message);
+                            promise.reject();
+                        });
+                }
+                promise.resolve();
+                        
+            }, function(error) {
+                alert('Error: ' + error.code + ' ' + error.message);
+                promise.reject();
+            });
+            
             return promise;
         },
 

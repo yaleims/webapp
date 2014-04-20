@@ -43,18 +43,11 @@ angular.module('yaleImsApp')
         },
 
         joinedTeams: function(netid, callback) {
-            // console.log(netid);
+            
             ParseService.getJoined(netid, undefined, function(results) {
-                // console.log(results);
                 callback(results);
             });
         },
-
-        allTeamsWithJoined: function(netid) 
-        {
-            // return 
-        }
-
     };
     return TeamsService;
 }]);
