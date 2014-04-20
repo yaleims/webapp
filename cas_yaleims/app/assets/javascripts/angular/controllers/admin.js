@@ -222,6 +222,14 @@ angular.module('yaleImsApp')
               });
             }
 
+            $scope.deleteGame = function() {
+              // Add game to parse
+              var game = $scope.gameData;
+              GamesService.deleteGame(game.gameid).then(function() {
+                $modalInstance.close({ type: 'danger', msg: 'Success! The game was deleted.'});
+              });
+            }
+
             $scope.cancel = function() {
               $modalInstance.dismiss('cancel');
             }
