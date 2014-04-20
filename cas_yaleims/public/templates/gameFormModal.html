@@ -1,26 +1,27 @@
 <div class="modal-header">
     <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
-    <h4 class="modal-title" ng-if="!edit">New Game</h4>
+    <h4 class="modal-title" ng-if="add">New Game</h4>
     <h4 class="modal-title" ng-if="edit">Edit Game</h4>
+    <h4 class="modal-title" ng-if="score">Score Game</h4>
 </div>
 
 <div class="modal-body">
-    <form>
+    <form ng-if="!score">
         <div class="row">
             <div class="col-sm-5">
-                <input type="text" ng-model="gameData.team1" placeholder="Home Team" typeahead="college as college.college for college in colleges | filter:{college:$viewValue} | limitTo:8" typeahead-template-url="templates/teamTypeahead.html" class="form-control">
+                <input type="text" ng-model="gameData.team1" placeholder="Home Team" typeahead="college as college.college for college in colleges | filter:{college:$viewValue} | limitTo:8" typeahead-template-url="templates/teamTypeahead.html" typeahead-editable="true" class="form-control">
             </div>
 
             <div class="col-sm-2"><center>vs.</center></div>
 
             <div class="col-sm-5">
-                <input type="text" ng-model="gameData.team2" placeholder="Away Team" typeahead="college as college.college for college in colleges | filter:{college:$viewValue} | limitTo:8" typeahead-template-url="templates/teamTypeahead.html" class="form-control">
+                <input type="text" ng-model="gameData.team2" placeholder="Away Team" typeahead="college as college.college for college in colleges | filter:{college:$viewValue} | limitTo:8" typeahead-template-url="templates/teamTypeahead.html" typeahead-editable="true" class="form-control">
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <input type="text" ng-model="gameData.sport" placeholder="Sport" typeahead="sport as sport.sport for sport in sports | filter:{sport:$viewValue} | limitTo:8" typeahead-template-url="templates/sportTypeahead.html" class="form-control">
+                <input type="text" ng-model="gameData.sport" placeholder="Sport" typeahead="sport as sport.sport for sport in sports | filter:{sport:$viewValue} | limitTo:8" typeahead-template-url="templates/sportTypeahead.html" typeahead-editable="true" class="form-control">
             </div>
         </div>
         <br>
@@ -34,17 +35,33 @@
                 <timepicker hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
             </div>
         </div>
-
     </form>
+
+    <h1 class="text-center">{{gameData.sport}}<br><small>{{gameData.date | date:'EEEE, MMMM d, y @ h:mm a'}}<small></h1>
+    <div class="row">
+        <div class="col-xs-5"><h2 class="text-center"><img ng-src="/assets/shields/{{gameData.team1url}}.png" class="mediumShield"></img>{{gameData.team1}}</h2></div>
+        <div class="col-xs-2"><h2 class="text-center">vs.</h2></div>
+        <div class="col-xs-5"><h2 class="text-center"><img ng-src="/assets/shields/{{gameData.team2url}}.png" class="mediumShield"></img>{{gameData.team2}}</h2></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-5"><input class="form-control input-lg scoreLarge" ng-model="gameData.score1" type="number" ng-min="1" ng-max="3"></div>
+        <div class="col-xs-2"></div>
+        <div class="col-xs-5"><input class="form-control input-lg scoreLarge" ng-model="gameData.score2" type="number" ng-min="1" ng-max="3"></img></h2></div>
+    </div>
 
 </div>
 
-<div class="modal-footer" ng-if="!edit">
+<div class="modal-footer" ng-if="add">
     <button class="btn btn-primary" ng-click="addGame()">Add</button>
     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>
 
 <div class="modal-footer" ng-if="edit">
     <button class="btn btn-primary" ng-click="editGame()">Update</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
+
+<div class="modal-footer" ng-if="score">
+    <button class="btn btn-primary" ng-click="scoreGame()">Save</button>
     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>

@@ -4,147 +4,89 @@
             <h1 class="text-center">Administrative Dashboard</h1>
         </div>
 
-        <div class="row">
-            <!-- Side Menu Bar -->
-            <div class="col-md-3" id="leftCol">
-                <ul class="nav nav-pills nav-stacked" id="sidebar">
-                    <li><a>Update Scores <span ng-if="updateScoreRequests" class="badge badge-danger">{{updateScoreRequests}}</span></a></li>
-                    <li><a>Manage Teams <span ng-if="manageTeamRequests" class="badge badge-danger">{{manageTeamRequests}}</span></a></li>
-                    <li><a>Update Schedule </a></li>
-                </ul>
-            </div>
-
-            <!-- Page Content -->
-            <div class="col-md-9">
-                <div class="page-header">
-                    <h1>Update Scoreboard</h1>
-                </div>
-
-
-
-                <div class="page-header">
-                    <h1>Update Schedule</h1>
-                </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                        <h3>Upcoming Games <button class="btn btn-success glyphicon glyphicon-plus pull-right" ng-click="toggleAddModal()"></button></h3>
-                        <table class="table table-hover">
-                          <thead>
-                            <tr>
-                              <th>Sport</th>
-                              <th>Date</th>
-                              <th>Colleges</th>
-                              <th>Edit</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr game-row ng-repeat="game in upcomingGames | orderBy:'date'"
-                                date="{{game.date | date:'MM/dd @ h:mma'}}"
-                                sport="{{game.sport.get('Sport')}}"
-                                sporturl="{{game.sport.get('URL')}}"
-                                team1="{{game.team1.get('College')}}"
-                                team1abbr="{{game.team1.get('Abbreviation')}}"
-                                team1url="{{game.team1.get('URL')}}"
-                                team2="{{game.team2.get('College')}}"
-                                team2abbr="{{game.team2.get('Abbreviation')}}"
-                                team2url="{{game.team2.get('URL')}}"
-                                netid="{{student.id}}"
-                                gameid="{{game.object.id}}"
-                                dateunfiltered="{{game.date | date:'medium'}}"
-                                adminfxn="toggleEditModal(team1, team2, date, sport, student, gameid)"
-                                admin="true">
-                             </tr>
-                           </tbody>
-                        </table>
-                    </div>
-              </div>
-
-                <!-- <div class="page-header">
-                    <h1>Manage Teams</h1>
-                </div>
-                <div class="row">
-                    <div ng-repeat="season in allSports">
-                        <div class="col-md-3">
-                            <h3>{{season.season}}</h3>
-                            <div class="row">
-                                <sport-select ng-repeat="sport in season.sport"
-                                              dial="updateSchedule(sport.get('Sport'), sport.get('URL'))"
-                                              updatepage="true"
-                                              url=""
-                                              sporturl="{{sport.get('URL')}}"
-                                              sport="{{sport.get('Sport')}}"
-                                              iconsize="adminSportIcon"
-                                              colsize="col-md-4"></sport-select>
-                            </div>
-                        </div>
-                        <div class="col-md-1"></div>
-                    </div>
-                </div>
-            </div>
-
-
-        </div> -->
-
-
-    </div>
-
-
-
-
-    <!-- Schedule Games -->
-    <!--<div class="text-center"><h1>Schedule Games</h1></div>
-
-      <div class="row">
-            <div class="col-md-10">
-              <h3>Add a Game</h3>
-              <form class="form-horizontal">
-                  <select ng-model="formTeam1" ng-options="c.get('College') for c in collegeObjects"></select>
-                  <select ng-model="formTeam2" ng-options="c.get('College') for c in collegeObjects"></select>
-                  <select ng-model="formSport" ng-options="c.get('Sport') for c in sportObjects"></select>
-                  <input type="date" ng-model="gameDate">
-                  <input type="time" ng-model="gameTime">
-                  <button class="btn" ng-click="addGames()"><i class="icon-plus"></i>Add</button>
-              </form>
-          </div>
-        </div>
-
-        <h3>My IM Gcal</h3>
-      <iframe src="https://www.google.com/calendar/embed?src=chr1u8ok860cen4lpr1mhpg1t0%40group.calendar.google.com&ctz=America/New_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-
-      &lt;!&ndash; Enter Scores &ndash;&gt;
-      <div class="text-center"><h1>Enter Scores</h1></div>
-
-
-        <div class="row">
-          <div class="col-md-10">
-              <h2>Recent Games</h2>
-              <h4>Note : Change this to be recent, not upcoming games. Also, filter so only admin's college games are listed</h4>
-              <table class="table table-hover">
-                   <thead>
-                      <tr>
+        <tabset>
+          <tab>
+            <tab-heading>Update Scores <span ng-if="updateScoreRequests" class="badge badge-danger">{{updateScoreRequests}}</span></tab-heading>
+            <div class="row">
+                  <div class="col-md-12">
+                    <h3>Recent Games</h3>
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
                           <th>Sport</th>
                           <th>Date</th>
                           <th>Colleges</th>
-                      </tr>
+                          <th>Add Score</th>
+                        </tr>
                       </thead>
                       <tbody>
-                          <tr game-row ng-repeat="game in upcomingGames | orderBy:'date'"
-                              date="{{game.date | date:'MM/dd @ h:mma'}}"
-                              sport="{{game.sport.get('Sport')}}"
-                              sporturl="{{game.sport.get('URL')}}"
-                              team1="{{game.team1.get('College')}}"
-                              team1abbr="{{game.team1.get('Abbreviation')}}"
-                              team1url="{{game.team1.get('URL')}}"
-                              team2="{{game.team2.get('College')}}"
-                              team2abbr="{{game.team2.get('Abbreviation')}}"
-                              team2url="{{game.team2.get('URL')}}">
-                          </tr>
-                      </tbody>
-              </table>
-          </div>
-      </div>
--->
-  
+                        <tr game-row ng-repeat="game in completedGames | orderBy:'date'"
+                            date="{{game.date | date:'MM/dd @ h:mma'}}"
+                            sport="{{game.sport.get('Sport')}}"
+                            sporturl="{{game.sport.get('URL')}}"
+                            team1="{{game.team1.get('College')}}"
+                            team1abbr="{{game.team1.get('Abbreviation')}}"
+                            team1url="{{game.team1.get('URL')}}"
+                            team2="{{game.team2.get('College')}}"
+                            team2abbr="{{game.team2.get('Abbreviation')}}"
+                            team2url="{{game.team2.get('URL')}}"
+                            netid="{{student.id}}"
+                            gameid="{{game.object.id}}"
+                            dateunfiltered="{{game.date | date:'medium'}}"
+                            adminfxn="toggleScoreModal(team1, team2, team1url, team2url, date, sport, student, gameid)"
+                            adminScore="true">
+                         </tr>
+                       </tbody>
+                    </table>
+                  </div>
+              </div>
+          </tab>
+
+          <tab>
+            <tab-heading>Update Schedule <span ng-if="updateScheduleRequests" class="badge badge-danger">{{updateScheduleRequests}}</span></tab-heading>
+              <div class="row">
+                  <div class="col-md-12">
+                    <h3>Upcoming Games <button class="btn btn-success glyphicon glyphicon-plus pull-right" ng-click="toggleAddModal()"></button></h3>
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>Sport</th>
+                          <th>Date</th>
+                          <th>Colleges</th>
+                          <th>Edit</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr game-row ng-repeat="game in upcomingGames | orderBy:'date'"
+                            date="{{game.date | date:'MM/dd @ h:mma'}}"
+                            sport="{{game.sport.get('Sport')}}"
+                            sporturl="{{game.sport.get('URL')}}"
+                            team1="{{game.team1.get('College')}}"
+                            team1abbr="{{game.team1.get('Abbreviation')}}"
+                            team1url="{{game.team1.get('URL')}}"
+                            team2="{{game.team2.get('College')}}"
+                            team2abbr="{{game.team2.get('Abbreviation')}}"
+                            team2url="{{game.team2.get('URL')}}"
+                            netid="{{student.id}}"
+                            gameid="{{game.object.id}}"
+                            dateunfiltered="{{game.date | date:'medium'}}"
+                            adminfxn="toggleEditModal(team1, team2, date, sport, student, gameid)"
+                            adminEdit="true">
+                         </tr>
+                       </tbody>
+                    </table>
+                  </div>
+              </div>
+          </tab>
+
+          <tab>
+            <tab-heading>Manage Teams <span ng-if="manageTeamRequests" class="badge badge-danger">{{manageTeamRequests}}</span></tab-heading>
+            
+          </tab>
+        </tabset>
+
+
+    </div>
 
 
 

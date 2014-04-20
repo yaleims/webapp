@@ -63,6 +63,15 @@ body {
     margin-right: 8px;
 }
 
+.mediumShield
+{
+    width: 30px;
+    height: 34px;
+    margin: 0px;
+    padding: 0px;
+    margin-right: 8px;
+}
+
 .joined
 {
   color: #5cb85c;
@@ -193,6 +202,14 @@ h1>.badge, h2>.badge, h3>.badge {
     display: block;
 }
 
+
+.scoreLarge
+{
+  height: 200px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 4.875em;
+}
 
 /******* Animation for Alert **********/
 

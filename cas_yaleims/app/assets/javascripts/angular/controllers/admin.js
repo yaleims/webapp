@@ -49,7 +49,7 @@ angular.module('yaleImsApp')
                                 student: $scope.student.id
                               };
 
-
+            $scope.add = true;
             // ************************************************
             // *********** DATE Picker functions *************
             // ************************************************
@@ -208,6 +208,105 @@ angular.module('yaleImsApp')
     };
 
     // ************************************************
+    // *********** Admin Edit Game Modal *************
+    // ************************************************
+    $scope.toggleScoreModal = function(team1, team2, team1url, team2url, datetime, sport, student, gameid) {
+         var modalInstance = $modal.open({
+          templateUrl: 'templates/gameFormModal.html',
+          controller: ['$scope', 'GamesService', '$modalInstance', 'ParseService', function($scope, GamesService, $modalInstance, ParseService) {
+            ParseService.getSports(undefined, function (results) {
+                $scope.$apply(function () {
+                    $scope.sports = results;
+                });
+            });
+
+            ParseService.getColleges(undefined, function (results) {
+                $scope.$apply(function () {
+                    $scope.colleges = results;
+                    console.log(results);
+                });
+            });
+
+            $scope.student = $scope.$parent.student;
+
+            $scope.gameData = { team1: team1,
+                                team2: team2,
+                                team1url: team1url,
+                                team2url: team2url,
+                                date: new Date(datetime),
+                                time: new Date(datetime),
+                                sport: sport,
+                                student: student,
+                                gameid: gameid,
+                                score1: '',
+                                score2: ''
+                              };
+
+
+            $scope.score = true;
+
+            // ************************************************
+            // *********** DATE Picker functions *************
+            // ************************************************
+            $scope.minDate = ( $scope.minDate ) ? null : new Date();
+
+            $scope.openCalendar = function($event) {
+              $event.preventDefault();
+              $event.stopPropagation();
+
+              $scope.openedCalendar = true;
+            };
+
+            $scope.dateOptions = {
+              'year-format': "'yy'",
+              'starting-day': 1,
+              'show-weeks': false
+            };
+
+            $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
+            $scope.format = $scope.formats[0];
+
+
+            // ************************************************
+            // *********** TIME Picker functions *************
+            // ************************************************
+            $scope.hstep = 1;
+            $scope.mstep = 15;
+            $scope.ismeridian = true;
+            $scope.meridian = ['AM', 'PM'];
+
+            $scope.timeChanged = function () {
+              console.log('Time changed to: ' + $scope.gameData.time);
+            };
+
+
+            // ************************************************
+            // *********** Handle games functions *************
+            // ************************************************
+              $scope.scoreGame = function() {
+              // Add game to parse
+              $modalInstance.close({ type: 'success', msg: 'Success! The edits to the game were saved.' });
+              var game = $scope.gameData;
+              var datetime = new Date(game.date.getFullYear(), game.date.getMonth(), game.date.getDate(), 
+                   game.time.getHours(), game.time.getMinutes(), game.time.getSeconds());
+              // GamesService.editGame(game.gameid, game.team1, game.team2, game.sport, datetime);
+            }
+
+            $scope.cancel = function() {
+              $modalInstance.dismiss('cancel');
+            }
+
+          }]
+        });
+
+       modalInstance.result.then(function (alert) {
+          $scope.alerts.push(alert);
+        }, function () {
+          console.log('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    // ************************************************
     // *************  Parse Integration  **************
     // ************************************************
     ParseService.getSportsBySeason(function(results) {
@@ -236,6 +335,12 @@ angular.module('yaleImsApp')
         $scope.$apply(function() {
           $scope.upcomingGames = results;
         })
+    });
+
+    ParseService.completedGames(undefined, undefined, function(results) {
+        $scope.$apply(function() {
+            $scope.completedGames = results;
+        });
     });
 
   	$scope.getGames = function() {
