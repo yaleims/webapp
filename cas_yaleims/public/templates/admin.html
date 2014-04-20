@@ -10,6 +10,7 @@
             <div class="row">
                   <div class="col-md-12">
                     <h3>Recent Games</h3>
+                    <alert ng-repeat="alert in scoreAlerts" type="alert.type" close="closeScoreAlert($index)">{{alert.msg}}</alert>
                     <table class="table table-hover">
                       <thead>
                         <tr>
@@ -64,6 +65,7 @@
                   <div class="col-md-8">
                     <h2 ng-if="sportURL">{{sportName}}</h2>
                     <h3>Upcoming Games <button class="btn btn-success glyphicon glyphicon-plus pull-right" ng-click="toggleAddModal()"></button></h3>
+                    <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
                     <table class="table table-hover">
                       <thead>
                         <tr>
