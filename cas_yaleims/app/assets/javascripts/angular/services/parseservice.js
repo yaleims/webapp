@@ -519,17 +519,57 @@ angular.module('yaleImsApp')
                 console.log(sport);
                 var object = results;
                 console.log(object);
-                
-                object.set('Team1', team1);
-                object.set('Team2', team2);
-                object.set('Sport', sport);
+
+                console.log('SPORT' + typeof sport);
+                console.log('TEAM1' + typeof team1);
+                console.log('TEAM2' + typeof team2);
+                if (typeof team1 == 'object')
+                    object.set('Team1', team1.object);
+                if (typeof team2 == 'object')
+                    object.set('Team2', team2.object);
+                if (typeof sport == 'object')
+                    object.set('Sport', sport.object);
+
                 object.set('Date', date);
-                object.save();    
+                object.save(); 
+
+                promise.resolve();   
             }, function(error) {
                 alert("Error: " + error.message);
                 promise.reject();
             });
+
+            return promise;
         },
+
+        scoreGame: function scoreGame(id, score1, score2) {
+
+            var parseClass = Parse.Object.extend('Game');
+            var query = new Parse.Query(parseClass);
+
+            var promise = new Parse.Promise();
+
+            query.equalTo('objectId', id.id); 
+
+            query.first().then(function(results) {                
+                var object = results;
+
+                if (typeof score1 == 'number')
+                    object.set('Score1', score1);
+                if (typeof score2 == 'number')
+                    object.set('Score2', score2);
+
+                object.save(); 
+                
+                promise.resolve();   
+            }, function(error) {
+                alert("Error: " + error.message);
+                promise.reject();
+            });
+
+            return promise;
+        },
+
 
         attendGame: function attendGame(netid, game) {
 

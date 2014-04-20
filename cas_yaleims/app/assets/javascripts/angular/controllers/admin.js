@@ -90,11 +90,12 @@ angular.module('yaleImsApp')
             // ************************************************
               $scope.addGame = function() {
               // Add game to parse
-              $modalInstance.close({ type: 'success', msg: 'Success! The game was added to the schedule.' });
               var game = $scope.gameData;
               var datetime = new Date(game.date.getFullYear(), game.date.getMonth(), game.date.getDate(), 
                    game.time.getHours(), game.time.getMinutes(), game.time.getSeconds());
-              GamesService.addGame(game.team1, game.team2, game.sport, datetime);
+              GamesService.addGame(game.team1, game.team2, game.sport, datetime).then(function() {
+                $modalInstance.close({ type: 'success', msg: 'Success! The game was added to the schedule.' });
+              });
             }
 
             $scope.cancel = function() {
@@ -105,7 +106,7 @@ angular.module('yaleImsApp')
         });
 
        modalInstance.result.then(function (alert) {
-          $scope.getGames();
+          $scope.getUpcoming();
           $scope.alerts.push(alert);
         }, function () {
           console.log('Modal dismissed at: ' + new Date());
@@ -186,11 +187,12 @@ angular.module('yaleImsApp')
             // ************************************************
               $scope.editGame = function() {
               // Add game to parse
-              $modalInstance.close({ type: 'success', msg: 'Success! The edits to the game were saved.' });
               var game = $scope.gameData;
               var datetime = new Date(game.date.getFullYear(), game.date.getMonth(), game.date.getDate(), 
                    game.time.getHours(), game.time.getMinutes(), game.time.getSeconds());
-              GamesService.editGame(gameid, game.team1, game.team2, game.sport, datetime);
+              GamesService.editGame(gameid, game.team1, game.team2, game.sport, datetime).then(function() {
+                $modalInstance.close({ type: 'success', msg: 'Success! The edits to the game were saved.'});
+              });
             }
 
             $scope.cancel = function() {
@@ -201,7 +203,8 @@ angular.module('yaleImsApp')
         });
 
        modalInstance.result.then(function (alert) {
-          $scope.getGames();
+          $scope.getUpcoming();
+          console.log("EDITTED");
           $scope.alerts.push(alert);
         }, function () {
           console.log('Modal dismissed at: ' + new Date());
@@ -286,21 +289,22 @@ angular.module('yaleImsApp')
             // ************************************************
               $scope.scoreGame = function() {
               // Add game to parse
-              $modalInstance.close({ type: 'success', msg: 'Success! The edits to the game were saved.' });
               var game = $scope.gameData;
               var datetime = new Date(game.date.getFullYear(), game.date.getMonth(), game.date.getDate(), 
                    game.time.getHours(), game.time.getMinutes(), game.time.getSeconds());
-              // GamesService.editGame(game.gameid, game.team1, game.team2, game.sport, datetime);
+              GamesService.scoreGame(game.gameid, game.score1, game.score2).then(function() {
+                $modalInstance.close({ type: 'success', msg: 'Success! The edits to the game were saved.' });
+              });
             }
 
             $scope.cancel = function() {
               $modalInstance.dismiss('cancel');
             }
-
           }]
         });
 
        modalInstance.result.then(function (alert) {
+          $scope.getCompleted();
           $scope.alerts.push(alert);
         }, function () {
           console.log('Modal dismissed at: ' + new Date());
@@ -310,6 +314,9 @@ angular.module('yaleImsApp')
     // ************************************************
     // *************  Parse Integration  **************
     // ************************************************
+
+    ParseService.updateGames(); 
+
     ParseService.getSportsBySeason(function(results) {
         $scope.allSports = results;
     });
@@ -326,12 +333,6 @@ angular.module('yaleImsApp')
         })
     });
 
-   	ParseService.getGames(undefined, undefined, true, function(results) {
-        $scope.$apply(function() {
-          $scope.pastGames = results;
-      	})
-  	});
-
     ParseService.getGames(undefined, undefined, false, function(results) {
         $scope.$apply(function() {
           $scope.upcomingGames = results;
@@ -344,12 +345,21 @@ angular.module('yaleImsApp')
         });
     });
 
-  	$scope.getGames = function() {
-	 	 ParseService.getGames(undefined, undefined, false, function(results) {
+
+    $scope.getCompleted = function() {
+      ParseService.completedGames(undefined, undefined, function(results) {
+        $scope.$apply(function() {
+            $scope.completedGames = results;
+        });
+      });
+    }
+
+  	$scope.getUpcoming = function() {
+      ParseService.getGames(undefined, undefined, false, function(results) {
 	        $scope.$apply(function() {
 	          $scope.upcomingGames = results;
-	        })
-	    });
- 	}
+	      })
+	     });
+ 	  }
 
   }]);
