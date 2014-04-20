@@ -234,7 +234,7 @@ angular.module('yaleImsApp')
     };
 
     // ************************************************
-    // *********** Admin Edit Game Modal *************
+    // *********** Admin Score Game Modal *************
     // ************************************************
     $scope.toggleScoreModal = function(team1, team2, team1url, team2url, datetime, sport, student, gameid) {
          var modalInstance = $modal.open({
@@ -331,6 +331,66 @@ angular.module('yaleImsApp')
           $scope.scoreAlerts.push(alert);
         }, function () {
           console.log('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    // ************************************************
+    // *********** Admin Checkin Modal *************
+    // ************************************************
+    $scope.toggleCheckinModal = function(team1, team2, team1url, team2url, datetime, sport, gameid) {
+         var modalInstance = $modal.open({
+          templateUrl: 'templates/gameFormModal.html',
+          controller: ['$scope', 'GamesService', '$modalInstance', 'ParseService', function($scope, GamesService, $modalInstance, ParseService) {
+            
+            ParseService.getSports(undefined, function (results) {
+                $scope.$apply(function () {
+                    $scope.sports = results;
+                });
+            });
+
+            ParseService.getColleges(undefined, function (results) {
+                $scope.$apply(function () {
+                    $scope.colleges = results;
+                    console.log(results);
+                });
+            });
+
+            $scope.student = $scope.$parent.student;
+
+            $scope.gameData = { team1: team1,
+                                team1players: [{'name': 'Nicholas Gonzalez', 'netid': 'ngg23', 'object': {'name': 'Nicholas Gonzalez', 'netid': 'ngg23'}}],
+                                team2: team2,
+                                team1url: team1url,
+                                team2url: team2url,
+                                date: new Date(datetime),
+                                sport: sport,
+                                gameid: gameid
+                              };
+
+            $scope.playerHere = function(playerObject, gameid) {
+                console.log(playerObject.name + ' is present!');
+            };
+
+            $scope.playerNotHere = function(playerObject, gameid) {
+                console.log(playerObject.name + ' is NOT present!');
+            };
+
+
+            $scope.checkin = true;
+
+            // ************************************************
+            // *********** Handle games functions *************
+            // ************************************************
+              
+            $scope.cancel = function() {
+              $modalInstance.close();
+            }
+          }]
+        });
+
+       modalInstance.result.then(function (alert) {
+          // $scope.getCompleted();
+          console.log("Modal for checking in closed")
         });
     };
 
