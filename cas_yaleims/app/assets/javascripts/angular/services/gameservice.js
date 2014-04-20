@@ -53,21 +53,47 @@ angular.module('yaleImsApp')
             });
         },
 
-        getGamesAttended: function(netid, college, sport) {
+        
+        getGamesAttended: function(netid, college, sport, callback) {
 
             var playerObject;
             var collegeObject;
             var sportObject;
 
-            ParseService.getGameById(gameid, function(results) {
-                gameObject = results[0];
-            }).then(function(results) {
-                ParseService.getPlayers(netid, function(results) {
-                    playerObject = results[0].object;
-                }).then(function(results) {
-                    ParseService.unattendGame(playerObject, gameObject);
-                    console.log('User: ' + netid + ' no longer attending: ' + gameid);   
+            var upcoming = [];
+            var attend = [];
+            
+            ParseService.getPlayers(netid, function(results) {
+                playerObject = results[0].object;
+            }).then(function() {
+                return ParseService.getColleges(college, function(results) {
+                    if (typeof college !== 'undefined')  
+                        collegeObject = results[0].object;
                 });
+            }).then(function() {
+                return ParseService.getSports(sportObject, function(results) {
+                    if (typeof sport !== 'undefined')
+                        sportObject = results[0].object;
+                });  
+            }).then(function() {
+                return ParseService.getGames(sportObject, collegeObject, false, function(results) {
+                    upcoming = results;
+                });
+            }).then(function() {
+                return ParseService.getAttending(playerObject, undefined, function(results) {
+                    attend = results; 
+                });
+            }).then(function() {                             
+                console.log(upcoming)  
+                for (var i = 0; i < upcoming.length; i++) {
+                    upcoming[i].penis = false;
+                    for (var j = 0; j < attend.length; j++) {
+                        if (upcoming[i].object == attend[j].game.object) {
+                            upcoming[i].penis = true;
+                        }
+                    }
+                }
+                callback(upcoming);
             });
         }
     };
