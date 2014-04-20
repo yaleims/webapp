@@ -27,12 +27,12 @@ angular.module('yaleImsApp')
             ParseService.getGameById(gameid, function(results) {
                 gameObject = results[0];
             }).then(function(results) {
-                ParseService.getPlayers(netid, function(results) {
+                return ParseService.getPlayers(netid, function(results) {
                     playerObject = results[0].object;
-                }).then(function(results) {
-                    ParseService.attendGame(playerObject, gameObject);
-                    console.log('User: ' + netid + ' is attending: ' + gameid);   
                 });
+            }).then(function(results) {
+                ParseService.attendGame(playerObject, gameObject);
+                console.log('User: ' + netid + ' is attending: ' + gameid);
             });
         },
 
@@ -44,21 +44,18 @@ angular.module('yaleImsApp')
             ParseService.getGameById(gameid, function(results) {
                 gameObject = results[0];
             }).then(function(results) {
-                ParseService.getPlayers(netid, function(results) {
+                return ParseService.getPlayers(netid, function(results) {
                     playerObject = results[0].object;
-                }).then(function(results) {
-                    ParseService.unattendGame(playerObject, gameObject);
-                    console.log('User: ' + netid + ' no longer attending: ' + gameid);   
                 });
+            }).then(function(results) {
+                ParseService.unattendGame(playerObject, gameObject);
+                    console.log('User: ' + netid + ' no longer attending: ' + gameid);   
             });
         },
 
-        
         getGamesAttended: function(netid, sport, college, callback) {
 
             var playerObject;
-            var collegeObject;
-            var sportObject;
 
             var upcoming = [];
             var attend = [];
@@ -66,7 +63,7 @@ angular.module('yaleImsApp')
             ParseService.getPlayers(netid, function(results) {
                 playerObject = results[0].object;
             }).then(function() {
-                return ParseService.getGames(sportObject, college, false, function(results) {
+                return ParseService.getGames(sport, college, false, function(results) {
                     upcoming = results;
                 });
             }).then(function() {
@@ -78,7 +75,8 @@ angular.module('yaleImsApp')
                 for (var i = 0; i < upcoming.length; i++) {
                     upcoming[i].going = false;
                     for (var j = 0; j < attend.length; j++) {
-                        if (upcoming[i].object == attend[j].game.object) {
+                        if (upcoming[i].object.id == attend[j].game.object.id) {
+                            console.log('Attending');
                             upcoming[i].going = true;
                         }
                     }
