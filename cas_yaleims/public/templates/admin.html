@@ -76,7 +76,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr game-row ng-repeat="game in upcomingGames | orderBy:'date' | filter:sportURL"
+                        <tr game-row ng-repeat="game in upcomingGames | orderBy:'date' | filter:sportURL | limitTo: 20"
                             date="{{game.date | date:'MM/dd @ h:mma'}}"
                             sport="{{game.sport.get('Sport')}}"
                             sporturl="{{game.sport.get('URL')}}"
