@@ -66,7 +66,7 @@
         </tr>
         </thead>
         <tbody>
-            <tr game-row ng-repeat="game in upcomingGames"
+            <tr game-row ng-repeat="game in upcomingGames | limitTo: 10"
                 team1="{{game.team1.get('College')}}"
                 team1abbr="{{game.team1.get('Abbreviation')}}"
                 team1url="{{game.team1.get('URL')}}"
@@ -96,7 +96,7 @@
         </tr>
         </thead>
         <tbody>
-            <tr game-row ng-repeat="game in pastGames"
+            <tr game-row ng-repeat="game in pastGames | limitTo: 10"
                 team1="{{game.team1.get('College')}}"
                 team1abbr="{{game.team1.get('Abbreviation')}}"
                 team1url="{{game.team1.get('URL')}}"
