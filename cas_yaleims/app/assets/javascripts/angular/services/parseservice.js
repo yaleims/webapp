@@ -251,8 +251,10 @@ angular.module('yaleImsApp')
 
             query.equalTo('Completed', past);
 
-            if (past)
+            if (past) {
                 query.descending('Date');
+                query.exists('Score1');
+            }
             else
                 query.ascending('Date');
 
