@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('yaleImsApp')
-  .controller('AdminCtrl', ['$scope', 'ParseService', '$rootScope', '$timeout', '$modal', function ($scope, ParseService, $rootScope, $timeout, $modal) {
+  .controller('AdminCtrl', ['$scope', 'ParseService', '$rootScope', '$timeout', '$modal', '$stateParams', function ($scope, ParseService, $rootScope, $timeout, $modal, $stateParams) {
     
     // ************************************************
     // *********** Special Admin Menu Bar *************
@@ -18,6 +18,22 @@ angular.module('yaleImsApp')
         $scope.alerts.splice(index, 1);
       };
 
+    // ************************************************
+    // *********** Active tab- admin page *************
+    // ************************************************
+    var activeTab = $stateParams.tab;
+    $scope.activeTab = function(tab) {
+        return angular.equals(tab, activeTab);
+    };
+
+    // ************************************************
+    // *********** Manage Schedule Filtering *************
+    // ************************************************
+    $scope.updateSchedule = function (sportName, sportUrl)
+    {
+        $scope.sportURL = sportUrl;
+        $scope.sportName = sportName;
+    }
 
     // ************************************************
     // *********** Admin Add Game Modal *************
@@ -354,12 +370,12 @@ angular.module('yaleImsApp')
       });
     }
 
-  	$scope.getUpcoming = function() {
+    $scope.getUpcoming = function() {
       ParseService.getGames(undefined, undefined, false, function(results) {
-	        $scope.$apply(function() {
-	          $scope.upcomingGames = results;
-	      })
-	     });
- 	  }
+            $scope.$apply(function() {
+              $scope.upcomingGames = results;
+          })
+         });
+      }
 
   }]);
