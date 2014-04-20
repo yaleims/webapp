@@ -47,7 +47,7 @@
             <tab-heading>Update Schedule <span ng-if="updateScheduleRequests" class="badge badge-danger">{{updateScheduleRequests}}</span></tab-heading>
             <div class="row">
                   <div class="col-md-3">
-                      <h2>Sports</h2>
+                      <h2>Sports <button class="btn btn-default pull-right" ng-click="filterAllSports()">All</button></h2>
                       <div ng-repeat="season in allSports">
                           <h3>{{season.season}}</h3>
                           <div class="row">
@@ -114,7 +114,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr game-row ng-repeat="game in upcomingGames | orderBy:'date' | filter:sportURL"
+                        <tr game-row ng-repeat="game in upcomingGames | orderBy:'date'"
                             date="{{game.date | date:'MM/dd @ h:mma'}}"
                             sport="{{game.sport.get('Sport')}}"
                             sporturl="{{game.sport.get('URL')}}"

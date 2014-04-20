@@ -39,6 +39,12 @@ angular.module('yaleImsApp')
         $scope.sportName = sportName;
     }
 
+    $scope.filterAllSports = function ()
+    {
+        $scope.sportURL = null;
+        $scope.sportName = null;
+    }
+
     // ************************************************
     // *********** Admin Add Game Modal *************
     // ************************************************
