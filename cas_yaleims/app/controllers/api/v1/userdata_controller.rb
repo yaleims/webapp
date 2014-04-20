@@ -12,6 +12,7 @@ class Api::V1::UserdataController < ApplicationController
 	      p[:year] = @user.graduationYear
 	      p[:college] = @user.collegeName
 	      p[:collegeurl] = @user.collegeURL
+	      p[:email] = @user.studentEmail
 	      render :json => {:status => "success", :person => p}
 	    else # should never happen
 	      render :json => {:status => "fail", :flash => "No such user >:("}
