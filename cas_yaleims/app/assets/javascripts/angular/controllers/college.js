@@ -5,7 +5,7 @@ angular.module('yaleImsApp')
 
         // Get the data from the url
         var college = $stateParams.college;
-        var netid = $srootScope.student.id;
+        var netid = $rootScope.student.id;
         var sport = "";
         if($stateParams.sport)
             sport = $stateParams.sport;
