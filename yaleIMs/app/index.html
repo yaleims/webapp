@@ -16,7 +16,7 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
-
+    <link rel="stylesheet" href="styles/flaticon.css">
     <link rel="stylesheet" href="styles/yaleims.css">
     <!-- endbuild -->
   </head>
@@ -26,7 +26,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <nav class="navbar navbar-default navbar-fixed-top affix" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top affix" ng-class="{'navbar-inverse': adminPage}" role="navigation">
         <!-- Start Container for Nav -->
         <div class="container">
             <div class="navbar-header">
@@ -44,15 +44,16 @@
                     <li><a href="/">Home</a></li>
                     <li><a href="/#/newsfeed">Newsfeed</a></li>
                     <li><a href="/#/leaderboard">Leaderboards</a></li>
-                    <li><a href="/#/college">Colleges</a></li>
+                    <li><a href="/#/college/morse/">Colleges</a></li>
                     <li><a href="/#/sport">Sports</a></li>
                     <li><a href="/#/profile">My Profile</a></li>
+                    <li><a href="/#/admin">Admin</a></li>
                 </ul>
             </div>
         </div>
         <!-- End container for nav -->
     </nav>
-    <div class="container" ng-view=""></div>
+    <div ng-view=""></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -91,8 +92,16 @@
         <script src="scripts/controllers/leaderboard.js"></script>
         <script src="scripts/controllers/sport.js"></script>
         <script src="scripts/controllers/college.js"></script>
-        <script src="scripts/services/ParseService.js"></script>
+        <script src="scripts/directives/collegelbrow.js"></script>
+        <script src="scripts/directives/playerlbrow.js"></script>
+        <script src="scripts/directives/sportlbrow.js"></script>
+        <script src="scripts/services/parseservice.js"></script>
         <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.16.min.js"></script>
+        <script src="scripts/directives/upcomingGame-row.js"></script>
+        <script src="scripts/directives/flaticon.js"></script>
+        <script src="scripts/directives/sportSelect.js"></script>
+        <script src="scripts/directives/shield.js"></script>
+        <script src="scripts/controllers/admin.js"></script>
         <!-- endbuild -->
 </body>
 </html>

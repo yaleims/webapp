@@ -2,9 +2,8 @@
 
 angular.module('yaleImsApp')
   .controller('ProfileCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+    $scope.playerTeams = [{sport: "Coed Badminton", sporturl: "coed-badminton"}, {sport: "Coed Swimming", sporturl: "coed-swimming"}];
+    $scope.playerName = "Nicholas Gonzalez";
+        $scope.playerCollege = "Morse";
+        $scope.playerYear = 2015;
   });

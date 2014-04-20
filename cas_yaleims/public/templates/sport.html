@@ -1,0 +1,113 @@
+<div ng-if="!sportName" class="container">
+
+    <div class="page-header">
+        <h1>Choose A Sport</h1>
+    </div>
+
+    <div class="row">
+        <div ng-repeat="season in allSports">
+            <div class="col-md-3">
+
+                    <h2>{{season.season}}</h2>
+                    <div class="row">
+                        <sport-select ng-repeat="sport in season.sport | orderBy: '-sport.get(\'Sport\')[1]'"  
+                        url="sportSelected({sport: '{{sport.get('URL')}}' })" 
+                        sporturl="{{sport.get('URL')}}" 
+                        sport="{{sport.get('Sport')}}" 
+                        iconsize="mediumSportIcon" 
+                        colsize="col-sm-4">
+                    </sport-select>
+                    </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-if="sportName" class="container">
+
+    <div class="page-header">
+        <h1>{{sportName}} <join-button college="{{student.collegeurl}}" netid="{{student.id}}" team="{{sportURL}}" member="onTeam"></join-button></h1>
+    </div>
+
+    <h3>Leaderboard</h3>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Colleges</th>
+            <th>Score</th>
+            <th>Win-Loss</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr collegelb-row ng-repeat="team in teams | orderBy:['-points','-win','loss']"
+                rank="{{$index + 1}}"
+                college="{{team.college.get('College')}}"
+                collegeurl="{{team.college.get('URL')}}"
+                points="{{team.points}}"
+                wins="{{team.win}}"
+                loss="{{team.loss}}">
+            </tr>
+        </tbody>
+    </table>
+    <hr class="featurette-divider">
+
+    <h3>Schedule</h3>
+
+    <h4>Upcoming Games</h4>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Colleges</th>
+            <th>RSVP</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr game-row ng-repeat="game in upcomingGames"
+                team1="{{game.team1.get('College')}}"
+                team1abbr="{{game.team1.get('Abbreviation')}}"
+                team1url="{{game.team1.get('URL')}}"
+                team2="{{game.team2.get('College')}}"
+                team2abbr="{{game.team2.get('Abbreviation')}}"
+                team2url="{{game.team2.get('URL')}}"
+                score1="{{game.score1}}"
+                score2="{{game.score2}}"
+                date="{{game.date | date:'MM/dd @ h:mma'}}"
+                noicon="true"
+                rsvp="true"
+                showrsvp="{{game.showrsvp}}"
+                netid="{{student.id}}"
+                gameid="{{game.object.id}}"
+                attending="{{game.going}}"></tr>
+        </tbody>
+    </table>
+
+    <h4>Past Games</h4>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Colleges</th>
+            <th>Score</th>
+
+        </tr>
+        </thead>
+        <tbody>
+            <tr game-row ng-repeat="game in pastGames"
+                team1="{{game.team1.get('College')}}"
+                team1abbr="{{game.team1.get('Abbreviation')}}"
+                team1url="{{game.team1.get('URL')}}"
+                team2="{{game.team2.get('College')}}"
+                team2abbr="{{game.team2.get('Abbreviation')}}"
+                team2url="{{game.team2.get('URL')}}"
+                score1="{{game.score1}}"
+                score2="{{game.score2}}"
+                past="true"
+                noicon="true"
+                date="{{game.date | date:'MM/dd @ h:mma'}}"></tr>
+        </tbody>
+    </table>
+</div>

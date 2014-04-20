@@ -28,13 +28,25 @@ angular.module('yaleImsApp', [
         templateUrl: 'views/leaderboard.html',
         controller: 'LeaderboardCtrl'
       })
-      .when('/sport', {
+        .when('/sport/:sport', {
+            templateUrl: 'views/sport.html',
+            controller: 'SportCtrl'
+        })
+        .when('/sport', {
         templateUrl: 'views/sport.html',
         controller: 'SportCtrl'
       })
-      .when('/college', {
+      .when('/college/:college/:sport', {
         templateUrl: 'views/college.html',
         controller: 'CollegeCtrl'
+      })
+        .when('/college/:college', {
+            templateUrl: 'views/college.html',
+            controller: 'CollegeCtrl'
+        })
+      .when('/admin', {
+        templateUrl: 'views/admin.html',
+        controller: 'AdminCtrl'
       })
       .otherwise({
         redirectTo: '/'

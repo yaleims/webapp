@@ -1,0 +1,113 @@
+@font-face {
+	font-family: "Flaticon";
+	src: url("Flaticon/flaticon.eot");
+	src: url("Flaticon/flaticon.eot#iefix") format("embedded-opentype"),
+	url("Flaticon/flaticon.woff") format("woff"),
+	url("Flaticon/flaticon.ttf") format("truetype"),
+	url("Flaticon/flaticon.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+	font-family: Flaticon;
+    font-style: normal;
+    margin-left: 0px;
+}
+/*
+Not as good an icon
+.flaticon-badminton:before {
+	content: "\e000";
+}*/
+[class$="coed-golf"]:before {
+	content: "\e611";
+}
+[class$="coed-swimming"]:before {
+	content: "\e609";
+}
+[class$="coed-water-polo"]:before {
+	content: "\e602";
+}
+[class$="coed-softball"]:before {
+	content: "\e60c";
+}
+[class$="coed-ultimate"]:before {
+	content: "\e612";
+}
+[class$="coed-soccer"]:before {
+	content: "\e60f";
+}
+[class$="coed-billiards"]:before {
+	content: "\e617";
+}
+[class$="coed-badminton"]:before {
+	content: "\e61c";
+}
+[class$="coed-4x4-volleyball"]:before {
+	content: "\e605";
+}
+[class$="coed-dodgeball"]:before {
+	content: "\e615";
+}
+[class$="womens-squash"]:before {
+	content: "\e603";
+}
+[class$="mens-squash"]:before {
+	content: "\e60b";
+}
+[class$="mens-volleyball"]:before {
+	content: "\e604";
+}
+[class$="womens-volleyball"]:before {
+	content: "\e603";
+}
+[class$="coed-table-tennis"]:before {
+	content: "\e608";
+}
+[class$="coed-tennis"]:before {
+	content: "\e607";
+}
+[class$="mens-soccer"]:before {
+	content: "\e60e";
+}
+[class$="womens-soccer"]:before {
+	content: "\e60d";
+}
+[class$="mens-football"]:before {
+	content: "\e613";
+}
+[class$="coed-bowling"]:before {
+	content: "\e616";
+}
+[class$="coed-football"]:before {
+	content: "\e614";
+}
+[class$="mens-xc"]:before {
+	content: "\e601";
+}
+[class$="womens-xc"]:before {
+	content: "\e600";
+}
+[class$="coed-volleyball"]:before {
+	content: "\e606";
+}
+[class$="a-hoops"]:before {
+	content: "\e61b";
+}
+[class$="b-hoops"]:before {
+	content: "\e61a";
+}
+[class$="c-hoops"]:before {
+	content: "\e619";
+}
+[class$="womens-hoops"]:before {
+	content: "\e618";
+}
+[class$="ice-hockey"]:before {
+	content: "\e610";
+}
+
+a, a:link, a:visited, a:hover, a:active
+{
+    text-decoration: none !important;
+}

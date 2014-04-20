@@ -1,0 +1,39 @@
+<div class="container">
+    <tabset>
+        <h1>Leaderboards</h1>
+        <tab heading="Colleges" class="pull-right">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>College Leaderboard</h3>
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score'"
+                            noWinLoss="true"
+                            rank="{{$index + 1}}"
+                            college="{{college.college}}"
+                            collegeurl="{{college.url}}"
+                            points="{{college.score}}"></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </tab>
+
+        <tab heading="Players" class="pull-right">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Player Leaderboard</h3>
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr playerlb-row ng-repeat="player in players | orderBy:'-points' | limitTo:12" 
+                            rank="{{$index + 1}}" 
+                            player="{{player.name}}"
+                            points="{{player.points}}"></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </tab>
+
+    </tabset>
+</div>

@@ -1,0 +1,96 @@
+    <!-- Splash for Admin Dashboard -->
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="text-center">Administrative Dashboard</h1>
+        </div>
+
+        <tabset>
+          <tab>
+            <tab-heading>Update Scores <span ng-if="updateScoreRequests" class="badge badge-danger">{{updateScoreRequests}}</span></tab-heading>
+            <div class="row">
+                  <div class="col-md-12">
+                    <h3>Recent Games</h3>
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>Sport</th>
+                          <th>Date</th>
+                          <th>Colleges</th>
+                          <th>Add Score</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr game-row ng-repeat="game in completedGames | orderBy:'date'"
+                            date="{{game.date | date:'MM/dd @ h:mma'}}"
+                            sport="{{game.sport.get('Sport')}}"
+                            sporturl="{{game.sport.get('URL')}}"
+                            team1="{{game.team1.get('College')}}"
+                            team1abbr="{{game.team1.get('Abbreviation')}}"
+                            team1url="{{game.team1.get('URL')}}"
+                            team2="{{game.team2.get('College')}}"
+                            team2abbr="{{game.team2.get('Abbreviation')}}"
+                            team2url="{{game.team2.get('URL')}}"
+                            netid="{{student.id}}"
+                            gameid="{{game.object.id}}"
+                            dateunfiltered="{{game.date | date:'medium'}}"
+                            adminfxn="toggleScoreModal(team1, team2, team1url, team2url, date, sport, student, gameid)"
+                            adminScore="true">
+                         </tr>
+                       </tbody>
+                    </table>
+                  </div>
+              </div>
+          </tab>
+
+          <tab>
+            <tab-heading>Update Schedule <span ng-if="updateScheduleRequests" class="badge badge-danger">{{updateScheduleRequests}}</span></tab-heading>
+              <div class="row">
+                  <div class="col-md-12">
+                    <h3>Upcoming Games <button class="btn btn-success glyphicon glyphicon-plus pull-right" ng-click="toggleAddModal()"></button></h3>
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>Sport</th>
+                          <th>Date</th>
+                          <th>Colleges</th>
+                          <th>Edit</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr game-row ng-repeat="game in upcomingGames | orderBy:'date'"
+                            date="{{game.date | date:'MM/dd @ h:mma'}}"
+                            sport="{{game.sport.get('Sport')}}"
+                            sporturl="{{game.sport.get('URL')}}"
+                            team1="{{game.team1.get('College')}}"
+                            team1abbr="{{game.team1.get('Abbreviation')}}"
+                            team1url="{{game.team1.get('URL')}}"
+                            team2="{{game.team2.get('College')}}"
+                            team2abbr="{{game.team2.get('Abbreviation')}}"
+                            team2url="{{game.team2.get('URL')}}"
+                            netid="{{student.id}}"
+                            gameid="{{game.object.id}}"
+                            dateunfiltered="{{game.date | date:'medium'}}"
+                            adminfxn="toggleEditModal(team1, team2, date, sport, student, gameid)"
+                            adminEdit="true">
+                         </tr>
+                       </tbody>
+                    </table>
+                  </div>
+              </div>
+          </tab>
+
+          <tab>
+            <tab-heading>Manage Teams <span ng-if="manageTeamRequests" class="badge badge-danger">{{manageTeamRequests}}</span></tab-heading>
+            
+          </tab>
+        </tabset>
+
+
+    </div>
+
+
+
+
+
+
+

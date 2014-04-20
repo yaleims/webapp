@@ -1,10 +1,23 @@
 'use strict';
 
 angular.module('yaleImsApp')
-  .controller('NewsfeedCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('NewsfeedCtrl', ['$scope', 'ParseService', function ($scope, ParseService) {
+
+    ParseService.getColleges(function(results) {
+        $scope.$apply(function() {
+            $scope.colleges = results;
+        })
+    });
+
+	 ParseService.getGames(function(results) {
+        $scope.$apply(function() {
+          $scope.pastGames = results;
+      	})
+  	}, undefined, undefined, true);
+
+  ParseService.getGames(function(results) {
+        $scope.$apply(function() {
+          $scope.upcomingGames = results;
+        })
+    }, undefined, undefined, false);
+}]);

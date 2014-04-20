@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="close()" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">Manage Your Teams</h4>
+</div>
+
+<div class="modal-body">
+    <p>Click the icons to join or unjoin specific teams.</p>
+    <div class="row">
+        <div ng-repeat="season in allTeams">
+            <div class="col-md-12">
+                <h2>{{season.season}}</h2>
+                <team-select ng-repeat="team in season.sport" netid="{{student.id}}" college="{{student.collegeurl}}" team="{{team.get('URL')}}" teamname="{{team.get('Sport')}}" member="{{team.join}}"></team-select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="close()">Done</button>
+</div>
