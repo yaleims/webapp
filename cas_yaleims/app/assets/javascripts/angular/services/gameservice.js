@@ -5,7 +5,7 @@ angular.module('yaleImsApp')
  
   	var GamesService = {
         addGame: function(team1, team2, sport, datetime) {
-            // Parse service
+            ParseService.addGame(team1, team2, sport, datetime);
             console.log('Added game');
         },
 
@@ -20,13 +20,37 @@ angular.module('yaleImsApp')
         },
 
         attendGame: function(netid, gameid) {
-            // Parse service
-            console.log('User: ' + netid + ' is attending: ' + gameid);
+            
+            var playerObject;
+            var gameObject;
+
+            ParseService.getGameById(gameid, function(results) {
+                gameObject = results[0];
+            }).then(function(results) {
+                ParseService.getPlayers(netid, function(results) {
+                    playerObject = results[0].object;
+                }).then(function(results) {
+                    ParseService.attendGame(playerObject, gameObject);
+                    console.log('User: ' + netid + ' is attending: ' + gameid);   
+                });
+            });
         },
 
         unattendGame: function(netid, gameid) {
-            // Parse service
-            console.log('User: ' + netid + ' is no longer attending: ' + gameid);
+                   
+            var playerObject;
+            var gameObject;
+
+            ParseService.getGameById(gameid, function(results) {
+                gameObject = results[0];
+            }).then(function(results) {
+                ParseService.getPlayers(netid, function(results) {
+                    playerObject = results[0].object;
+                }).then(function(results) {
+                    ParseService.unattendGame(playerObject, gameObject);
+                    console.log('User: ' + netid + ' no longer attending: ' + gameid);   
+                });
+            });
         },
 
         getGamesAttended: function(netid) {

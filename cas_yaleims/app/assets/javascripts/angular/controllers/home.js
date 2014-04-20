@@ -8,7 +8,7 @@ angular.module('yaleImsApp')
             $scope.colleges = results;
         })
     });
-
+    
     ParseService.getJoined('cgd28', undefined, function(results) {
         $scope.$apply(function() {
             $scope.whoa = results;
