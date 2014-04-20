@@ -53,11 +53,23 @@ angular.module('yaleImsApp')
             });
         },
 
-        getGamesAttended: function(netid) {
-            // Parse service
-            console.log('User: ' + netid + ' attended these games: ' + gameid);
-        }
+        getGamesAttended: function(netid, college, sport) {
 
+            var playerObject;
+            var collegeObject;
+            var sportObject;
+
+            ParseService.getGameById(gameid, function(results) {
+                gameObject = results[0];
+            }).then(function(results) {
+                ParseService.getPlayers(netid, function(results) {
+                    playerObject = results[0].object;
+                }).then(function(results) {
+                    ParseService.unattendGame(playerObject, gameObject);
+                    console.log('User: ' + netid + ' no longer attending: ' + gameid);   
+                });
+            });
+        }
     };
     return GamesService;
 }]);

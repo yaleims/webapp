@@ -416,6 +416,91 @@ angular.module('yaleImsApp')
             return promise;
         },
 
+        completedGames: function completedGames(sport, college, callback) {
+            
+            var parseClass = Parse.Object.extend('Game');
+            var query = new Parse.Query(parseClass);
+
+            var promise = new Parse.Promise();
+
+            if (typeof college !== 'undefined') {
+
+                var query1 = new Parse.Query(parseClass);
+                var query2 = new Parse.Query(parseClass);
+
+                query1.equalTo('Team1', college);
+                query2.equalTo('Team2', college);
+
+                query = Parse.Query.or(query1, query2);
+            }
+
+            if (typeof sport !== 'undefined')
+                query.equalTo('Sport', sport);
+
+            query.equalTo('Completed', true);
+            query.doesNotExist('Score1');
+            query.doesNotExist('Score1');
+
+            query.descending('Date');
+            
+            var games = [];
+  
+            query.include('Sport');
+            query.include('Team1');
+            query.include('Team2');
+            
+            query.find().then(function(results) {
+                
+                for (var i = 0; i < results.length; i++) { 
+                    var object = results[i];
+
+                    games.push({
+                        date : object.get('Date'),
+                        score1 : object.get('Score1'),
+                        score2 : object.get('Score2'),
+                        complete : object.get('Completed'),
+                        team1 : object.get('Team1'),
+                        team2 : object.get('Team2'),
+                        sport : object.get('Sport'),
+                        object : object
+                    });
+                }   
+                callback(games);
+                promise.resolve();
+            }, function(error) {
+                alert('Error: ' + error.code + ' ' + error.message);
+                promise.reject();    
+            });
+
+            return promise;
+        },
+
+        updateGames: function updateGames() {
+
+            var date = new Date;
+
+            var parseClass = Parse.Object.extend('Game');
+            var query = new Parse.Query(parseClass);
+
+            var promise = new Parse.Promise();
+
+            query.lessThan('Date', date);
+
+            var updates = [];
+
+            query.find().then(function(results) {
+                for (var i = 0; i < results.length; i++)
+                    updates.push(results[i]);
+            }).then(function(results) {
+                for (var i = 0; i < updates.length; i++) {
+                    var object = updates[i];
+                    
+                    object.set('Completed', true);
+                    object.save();    
+                }
+            });
+        },
+
         attendGame: function attendGame(netid, game) {
 
             var promise = new Parse.Promise();
