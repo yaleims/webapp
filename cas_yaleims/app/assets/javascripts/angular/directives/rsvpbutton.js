@@ -3,22 +3,22 @@
 angular.module('yaleImsApp')
   .directive('rsvpButton', ['GamesService', function (GamesService) {
     return {
-        template: '<button ng-show="!attending" ng-click="attend()" class="btn btn-info">RSVP</button><button ng-show="attending" ng-click="unattend()" class="btn btn-success">Attending</button>',
+        template: '<button class="btn btn-info" ng-click="going()" ng-hide="merp">RSVP</button><button class="btn btn-success" ng-click="unattend()" ng-if="merp">Going</button>',
         restrict: 'E',
         scope: {
             netid: '@',
             gameid: '@',
-            attending: '@'        
+            merp: '@'        
         },
         link: function(scope) {
-
-            scope.attend = function() {
-                scope.attending = true;
+            console.log(scope.merp);
+            scope.going = function() {
+                scope.merp = true;
                 GamesService.attendGame(scope.netid, scope.gameid);
             };
 
             scope.unattend = function() {
-                scope.attending = false;
+                scope.merp = false;
                 GamesService.unattendGame(scope.netid, scope.gameid);
             };
         }

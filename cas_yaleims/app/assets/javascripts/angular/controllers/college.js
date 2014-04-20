@@ -34,23 +34,6 @@ angular.module('yaleImsApp')
             });
         }
 
-        GamesService.getGamesAttended(netid, college, undefined, function(results) {
-            console.log(netid);
-            $scope.$apply(function() {
-                for(var game in results)
-                {
-                    if(results[game].team1.get('URL') == $rootScope.student.collegeurl 
-                        || results[game].team2.get('URL') == $rootScope.student.collegeurl) {
-                        results[game].showrsvp = true;
-                    }
-                    else {
-                        results[game].showrsvp = false;
-                    }
-                }
-                $scope.upcomingGames = results;
-            })
-        })
-
         ParseService.getSportsBySeason(function(results) {
             $scope.allSports = results;
         });
@@ -66,5 +49,41 @@ angular.module('yaleImsApp')
                     // console.log(results);
                 })
             });
+
+            GamesService.getGamesAttended(netid, undefined, college, function(results) {
+                $scope.$apply(function() {
+                    // console.log(results);
+                    for(var game in results)
+                    {
+                        if(results[game].team1.get('URL') == $rootScope.student.collegeurl 
+                            || results[game].team2.get('URL') == $rootScope.student.collegeurl) {
+                            results[game].showrsvp = true;
+                        }
+                        else {
+                            results[game].showrsvp = false;
+                        }
+                    }
+                    $scope.upcomingGames = results;
+                    console.log(results);
+                })
+            });
+
+            /*ParseService.getGames(undefined, college, false, function(results) {
+                $scope.$apply(function() {
+                    // console.log(results);
+                    for(var game in results)
+                    {
+                        if(results[game].team1.get('URL') == $rootScope.student.collegeurl 
+                            || results[game].team2.get('URL') == $rootScope.student.collegeurl) {
+                            results[game].showrsvp = true;
+                        }
+                        else {
+                            results[game].showrsvp = false;
+                        }
+                    }
+                    $scope.upcomingGames = results;
+                    console.log(results);
+                })
+            });*/
         });
 }]);

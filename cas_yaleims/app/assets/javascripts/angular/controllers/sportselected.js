@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('yaleImsApp')
-  .controller('SportSelectedCtrl', ['$scope', '$rootScope', 'TeamsService', 'ParseService', '$stateParams', function ($scope, $rootScope, TeamsService, ParseService, $stateParams) {
+  .controller('SportSelectedCtrl', ['$scope', '$rootScope', 'TeamsService', 'ParseService', 'GamesService', '$stateParams', function ($scope, $rootScope, TeamsService, ParseService, GamesService, $stateParams) {
 
         $scope.student = $rootScope.student;
+        var netid = $rootScope.student.id;
         var sportURL = $stateParams.sport;
         $scope.sportURL = sportURL;
 
@@ -29,22 +30,23 @@ angular.module('yaleImsApp')
                 })
             });
 
-            ParseService.getGames(sport, undefined, false, function(results) {
+           GamesService.getGamesAttended(netid, sport, undefined, function(results) {
                 $scope.$apply(function() {
-                    for(var game in results)
-                    {
-                        if(results[game].team1.get('URL') == $rootScope.student.collegeurl 
-                            || results[game].team2.get('URL') == $rootScope.student.collegeurl) {
-                            results[game].showrsvp = true;
-                        }
-                        else {
-                            results[game].showrsvp = false;
-                        }
+                            // console.log(results);
+                  for(var game in results)
+                  {
+                    if(results[game].team1.get('URL') == $rootScope.student.collegeurl 
+                      || results[game].team2.get('URL') == $rootScope.student.collegeurl) {
+                        results[game].showrsvp = true;
                     }
-                    $scope.upcomingGames = results;
+                    else {
+                      results[game].showrsvp = false;
+                    }
+                  }
+                  $scope.upcomingGames = results;
+                  console.log(results);
                 })
             });
-
 
            TeamsService.joinedTeams($rootScope.student.id, function(results) {
                 $scope.$apply(function() {
