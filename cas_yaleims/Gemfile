@@ -34,3 +34,4 @@ gem 'net-ldap'
 gem 'rubycas-client'
 gem 'nokogiri'
 gem 'mechanize'
+gem 'rails_12factor', group: :production
