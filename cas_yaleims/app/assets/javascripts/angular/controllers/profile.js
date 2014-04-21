@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('yaleImsApp')
-  .controller('ProfileCtrl', ['$scope', '$rootScope', '$modal', 'Student', 'ParseService', 'TeamsService', function ($scope, $rootScope, $modal, Student, ParseService, TeamsService) {
+  .controller('ProfileCtrl', ['$scope', '$rootScope', '$modal', 'Student', 'ParseService', 'TeamsService', 'GamesService', function ($scope, $rootScope, $modal, Student, ParseService, TeamsService, GamesService) {
     $scope.me = true;
     $scope.student = $rootScope.student;
     var netid = $rootScope.student.id;
@@ -25,27 +25,19 @@ angular.module('yaleImsApp')
 	    });
     });
 
-    var playerObject;
-    
-	ParseService.getPlayers(netid, function(results) {
-        playerObject = results[0].object;
-	}).then(function() {
-       	ParseService.getRSVPGames(playerObject, true, function(results) {
-       		$scope.$apply(function() {
-       			$scope.pastGames = results;
-       			console.log('past');
-       			console.log(results);
-       		});
+    GamesService.getGamesAttending(netid, undefined, undefined, function(results) {
+    	$scope.$apply(function() {
+       		$scope.pastGames = results;
        	});
-
-       	ParseService.getRSVPGames(playerObject, false, function(results) {
-       		$scope.$apply(function() {
-       			$scope.upcomingGames = results;
-       			console.log('upcoming');
-             	console.log(results);
-        	});
-        });
     });
+
+    GamesService.getGamesAttended(netid, undefined, undefined, function(results) {
+       	$scope.$apply(function() {
+
+       		$scope.upcomingGames = results;
+       	});
+    });
+    
 
     $scope.requeryTeams = function () {
     	ParseService.getSportsBySeason(function(results) {
