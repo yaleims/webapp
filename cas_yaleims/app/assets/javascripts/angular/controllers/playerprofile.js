@@ -7,10 +7,13 @@ angular.module('yaleImsApp')
     $scope.student = $rootScope.student;
     
     // Player being viewed
-    $scope.notme = true;
-    console.log("Player");
-    $scope.player = $stateParams.player;
     var netid = $stateParams.player;
+    ParseService.getPlayers(netid, function(results){
+    	$scope.$apply(function() {
+    		$scope.player = results[0];
+    		console.log($scope.player);
+    	});
+    });
 
     ParseService.getSportsBySeason(function(results) {
         TeamsService.joinedTeams(netid, function(joinedTeams) {
