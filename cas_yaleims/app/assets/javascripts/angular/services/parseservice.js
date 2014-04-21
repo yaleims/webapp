@@ -256,7 +256,7 @@ angular.module('yaleImsApp')
                 query.greaterThan('Date', date);
 
             console.log(gameids);
-            console.log(date)l
+            console.log(date);
             query.include('Sport');
             query.include('Team1');
             query.include('Team2');
