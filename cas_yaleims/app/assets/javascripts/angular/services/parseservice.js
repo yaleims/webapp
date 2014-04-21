@@ -190,6 +190,7 @@ angular.module('yaleImsApp')
                         points : object.get('Points'),
                         college : object.get('College').get('College'),
                         collegeurl : object.get('College').get('URL'),
+                        year : object.get('Year'),
                         object : object
                     });
                 }
@@ -255,6 +256,7 @@ angular.module('yaleImsApp')
                 query.greaterThan('Date', date);
 
             console.log(gameids);
+            console.log(date)l
             query.include('Sport');
             query.include('Team1');
             query.include('Team2');
