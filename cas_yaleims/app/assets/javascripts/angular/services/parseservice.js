@@ -251,12 +251,12 @@ angular.module('yaleImsApp')
             }
 
             if (typeof buffer == 'number')
-                date = new Date(date.getTime() + buffer*60000);
+               date = new Date(date.getTime() + buffer*60000);
 
             if (past)
-                query.lessThan('Date', date);
+               query.lessThan('Date', date);
             else
-                query.greaterThan('Date', date);
+               query.greaterThan('Date', date);
 
             query.include('Sport');
             query.include('Team1');
@@ -420,7 +420,6 @@ angular.module('yaleImsApp')
             var parseClass = Parse.Object.extend('Attend');
             var query = new Parse.Query(parseClass);
 
-            query.equalTo('Attended', true);
             query.equalTo('Player', player);
 
             query.find().then(function(results) {
@@ -430,6 +429,7 @@ angular.module('yaleImsApp')
                     games.push(object.get('Game').id);
                 }
             }).then(function () {
+                console.log(games);
                 ParseService.getGamesByDate(games, 0, past, function(results) {
                     for (var i = 0; i < results.length; i++) {
                         attending.push(results[i]);

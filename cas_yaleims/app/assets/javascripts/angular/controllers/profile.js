@@ -33,12 +33,15 @@ angular.module('yaleImsApp')
        	ParseService.getRSVPGames(playerObject, true, function(results) {
        		$scope.$apply(function() {
        			$scope.pastGames = results;
+       			console.log('past');
+       			console.log(results);
        		});
        	});
 
        	ParseService.getRSVPGames(playerObject, false, function(results) {
        		$scope.$apply(function() {
        			$scope.upcomingGames = results;
+       			console.log('upcoming');
              	console.log(results);
         	});
         });
