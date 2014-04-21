@@ -68,8 +68,8 @@
                       <tbody>
                             <tr ng-repeat="player in gameData.team1players">
                                 <td>{{player.name}}</td>
-                                <td><button class="btn btn-success glyphicon glyphicon-ok" ng-click="playerHere(player.object, gameData.gameid)"></button></td>
-                                <td><button class="btn btn-danger glyphicon glyphicon-remove" ng-click="playerNotHere(player.object, gameData.gameid)"></button></td>
+                                <td><button class="btn btn-success glyphicon glyphicon-ok" ng-click="playerHere(player, gameData.gameid)"></button></td>
+                                <td><button class="btn btn-danger glyphicon glyphicon-remove" ng-click="playerNotHere(player, gameData.gameid)"></button></td>
                             </tr>
                       </tbody>
                 </table>
@@ -88,8 +88,8 @@
                       <tbody>
                             <tr ng-repeat="player in gameData.team2players">
                                 <td>{{player.name}}</td>
-                                <td><button class="btn btn-success glyphicon glyphicon-ok" ng-click="playerHere(player.object, gameData.gameid)"></button></td>
-                                <td><button class="btn btn-danger glyphicon glyphicon-remove" ng-click="playerNotHere(player.object, gameData.gameid)"></button></td>
+                                <td><button class="btn btn-success glyphicon glyphicon-ok" ng-click="playerHere(player, gameData.gameid)"></button></td>
+                                <td><button class="btn btn-danger glyphicon glyphicon-remove" ng-click="playerNotHere(player, gameData.gameid)"></button></td>
                             </tr>
                       </tbody>
                 </table>

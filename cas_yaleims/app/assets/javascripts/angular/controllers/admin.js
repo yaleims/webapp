@@ -356,40 +356,56 @@ angular.module('yaleImsApp')
          var modalInstance = $modal.open({
           templateUrl: 'templates/gameFormModal.html',
           controller: ['$scope', 'GamesService', '$modalInstance', 'ParseService', function($scope, GamesService, $modalInstance, ParseService) {
+
+            $scope.getAttending = function() {
             
-            ParseService.getSports(undefined, function (results) {
-                $scope.$apply(function () {
-                    $scope.sports = results;
-                    // $scope.gameData.team1players = results;
-                });
-            });
+              var team1players = [];
+              var team2players = [];
 
-            ParseService.getColleges(undefined, function (results) {
-                $scope.$apply(function () {
-                    $scope.colleges = results;
-                    // $scope.gameData.team2players = results;
-                    console.log(results);
-                });
-            });
+              ParseService.getAttending(undefined, gameid, function(results) {
 
+                  console.log('updating list');
+                  for (var i = 0; i < results.length; i++) {
+                    if (results[i].player.college == team1 && results[i].object.get('Attended') == false) {
+                      team1players.push(results[i].player);
+                    }
+                    else if (results[i].player.college == team2 && results[i].object.get('Attended') == false) {
+                      team2players.push(results[i].player);
+                    }
+                  }
+                }).then(function() {
+                  $scope.$apply(function() {
+                      $scope.gameData.team1players = team1players;
+                      $scope.gameData.team2players = team2players;
+                      console.log(team1players);
+                      console.log(team2players);
+                  });
+              });
+            }
+
+            $scope.getAttending(); 
             $scope.student = $scope.$parent.student;
 
-            $scope.gameData = { team1: team1,
-                                team1players: [{'name': 'Nicholas Gonzalez', 'netid': 'ngg23', 'object': {'name': 'Nicholas Gonzalez', 'netid': 'ngg23'}}],
-                                team2: team2,
-                                team1url: team1url,
-                                team2url: team2url,
-                                date: new Date(datetime),
-                                sport: sport,
-                                gameid: gameid
-                              };
-
-            $scope.playerHere = function(playerObject, gameid) {
-                console.log(playerObject.netid + ' is present!');
+            $scope.gameData = { 
+                      team1: team1,
+                      team2: team2,
+                      team1url: team1url,
+                      team2url: team2url,
+                      date: new Date(datetime),
+                      sport: sport,
+                      gameid: gameid
             };
 
-            $scope.playerNotHere = function(playerObject, gameid) {
-                console.log(playerObject.netid + ' is NOT present!');
+            $scope.playerHere = function(player, game) {
+                ParseService.setAttended(player.object, game).then(function() {
+                  $scope.getAttending();
+                });
+            };
+
+            $scope.playerNotHere = function(player, game) {
+                ParseService.unattendGame(player.object, game).then(function() {
+                  $scope.getAttending();
+                });
             };
 
 
@@ -406,7 +422,7 @@ angular.module('yaleImsApp')
         });
 
        modalInstance.result.then(function (alert) {
-          // $scope.getCompleted();
+          $scope.getCheckIn();
           console.log("Modal for checking in closed")
         });
     };
@@ -421,30 +437,13 @@ angular.module('yaleImsApp')
         $scope.allSports = results;
     });
 
-    ParseService.getSports(undefined, function(results) {
+    $scope.getCheckIn = function() {
+      ParseService.getCheckIns(function(results) {
         $scope.$apply(function() {
-            $scope.sportObjects = results;
+            $scope.gameDates = results;
         })
-    });
-
-    ParseService.getColleges(undefined, function(results) {
-        $scope.$apply(function() {
-            $scope.collegeObjects = results;
-        })
-    });
-
-    ParseService.getGames(undefined, undefined, false, function(results) {
-        $scope.$apply(function() {
-          $scope.upcomingGames = results;
-        })
-    });
-
-    ParseService.completedGames(undefined, undefined, function(results) {
-        $scope.$apply(function() {
-            $scope.completedGames = results;
-        });
-    });
-
+      });
+    }
 
     $scope.getCompleted = function() {
       ParseService.completedGames(undefined, undefined, function(results) {
@@ -459,7 +458,11 @@ angular.module('yaleImsApp')
             $scope.$apply(function() {
               $scope.upcomingGames = results;
           })
-         });
+        });
       }
+
+      $scope.getCompleted();
+      $scope.getUpcoming();
+      $scope.getCheckIn();
 
   }]);

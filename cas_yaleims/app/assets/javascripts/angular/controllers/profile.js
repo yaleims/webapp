@@ -24,6 +24,25 @@ angular.module('yaleImsApp')
 	    });
     });
 
+    var playerObject;
+    
+	ParseService.getPlayers(netid, function(results) {
+        playerObject = results[0].object;
+	}).then(function() {
+       	ParseService.getRSVPGames(playerObject, true, function(results) {
+       		$scope.$apply(function() {
+       			$scope.pastGames = results;
+       		});
+       	});
+
+       	ParseService.getRSVPGames(playerObject, false, function(results) {
+       		$scope.$apply(function() {
+       			$scope.upcomingGames = results;
+             	console.log(results);
+        	});
+        });
+    });
+
     $scope.requeryTeams = function () {
     	ParseService.getSportsBySeason(function(results) {
 	        TeamsService.joinedTeams(netid, function(joinedTeams) {
