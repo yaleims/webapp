@@ -11,6 +11,8 @@ angular.module('yaleImsApp')
     ParseService.getPlayers(netid, function(results){
     	$scope.$apply(function() {
     		$scope.player = results[0];
+    		var fullName = results[0].name.split(" ");
+    		$scope.player.fname = fullName[0];
     		console.log($scope.player);
     	});
     });
