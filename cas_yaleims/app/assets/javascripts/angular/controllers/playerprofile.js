@@ -1,10 +1,16 @@
 'use strict';
 
 angular.module('yaleImsApp')
-  .controller('ProfileCtrl', ['$scope', '$rootScope', '$modal', 'Student', 'ParseService', 'TeamsService', function ($scope, $rootScope, $modal, Student, ParseService, TeamsService) {
-    $scope.me = true;
+  .controller('PlayerProfileCtrl', ['$scope', '$rootScope', '$stateParams', 'Student', 'ParseService', 'TeamsService', function ($scope, $rootScope, $stateParams, Student, ParseService, TeamsService) {
+    
+  	// Student logged in
     $scope.student = $rootScope.student;
-    var netid = $rootScope.student.id;
+    
+    // Player being viewed
+    $scope.notme = true;
+    console.log("Player");
+    $scope.player = $stateParams.player;
+    var netid = $stateParams.player;
 
     ParseService.getSportsBySeason(function(results) {
         TeamsService.joinedTeams(netid, function(joinedTeams) {
@@ -46,32 +52,5 @@ angular.module('yaleImsApp')
 	    });
 	    console.log("Requery");
     };
-
-    $scope.toggleModal = function() {
-    	 var modalInstance = $modal.open({
-	      templateUrl: 'templates/profileModalContent.html',
-	      controller: ['$scope', '$rootScope',  '$modalInstance', 'allTeams', function ($scope, $rootScope, $modalInstance, allTeams) {
-	      	$scope.student = $rootScope.student;
-			$scope.allTeams = allTeams;
-			// console.log($scope.allTeams);
-
-			$scope.close = function () {
-				$modalInstance.close();
-			};
-
-	      }],
-	      resolve: {
-	        allTeams: function () {
-	          return $scope.allTeams;
-	        }
-	      }
-	    });
-
-	    modalInstance.result.then(function () {
-	    	console.log("CLOSED");
-	    	$scope.requeryTeams();
-	    });
-    };
-
     
   }]);

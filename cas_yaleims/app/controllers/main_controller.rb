@@ -2,12 +2,12 @@ class MainController < ApplicationController
   
   def index
   	@current_user ||= User.where(netid: session[:cas_user]).first
-  	p @current_user.name
-  	p @current_user.collegeName
-  	p @current_user.collegeURL
-  	p @current_user.studentNetid
-  	p @current_user.studentEmail
-  	p @current_user.graduationYear
+  	# p @current_user.name
+  	# p @current_user.collegeName
+  	# p @current_user.collegeURL
+  	# p @current_user.studentNetid
+  	# p @current_user.studentEmail
+  	# p @current_user.graduationYear
   end
 
   def current_user
