@@ -179,6 +179,8 @@ angular.module('yaleImsApp')
 
             var players = [];
 
+            query.include('College');
+
             query.find().then(function(results) {
 
                 for (var i = 0; i < results.length; i++) {
@@ -186,6 +188,8 @@ angular.module('yaleImsApp')
                     players.push({
                         name : object.get('Name'),
                         points : object.get('Points'),
+                        college : object.get('College').get('College'),
+                        collegeurl : object.get('College').get('URL'),
                         object : object
                     });
                 }
@@ -250,6 +254,7 @@ angular.module('yaleImsApp')
             else
                 query.greaterThan('Date', date);
 
+            console.log(gameids);
             query.include('Sport');
             query.include('Team1');
             query.include('Team2');
@@ -403,7 +408,7 @@ angular.module('yaleImsApp')
 
         getRSVPGames: function getRSVPGames(player, past, callback) {
 
-            var games = ['buffer'];
+            var games = [];
             var attending = [];
 
             var promise = new Parse.Promise();
