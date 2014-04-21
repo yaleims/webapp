@@ -441,6 +441,7 @@ angular.module('yaleImsApp')
       ParseService.getCheckIns(function(results) {
         $scope.$apply(function() {
             $scope.gameDates = results;
+            console.log($scope.gameDates);
         })
       });
     }

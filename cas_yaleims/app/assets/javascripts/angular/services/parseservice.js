@@ -239,7 +239,7 @@ angular.module('yaleImsApp')
 
             var games = [];
 
-            if (typeof gamesids !== 'undefined')
+            if (typeof gameids !== 'undefined')
                 query.containedIn('objectId', gameids);
 
             if (typeof buffer == 'number')
@@ -403,7 +403,7 @@ angular.module('yaleImsApp')
 
         getRSVPGames: function getRSVPGames(player, past, callback) {
 
-            var games = [];
+            var games = ['buffer'];
             var attending = [];
 
             var promise = new Parse.Promise();
