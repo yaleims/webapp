@@ -1,7 +1,10 @@
 <div class="container">
+        <div class="jumbotron">
+            <h1 class="text-center">Leaderboards</h1>
+        </div>
     <tabset>
-        <h1>Leaderboards</h1>
-        <tab heading="Colleges" class="pull-right">
+        
+        <tab heading="Colleges" class="pull-left">
             <div class="row">
                 <div class="col-md-12">
                     <h3>College Leaderboard</h3>
@@ -26,13 +29,13 @@
             </div>
         </tab>
 
-        <tab heading="Players" class="pull-right">
+        <tab heading="Players" class="pull-left">
             <div class="row">
                 <div class="col-md-12">
                     <h3>Player Leaderboard</h3>
                     <table class="table table-hover">
                         <tbody>
-                            <tr playerlb-row ng-repeat="player in players | orderBy:'[-points, name]' | limitTo:12" 
+                            <tr playerlb-row ng-repeat="player in players | orderBy:['-points', 'name'] | limitTo:12" 
                             rank="{{$index + 1}}" 
                             player="{{player.name}}"
                             points="{{player.points}}"></tr>
