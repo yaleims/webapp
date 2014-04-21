@@ -26,7 +26,7 @@
         </tr>
         </thead>
         <tbody>
-            <tr game-row ng-repeat="game in upcomingGames | filter:sportURL | limitTo: 10"
+            <tr game-row ng-repeat="game in upcomingGames | filter:{going:true} | limitTo: 10"
                 sport="{{game.sport.get('Sport')}}"
                 sporturl="{{game.sport.get('URL')}}"
                 team1="{{game.team1.get('College')}}"
@@ -41,7 +41,7 @@
                 
                 date="{{game.date | date:'MM/dd @ h:mma'}}"
                 rsvp="true"
-                showrsvp="{{game.showrsvp}}"></tr>
+                showrsvp="{{game.going}}"></tr>
         </tbody>
     </table>
       
@@ -58,7 +58,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr game-row ng-repeat="game in pastGames | filter:sportURL | limitTo: 10"
+        <tr game-row ng-repeat="game in pastGames | filter:{going:true} | limitTo: 10"
             sport="{{game.sport.get('Sport')}}"
             sporturl="{{game.sport.get('URL')}}"
             team1="{{game.team1.get('College')}}"

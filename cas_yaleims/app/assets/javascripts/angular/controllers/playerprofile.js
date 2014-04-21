@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('yaleImsApp')
-  .controller('PlayerProfileCtrl', ['$scope', '$rootScope', '$stateParams', 'Student', 'ParseService', 'TeamsService', function ($scope, $rootScope, $stateParams, Student, ParseService, TeamsService) {
+  .controller('PlayerProfileCtrl', ['$scope', '$rootScope', '$stateParams', 'Student', 'ParseService', 'GamesService', 'TeamsService', function ($scope, $rootScope, $stateParams, Student, ParseService, GamesService, TeamsService) {
     
   	// Student logged in
     $scope.student = $rootScope.student;
@@ -15,6 +15,19 @@ angular.module('yaleImsApp')
     		$scope.player.fname = fullName[0];
     		console.log($scope.player);
     	});
+    });
+
+    GamesService.getGamesAttending(netid, undefined, undefined, function(results) {
+    	$scope.$apply(function() {
+       		$scope.pastGames = results;
+       	});
+    });
+
+    GamesService.getGamesAttended(netid, undefined, undefined, function(results) {
+       	$scope.$apply(function() {
+
+       		$scope.upcomingGames = results;
+       	});
     });
 
     ParseService.getSportsBySeason(function(results) {
