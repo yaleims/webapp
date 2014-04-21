@@ -187,6 +187,7 @@ angular.module('yaleImsApp')
                     var object = results[i];
                     players.push({
                         name : object.get('Name'),
+                        netid : object.get('netid'),
                         points : object.get('Points'),
                         college : object.get('College').get('College'),
                         collegeurl : object.get('College').get('URL'),
@@ -244,19 +245,19 @@ angular.module('yaleImsApp')
 
             var games = [];
 
-            if (typeof gameids !== 'undefined')
+            if (typeof gameids !== 'undefined') {
+                console.log(gameids)
                 query.containedIn('objectId', gameids);
+            }
 
             if (typeof buffer == 'number')
                 date = new Date(date.getTime() + buffer*60000);
 
-            if (past) 
+            if (past)
                 query.lessThan('Date', date);
             else
                 query.greaterThan('Date', date);
 
-            console.log(gameids);
-            console.log(date);
             query.include('Sport');
             query.include('Team1');
             query.include('Team2');
@@ -278,6 +279,7 @@ angular.module('yaleImsApp')
                         object : object
                     });
                 }   
+                console.log(games);
                 callback(games);
                 promise.resolve();
             }, function(error) {
