@@ -33,10 +33,13 @@
                     <h3>Player Leaderboard</h3>
                     <table class="table table-hover">
                         <tbody>
-                            <tr playerlb-row ng-repeat="player in players | orderBy:['-points', 'name'] | limitTo:12" 
-                            rank="{{$index + 1}}" 
-                            player="{{player.name}}"
-                            points="{{player.points}}"></tr>
+                            <tr playerlb-row ng-repeat="player in players | orderBy: '-points'| limitTo:12" 
+                                rank="{{$index + 1}}" 
+                                player="{{player.name}}"
+                                college="{{player.college}}"
+                                collegeurl="{{player.collegeurl}}"
+                                netid="{{player.netid}}" 
+                                points="{{player.points}}"></tr>
                         </tbody>
                     </table>
                 </div>
