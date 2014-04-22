@@ -35,3 +35,4 @@ gem 'rubycas-client'
 gem 'nokogiri'
 gem 'mechanize'
 gem 'rails_12factor', group: :production
+ruby "2.1.1"
