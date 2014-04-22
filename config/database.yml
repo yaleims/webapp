@@ -14,6 +14,14 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+
+
 development:
   adapter: postgresql
   encoding: unicode
@@ -43,18 +51,18 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  adapter: postgresql
-  encoding: unicode
-  database: cas_yaleims_test
-  pool: 5
-  username: cas_yaleims
-  password: cs439group5
+# test:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: cas_yaleims_test
+#   pool: 5
+#   username: cas_yaleims
+#   password: cs439group5
 
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: cas_yaleims_production
-  pool: 5
-  username: cas_yaleims
-  password: cs439group5
+# production:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: cas_yaleims_production
+#   pool: 5
+#   username: cas_yaleims
+#   password: cs439group5
