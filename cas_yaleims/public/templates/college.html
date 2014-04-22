@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="col-md-3">
-            <h2>Sports</h2>
+            <h2>Sports <button class="btn btn-default pull-right" ng-click="filterAllSports()">All</button></h2>
             <div ng-repeat="season in allSports">
                 <h3>{{season.season}}</h3>
                 <div class="row">
@@ -22,7 +22,7 @@
                                   sporturl="{{sport.get('URL')}}"
                                   sport="{{sport.get('Sport')}}"
                                   iconsize="mediumSportIcon"
-                                  colsize="col-md-4"></sport-select>
+                                  colsize="col-xs-4"></sport-select>
                 </div>
             </div>
         </div>
@@ -30,45 +30,22 @@
         <div class="col-md-1"></div>
 
         <div class="col-md-8">
-            <h2 ng-if="sportURL">{{collegeName}} {{sportName}}<small> ({{sportWins}}-{{sportLosses}})</small> <small>{{sportTyngPoints}} Tyng Points</small></h2>
+            <h2 ng-if="sportURL">{{collegeName}} {{sportName}}<small> ({{sportWins}}-{{sportLosses}}-{{sportTies}})</small> <small>{{sportTyngPoints}} Tyng Points</small></h2>
             <h3>Schedule</h3>
-                <h4>Past Games</h4>
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Colleges</th>
-                        <th>Score</th>
-                        <th>Outcome</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr game-row ng-repeat="game in pastGames | filter:sportURL"
-                        team1="{{game.team1.get('College')}}"
-                        team1abbr="{{game.team1.get('Abbreviation')}}"
-                        team1url="{{game.team1.get('URL')}}"
-                        team2="{{game.team2.get('College')}}"
-                        team2abbr="{{game.team2.get('Abbreviation')}}"
-                        team2url="{{game.team2.get('URL')}}"
-                        score1="{{game.score1}}"
-                        score2="{{game.score2}}"
-                        past="true"
-                        noicon="true"
-                        date="{{game.date | date:'MM/dd @ h:mma'}}"
-                        outcome="{{outcome}}"></tr>
-                    </tbody>
-                </table>
                  <h4>Upcoming Games</h4>
                 <table class="table table-hover">
                     <thead>
                     <tr>
+                        <th>Sport</th>
                         <th>Date</th>
                         <th>Colleges</th>
                         <th>RSVP</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr game-row ng-repeat="game in upcomingGames | filter:sportURL"
+                    <tr game-row ng-repeat="game in upcomingGames | filter:sportURL | limitTo: 10"
+                        sport="{{game.sport.get('Sport')}}"
+                        sporturl="{{game.sport.get('URL')}}"
                         team1="{{game.team1.get('College')}}"
                         team1abbr="{{game.team1.get('Abbreviation')}}"
                         team1url="{{game.team1.get('URL')}}"
@@ -78,11 +55,38 @@
                         netid="{{student.id}}"
                         gameid="{{game.object.id}}"
                         attending="{{game.going}}"
-
+                        
                         date="{{game.date | date:'MM/dd @ h:mma'}}"
-                        noicon="true"
                         rsvp="true"
                         showrsvp="{{game.showrsvp}}"></tr>
+                    </tbody>
+                </table>
+                <h4>Past Games</h4>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Sport</th>
+                        <th>Date</th>
+                        <th>Colleges</th>
+                        <th>Score</th>
+                        <th>Outcome</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr game-row ng-repeat="game in pastGames | filter:sportURL | limitTo: 10"
+                        sport="{{game.sport.get('Sport')}}"
+                        sporturl="{{game.sport.get('URL')}}"
+                        team1="{{game.team1.get('College')}}"
+                        team1abbr="{{game.team1.get('Abbreviation')}}"
+                        team1url="{{game.team1.get('URL')}}"
+                        team2="{{game.team2.get('College')}}"
+                        team2abbr="{{game.team2.get('Abbreviation')}}"
+                        team2url="{{game.team2.get('URL')}}"
+                        score1="{{game.score1}}"
+                        score2="{{game.score2}}"
+                        past="true"
+                        date="{{game.date | date:'MM/dd'}}"
+                        outcome="{{game.outcome}}"></tr>
                     </tbody>
                 </table>
         </div>

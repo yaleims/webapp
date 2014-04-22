@@ -11,7 +11,6 @@ angular.module('yaleImsApp')
             merp: '@'        
         },
         link: function(scope) {
-            console.log(scope.merp);
             scope.going = function() {
                 scope.merp = true;
                 GamesService.attendGame(scope.netid, scope.gameid);

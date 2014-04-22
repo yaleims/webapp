@@ -13,6 +13,12 @@ angular.module('yaleImsApp')
         $scope.collegeURL = college;
         $scope.sportURL = sport;
 
+        $scope.filterAllSports = function ()
+        {
+            $scope.sportURL = null;
+            $scope.sportName = null;
+        }
+
         $scope.updateSchedule = function (sportName, sportUrl)
         {
             $scope.sportURL = sportUrl;
@@ -23,10 +29,11 @@ angular.module('yaleImsApp')
                     sport = results[0].object;
                 })
             
-                ParseService.getTeams(sport, college, function(results) {
+               ParseService.getTeams(sport, college, function(results) {
                     $scope.$apply(function() {
                         $scope.sportWins = results[0].win;
                         $scope.sportLosses = results[0].loss;
+                        $scope.sportTies = results[0].tie;
                         $scope.sportTyngPoints = results[0].points;
                         console.log(results);
                     });
@@ -45,8 +52,16 @@ angular.module('yaleImsApp')
 
             ParseService.getGames(undefined, college, true, function(results) {
                 $scope.$apply(function() {
+                    for (var game in results) {
+                        if (typeof results[game].winner == 'undefined')
+                            results[game].outcome = 'T';
+                        else if (results[game].winner.id == college.id)
+                            results[game].outcome = 'W';
+                        else {
+                            results[game].outcome = 'L';
+                        }
+                    }
                     $scope.pastGames = results;
-                    // console.log(results);
                 })
             });
 

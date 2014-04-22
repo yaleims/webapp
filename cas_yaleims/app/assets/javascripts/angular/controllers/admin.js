@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('yaleImsApp')
-  .controller('AdminCtrl', ['$scope', 'ParseService', '$rootScope', '$timeout', '$modal', function ($scope, ParseService, $rootScope, $timeout, $modal) {
+  .controller('AdminCtrl', ['$scope', 'ParseService', '$rootScope', '$timeout', '$modal', '$stateParams', function ($scope, ParseService, $rootScope, $timeout, $modal, $stateParams) {
     
     // ************************************************
     // *********** Special Admin Menu Bar *************
@@ -13,11 +13,37 @@ angular.module('yaleImsApp')
         $rootScope.adminPage = false;
     });
 
-    $scope.alerts = [];
     $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
-      };
+    };
 
+    $scope.closeScoreAlert = function(index) {
+        $scope.scoreAlerts.splice(index, 1);
+    };
+
+
+    // ************************************************
+    // *********** Active tab- admin page *************
+    // ************************************************
+    var activeTab = $stateParams.tab;
+    $scope.activeTab = function(tab) {
+        return angular.equals(tab, activeTab);
+    };
+
+    // ************************************************
+    // *********** Manage Schedule Filtering *************
+    // ************************************************
+    $scope.updateSchedule = function (sportName, sportUrl)
+    {
+        $scope.sportURL = sportUrl;
+        $scope.sportName = sportName;
+    }
+
+    $scope.filterAllSports = function ()
+    {
+        $scope.sportURL = null;
+        $scope.sportName = null;
+    }
 
     // ************************************************
     // *********** Admin Add Game Modal *************
@@ -90,11 +116,12 @@ angular.module('yaleImsApp')
             // ************************************************
               $scope.addGame = function() {
               // Add game to parse
-              $modalInstance.close({ type: 'success', msg: 'Success! The game was added to the schedule.' });
               var game = $scope.gameData;
               var datetime = new Date(game.date.getFullYear(), game.date.getMonth(), game.date.getDate(), 
                    game.time.getHours(), game.time.getMinutes(), game.time.getSeconds());
-              GamesService.addGame(game.team1, game.team2, game.sport, datetime);
+              GamesService.addGame(game.team1, game.team2, game.sport, datetime).then(function() {
+                $modalInstance.close({ type: 'success', msg: 'Success! The game was added to the schedule.' });
+              });
             }
 
             $scope.cancel = function() {
@@ -105,7 +132,8 @@ angular.module('yaleImsApp')
         });
 
        modalInstance.result.then(function (alert) {
-          $scope.getGames();
+          $scope.getUpcoming();
+          $scope.alerts = [];
           $scope.alerts.push(alert);
         }, function () {
           console.log('Modal dismissed at: ' + new Date());
@@ -140,6 +168,7 @@ angular.module('yaleImsApp')
                                 date: new Date(datetime),
                                 time: new Date(datetime),
                                 sport: sport.get('Sport'),
+                                gameid: gameid,
                                 student: student
                               };
 
@@ -186,11 +215,20 @@ angular.module('yaleImsApp')
             // ************************************************
               $scope.editGame = function() {
               // Add game to parse
-              $modalInstance.close({ type: 'success', msg: 'Success! The edits to the game were saved.' });
               var game = $scope.gameData;
               var datetime = new Date(game.date.getFullYear(), game.date.getMonth(), game.date.getDate(), 
                    game.time.getHours(), game.time.getMinutes(), game.time.getSeconds());
-              GamesService.editGame(gameid, game.team1, game.team2, game.sport, datetime);
+              GamesService.editGame(gameid, game.team1, game.team2, game.sport, datetime).then(function() {
+                $modalInstance.close({ type: 'success', msg: 'Success! The edits to the game were saved.'});
+              });
+            }
+
+            $scope.deleteGame = function() {
+              // Add game to parse
+              var game = $scope.gameData;
+              GamesService.deleteGame(game.gameid).then(function() {
+                $modalInstance.close({ type: 'danger', msg: 'Success! The game was deleted.'});
+              });
             }
 
             $scope.cancel = function() {
@@ -201,7 +239,9 @@ angular.module('yaleImsApp')
         });
 
        modalInstance.result.then(function (alert) {
-          $scope.getGames();
+          $scope.getUpcoming();
+          console.log("EDITTED");
+          $scope.alerts = [];
           $scope.alerts.push(alert);
         }, function () {
           console.log('Modal dismissed at: ' + new Date());
@@ -209,7 +249,7 @@ angular.module('yaleImsApp')
     };
 
     // ************************************************
-    // *********** Admin Edit Game Modal *************
+    // *********** Admin Score Game Modal *************
     // ************************************************
     $scope.toggleScoreModal = function(team1, team2, team1url, team2url, datetime, sport, student, gameid) {
          var modalInstance = $modal.open({
@@ -286,70 +326,144 @@ angular.module('yaleImsApp')
             // ************************************************
               $scope.scoreGame = function() {
               // Add game to parse
-              $modalInstance.close({ type: 'success', msg: 'Success! The edits to the game were saved.' });
               var game = $scope.gameData;
               var datetime = new Date(game.date.getFullYear(), game.date.getMonth(), game.date.getDate(), 
                    game.time.getHours(), game.time.getMinutes(), game.time.getSeconds());
-              // GamesService.editGame(game.gameid, game.team1, game.team2, game.sport, datetime);
+              GamesService.scoreGame(game.gameid, game.score1, game.score2).then(function() {
+                $modalInstance.close({ type: 'success', msg: 'Success! The scores for the game were saved.' });
+              });
             }
 
             $scope.cancel = function() {
               $modalInstance.dismiss('cancel');
             }
-
           }]
         });
 
        modalInstance.result.then(function (alert) {
-          $scope.alerts.push(alert);
+          $scope.getCompleted();
+          $scope.scoreAlerts = [];
+          $scope.scoreAlerts.push(alert);
         }, function () {
           console.log('Modal dismissed at: ' + new Date());
         });
     };
 
     // ************************************************
+    // *********** Admin Checkin Modal *************
+    // ************************************************
+    $scope.toggleCheckinModal = function(team1, team2, team1url, team2url, datetime, sport, gameid) {
+         var modalInstance = $modal.open({
+          templateUrl: 'templates/gameFormModal.html',
+          controller: ['$scope', 'GamesService', '$modalInstance', 'ParseService', function($scope, GamesService, $modalInstance, ParseService) {
+
+            $scope.getAttending = function() {
+            
+              var team1players = [];
+              var team2players = [];
+
+              ParseService.getAttending(undefined, gameid, function(results) {
+
+                  console.log('updating list');
+                  for (var i = 0; i < results.length; i++) {
+                    if (results[i].player.college == team1 && results[i].object.get('Attended') == false) {
+                      team1players.push(results[i].player);
+                    }
+                    else if (results[i].player.college == team2 && results[i].object.get('Attended') == false) {
+                      team2players.push(results[i].player);
+                    }
+                  }
+                }).then(function() {
+                  $scope.$apply(function() {
+                      $scope.gameData.team1players = team1players;
+                      $scope.gameData.team2players = team2players;
+                      console.log(team1players);
+                      console.log(team2players);
+                  });
+              });
+            }
+
+            $scope.getAttending(); 
+            $scope.student = $scope.$parent.student;
+
+            $scope.gameData = { 
+                      team1: team1,
+                      team2: team2,
+                      team1url: team1url,
+                      team2url: team2url,
+                      date: new Date(datetime),
+                      sport: sport,
+                      gameid: gameid
+            };
+
+            $scope.playerHere = function(player, game) {
+                ParseService.setAttended(player.object, game).then(function() {
+                  $scope.getAttending();
+                });
+            };
+
+            $scope.playerNotHere = function(player, game) {
+                ParseService.unattendGame(player.object, game).then(function() {
+                  $scope.getAttending();
+                });
+            };
+
+
+            $scope.checkin = true;
+
+            // ************************************************
+            // *********** Handle games functions *************
+            // ************************************************
+              
+            $scope.cancel = function() {
+              $modalInstance.close();
+            }
+          }]
+        });
+
+       modalInstance.result.then(function (alert) {
+          $scope.getCheckIn();
+          console.log("Modal for checking in closed")
+        });
+    };
+
+    // ************************************************
     // *************  Parse Integration  **************
     // ************************************************
+
+    ParseService.updateGames(); 
+
     ParseService.getSportsBySeason(function(results) {
         $scope.allSports = results;
     });
 
-    ParseService.getSports(undefined, function(results) {
+    $scope.getCheckIn = function() {
+      ParseService.getCheckIns(function(results) {
         $scope.$apply(function() {
-            $scope.sportObjects = results;
+            $scope.gameDates = results;
+            console.log($scope.gameDates);
         })
-    });
+      });
+    }
 
-    ParseService.getColleges(undefined, function(results) {
-        $scope.$apply(function() {
-            $scope.collegeObjects = results;
-        })
-    });
-
-   	ParseService.getGames(undefined, undefined, true, function(results) {
-        $scope.$apply(function() {
-          $scope.pastGames = results;
-      	})
-  	});
-
-    ParseService.getGames(undefined, undefined, false, function(results) {
-        $scope.$apply(function() {
-          $scope.upcomingGames = results;
-        })
-    });
-
-    ParseService.completedGames(undefined, undefined, function(results) {
+    $scope.getCompleted = function() {
+      ParseService.completedGames(undefined, undefined, function(results) {
         $scope.$apply(function() {
             $scope.completedGames = results;
         });
-    });
+      });
+    }
 
-  	$scope.getGames = function() {
-	 	 ParseService.getGames(undefined, undefined, false, function(results) {
-	        $scope.$apply(function() {
-	          $scope.upcomingGames = results;
-	        })
-	    });
- 	}
+    $scope.getUpcoming = function() {
+      ParseService.getGames(undefined, undefined, false, function(results) {
+            $scope.$apply(function() {
+              $scope.upcomingGames = results;
+          })
+        });
+      }
+
+      $scope.getCompleted();
+      $scope.getUpcoming();
+      $scope.getCheckIn();
 
   }]);

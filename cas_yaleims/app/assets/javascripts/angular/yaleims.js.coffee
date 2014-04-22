@@ -14,6 +14,11 @@ window.yaleImsApp = angular.module('yaleImsApp',
           templateUrl: '/templates/profile'
           controller: 'ProfileCtrl'
         )
+        .state('player',
+          url: '/profile/:player',
+          templateUrl: '/templates/player'
+          controller: 'PlayerProfileCtrl'
+        )
         .state('newsfeed',
           url: '/newsfeed',
           templateUrl: '/templates/newsfeed'
@@ -61,9 +66,9 @@ window.yaleImsApp = angular.module('yaleImsApp',
 
   .run(['$rootScope', 'Student', 'ParseService', ($rootScope, Student, ParseService) ->
     yaleImsApp.apiPrefix = '/api/v1'
-    Student.get((response) ->
+    Student.get({}, (response) ->
       $rootScope.student = response.person
-      console.log(response.person)
+      console.log($rootScope.student)
       ParseService.addPerson(response.person.id, response.person.name, response.person.collegeurl, response.person.year);
     )
   ])

@@ -32,6 +32,58 @@ body {
     -webkit-transform: translateZ(0);
 }
 
+/*********** RANK SIZE ************/
+[class*=" rank-"]
+{
+  color: #fff !important;
+  text-shadow: 0 0 3px rgba(0,0,0,0.8);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-collapse: collapse;
+  display: block;
+  margin: 2px 0px; 
+}
+
+.rank-1
+{
+  padding: 60px 0px;
+  font-size: 2.5em;
+}
+
+.rank-2
+{
+  padding: 35px 0px;
+  font-size: 2.5em;
+}
+
+.rank-3
+{
+  padding: 20px 0px;
+  font-size: 2.5em;
+}
+
+@media (min-width: 979px) {
+  .rank-1
+  {
+    padding: 60px 0px;
+    font-size: 4.5em;
+  }
+
+  .rank-2
+  {
+    padding: 35px 0px;
+    font-size: 3.75em;
+  }
+
+  .rank-3
+  {
+    padding: 20px 0px;
+    font-size: 3em;
+  }
+}
+
+
 
 /*********** ICON SIZE ************/
 .smallSportIcon
@@ -67,6 +119,15 @@ body {
 {
     width: 30px;
     height: 34px;
+    margin: 0px;
+    padding: 0px;
+    margin-right: 8px;
+}
+
+.largeShield
+{
+    width: 40px;
+    height: 45px;
     margin: 0px;
     padding: 0px;
     margin-right: 8px;

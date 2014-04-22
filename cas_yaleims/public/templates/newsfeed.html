@@ -13,7 +13,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr game-row ng-repeat="game in pastGames | orderBy:'-date' | limitTo:6"
+                        <tr game-row ng-repeat="game in pastGames | orderBy:'-date' | limitTo:8"
                             date="{{game.date | date:'MM/dd'}}"
                             sport="{{game.sport.get('Sport')}}"
                             sporturl="{{game.sport.get('URL')}}"
@@ -38,7 +38,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score' | limitTo:6"
+                    <tr collegelb-row ng-repeat="college in colleges | orderBy:'-score' | limitTo:8"
                         noWinLoss="true"
                         rank="{{$index + 1}}"
                         college="{{college.college}}"
@@ -61,7 +61,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr game-row ng-repeat="game in upcomingGames | orderBy:'date' | limitTo:6"
+                        <tr game-row ng-repeat="game in upcomingGames | orderBy:'date' | limitTo:20"
                             date="{{game.date | date:'MM/dd @ h:mma'}}"
                             sport="{{game.sport.get('Sport')}}"
                             sporturl="{{game.sport.get('URL')}}"

@@ -3,7 +3,6 @@
     <div class="jumbotron">
         <center>
             <h1>Yale IMs</h1>
-            <p>Some welcome text here to introduce the site.</p>
         </center>
     </div>
 
@@ -53,7 +52,10 @@
                 <tbody>
                     <tr playerlb-row ng-repeat="player in players | orderBy: '-points'| limitTo:6" 
                         rank="{{$index + 1}}" 
-                        player="{{player.name}}" 
+                        player="{{player.name}}"
+                        college="{{player.college}}"
+                        collegeurl="{{player.collegeurl}}"
+                        netid="{{player.netid}}" 
                         points="{{player.points}}"></tr>
                 </tbody>
             </table>
@@ -74,7 +76,7 @@
                         sporturl="{{sport.get('URL')}}" 
                         sport="{{sport.get('Sport')}}" 
                         iconsize="mediumSportIcon" 
-                        colsize="col-sm-4">
+                        colsize="col-xs-4">
                     </sport-select>
                 </div>
             </div>

@@ -15,7 +15,7 @@
                         sporturl="{{sport.get('URL')}}" 
                         sport="{{sport.get('Sport')}}" 
                         iconsize="mediumSportIcon" 
-                        colsize="col-sm-4">
+                        colsize="col-xs-4">
                     </sport-select>
                     </div>
             </div>
@@ -38,7 +38,7 @@
             <th>#</th>
             <th>Colleges</th>
             <th>Score</th>
-            <th>Win-Loss</th>
+            <th>W-L-T</th>
         </tr>
         </thead>
         <tbody>
@@ -48,7 +48,8 @@
                 collegeurl="{{team.college.get('URL')}}"
                 points="{{team.points}}"
                 wins="{{team.win}}"
-                loss="{{team.loss}}">
+                loss="{{team.loss}}"
+                tie="{{team.tie}}">
             </tr>
         </tbody>
     </table>
@@ -66,7 +67,7 @@
         </tr>
         </thead>
         <tbody>
-            <tr game-row ng-repeat="game in upcomingGames"
+            <tr game-row ng-repeat="game in upcomingGames | limitTo: 10"
                 team1="{{game.team1.get('College')}}"
                 team1abbr="{{game.team1.get('Abbreviation')}}"
                 team1url="{{game.team1.get('URL')}}"
@@ -96,7 +97,7 @@
         </tr>
         </thead>
         <tbody>
-            <tr game-row ng-repeat="game in pastGames"
+            <tr game-row ng-repeat="game in pastGames | limitTo: 10"
                 team1="{{game.team1.get('College')}}"
                 team1abbr="{{game.team1.get('Abbreviation')}}"
                 team1url="{{game.team1.get('URL')}}"
@@ -107,7 +108,7 @@
                 score2="{{game.score2}}"
                 past="true"
                 noicon="true"
-                date="{{game.date | date:'MM/dd @ h:mma'}}"></tr>
+                date="{{game.date | date:'MM/dd'}}"></tr>
         </tbody>
     </table>
 </div>

@@ -1,13 +1,13 @@
-<div class="jumbotron coverPhoto {{student.collegeurl}}">
+<div class="jumbotron coverPhoto {{player.collegeurl}}">
     <div class="container">
-        <h1>{{student.name}}</h1>
-        <h2>{{student.college}} {{student.year}}</h2>
+        <h1>{{player.name}}</h1>
+        <h2>{{player.college}} {{player.year}}</h2>
     </div>
 </div>
 
 <div class="container">
 
-    <h2>My Teams<button type="button" ng-click="toggleModal()" class="btn btn-danger pull-right">Add Team</button></h2>
+    <h2>{{player.fname}}'s Teams</h2>
 
     <div class="row">
         <div ng-repeat="team in playerTeams | orderBy: ['season','sport']" class="col-md-2 col-sm-3 col-xs-4">
@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <h2>Games I Am Attending</h2>
+    <h2>Games {{player.fname}} Is Attending</h2>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -41,13 +41,13 @@
                 
                 date="{{game.date | date:'MM/dd @ h:mma'}}"
                 rsvp="true"
-                showrsvp="{{game.going}}"></tr>
+                showrsvp="{{game.showrsvp}}"></tr>
         </tbody>
     </table>
       
 
-    <h2>Games I Attended</h2>
-    <table class="table table-hover">
+    <h2>Games {{player.fname}} Attended</h2>
+     <table class="table table-hover">
         <thead>
         <tr>
             <th>Sport</th>
