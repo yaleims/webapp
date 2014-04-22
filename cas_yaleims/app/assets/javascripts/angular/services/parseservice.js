@@ -461,6 +461,7 @@ angular.module('yaleImsApp')
             query.include(['Game.Team1']);
             query.include(['Game.Team2']);
             query.include(['Game.College']);
+            query.include(['Game.Winner']);
 
             query.find().then(function(results) {
                   
@@ -483,6 +484,7 @@ angular.module('yaleImsApp')
                             team1 : object.get('Game').get('Team1'),
                             team2 : object.get('Game').get('Team2'),
                             sport : object.get('Game').get('Sport'),
+                             winner : object.get('Game').get('Winner'),
                             object : object.get('Game')
                         },
                         object : object        

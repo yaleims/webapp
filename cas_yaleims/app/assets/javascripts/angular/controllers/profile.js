@@ -5,6 +5,7 @@ angular.module('yaleImsApp')
     $scope.me = true;
     $scope.student = $rootScope.student;
     var netid = $rootScope.student.id;
+    var college = $rootScope.student.college;
 
     ParseService.getSportsBySeason(function(results) {
         TeamsService.joinedTeams(netid, function(joinedTeams) {
@@ -25,10 +26,26 @@ angular.module('yaleImsApp')
 	    });
     });
 
-    GamesService.getGamesAttending(netid, undefined, undefined, function(results) {
-    	$scope.$apply(function() {
-       		$scope.pastGames = results;
-       	});
+    ParseService.getColleges(college, function(results) {
+        college = results[0].object;
+        GamesService.getGamesAttending(netid, undefined, undefined, function(results) {
+	    	$scope.$apply(function() {
+	    		console.log("RESULTS");
+	    		//console.log(results);
+	    		for (var game in results) {
+	                if (typeof results[game].winner == 'undefined')
+	                    results[game].outcome = 'T';
+	                else if (results[game].winner.get('College') == college.id) {
+	                    results[game].outcome = 'W';
+	                }
+	                else {
+	                    results[game].outcome = 'L';
+	                }
+	            }
+	       		$scope.pastGames = results;
+	       	});
+	    });
+
     });
 
     GamesService.getGamesAttended(netid, undefined, undefined, function(results) {
