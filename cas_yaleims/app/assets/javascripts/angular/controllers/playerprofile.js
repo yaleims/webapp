@@ -18,9 +18,24 @@ angular.module('yaleImsApp')
     });
 
     GamesService.getGamesAttending(netid, undefined, undefined, function(results) {
-    	$scope.$apply(function() {
-       		$scope.pastGames = results;
-       	});
+	
+	    	var college = $scope.player.college;
+
+	    	$scope.$apply(function() {
+	    		console.log("RESULTS");
+	    		console.log(results);
+	    		results[game].winner.get('College')
+	    		for (var game in results) {
+	                if (typeof results[game].winner == 'undefined')
+	                    results[game].outcome = 'T';
+	                else if (results[game].winner.get('College') == college)
+	                    results[game].outcome = 'W';
+	                else {
+	                    results[game].outcome = 'L';
+	                }
+	            }
+	       		$scope.pastGames = results;
+	       	});
     });
 
     GamesService.getGamesAttended(netid, undefined, undefined, function(results) {
