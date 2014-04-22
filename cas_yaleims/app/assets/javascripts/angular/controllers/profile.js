@@ -33,7 +33,6 @@ angular.module('yaleImsApp')
 
     GamesService.getGamesAttended(netid, undefined, undefined, function(results) {
        	$scope.$apply(function() {
-
        		$scope.upcomingGames = results;
        	});
     });
