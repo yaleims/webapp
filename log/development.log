@@ -12782,3 +12782,209 @@ DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.fin
   [1m[36mUser Load (2.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."netid" = 'ngg23' ORDER BY "users"."id" ASC LIMIT 1[0m
   [1m[35mCACHE (0.0ms)[0m  SELECT "users".* FROM "users" WHERE "users"."netid" = 'ngg23' ORDER BY "users"."id" ASC LIMIT 1
 Completed 200 OK in 10ms (Views: 0.5ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-04-22 13:09:22 -0400
+DEPRECATION WARNING: Filter object with #filter method is deprecated. Define method corresponding to filter type (#before, #after or #around). (called from <class:ApplicationController> at /Users/NicksFolder/Desktop/Yale Junior Year/Spring 2014/CS 439/webapp/app/controllers/application_controller.rb:4)
+Processing by MainController#index as HTML
+Existing local CAS session detected for "ngg23". Previous ticket "ST-1603881-LCofZwykhbujVmGgJybW-cas" will be re-used.
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.find_or_create_by(name: 'foo') instead. (called from getMe at /Users/NicksFolder/Desktop/Yale Junior Year/Spring 2014/CS 439/webapp/app/controllers/application_controller.rb:14)
+  [1m[36mUser Load (2.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."netid" = 'ngg23' ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "users".* FROM "users" WHERE "users"."netid" = 'ngg23' ORDER BY "users"."id" ASC LIMIT 1
+  Rendered main/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 308ms (Views: 269.0ms | ActiveRecord: 10.7ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:22 -0400
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-04-22 13:09:22 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:22 -0400
+
+
+Started GET "/assets/angular-resource.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:22 -0400
+
+
+Started GET "/assets/angular.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:22 -0400
+
+
+Started GET "/assets/angular-ui-router.min.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:22 -0400
+
+
+Started GET "/assets/angular-ui-bootstrap-tpls.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:22 -0400
+
+
+Started GET "/assets/ui.bootstrap.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:22 -0400
+
+
+Started GET "/assets/bootstrap/affix.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:22 -0400
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:22 -0400
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/ngstorage.min.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/parse.min.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/yaleims.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/controllers/admin.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/controllers/college.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/controllers/home.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/controllers/leaderboard.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/controllers/logout.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/controllers/main.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/controllers/newsfeed.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/controllers/playerprofile.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/controllers/profile.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/controllers/sport.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/controllers/sportselected.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/directives/addgameform.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/directives/collegelbrow.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/directives/flaticon.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/directives/game-row.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/directives/joinbutton.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/directives/playerlbrow.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/directives/rsvpbutton.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/directives/shield.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/directives/sportlbrow.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/directives/sportselect.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/directives/teamselect.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/filters/titlecase.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/services/gameservice.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/services/parseservice.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/services/student.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/angular/services/teamservice.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/api/v1/users/me" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+Processing by Api::V1::UserdataController#me as JSON
+Existing local CAS session detected for "ngg23". Previous ticket "ST-1603881-LCofZwykhbujVmGgJybW-cas" will be re-used.
+DEPRECATION WARNING: This dynamic method is deprecated. Please use e.g. Post.find_or_create_by(name: 'foo') instead. (called from getMe at /Users/NicksFolder/Desktop/Yale Junior Year/Spring 2014/CS 439/webapp/app/controllers/application_controller.rb:14)
+  [1m[36mUser Load (3.8ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."netid" = 'ngg23' ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "users".* FROM "users" WHERE "users"."netid" = 'ngg23' ORDER BY "users"."id" ASC LIMIT 1
+Completed 200 OK in 13ms (Views: 1.3ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/assets/shields/berkeley.png" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/shields/jonathan-edwards.png" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/shields/saybrook.png" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/shields/calhoun.png" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/shields/timothy-dwight.png" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/shields/morse.png" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/shields/trumbull.png" for 127.0.0.1 at 2014-04-22 13:09:23 -0400
+
+
+Started GET "/assets/shields/branford.png" for 127.0.0.1 at 2014-04-22 13:09:24 -0400
+
+
+Started GET "/assets/shields/silliman.png" for 127.0.0.1 at 2014-04-22 13:09:24 -0400
+
+
+Started GET "/assets/Flaticon/flaticon.woff" for 127.0.0.1 at 2014-04-22 13:09:24 -0400
