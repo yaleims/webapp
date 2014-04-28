@@ -9,3 +9,4 @@ CASClient::Frameworks::Rails::Filter.configure(
   :username_session_key => :cas_user,
   :extra_attributes_session_key => :cas_extra_attributes
 )
+
