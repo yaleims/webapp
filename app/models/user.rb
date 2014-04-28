@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   require 'net/ldap'
+  require 'mechanize'
   
   # Associations
  
@@ -7,7 +8,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email, :message => "Conflicting email address."
  
   # Callbacks
-  after_create :populateLDAP
+  # after_create :populateLDAP
+  after_create :method_callback
     
   # Accessors 
   def name
@@ -44,10 +46,13 @@ class User < ActiveRecord::Base
   
  
 protected
+
+  def method_callback
+    User.get_user(netid)
+  end
  
   #populate contact fields from LDAP
   def populateLDAP
-    
     #quit if no email or netid to work with
     self.email ||= ''
     return if !self.email.include?('@yale.edu') && !self.netid
@@ -83,16 +88,63 @@ protected
     self.save!
     p self
   end
- 
-  # not a yale email, just make best guess at it 
-  def guessFromEmail
-    name = self.email[ /[^@]+/ ]
-    return false if !name
-    name = name.split( "." )
- 
-    self.fname = name[0].downcase
-    self.lname = name[1].downcase || ''
-    self.save
+
+  def User.get_user netid
+    # p netid
+    email_regex = /^\s*Email Address:\s*$/i
+    year_regex = /^\s*Class Year:\s*$/i
+    college_regex = /^\s*Residential College:\s*$/i
+    name_regex = /^\s*Name:\s*$/i
+    browser = User.make_cas_browser
+    browser.get("http://directory.yale.edu/phonebook/index.htm?searchString=uid%3D#{netid}")
+    u = nil
+    browser.page.search('tr').each do |tr|
+      # puts "tr!"
+      field = tr.at('th').text
+      value = tr.at('td').text.strip
+      case field
+        when email_regex
+          u = User.where(netid: netid).first
+          if u
+            u.email = value
+            u.save
+          end
+        when year_regex
+          u = User.where(netid: netid).first
+          if u
+            u.year = value
+            u.save
+          end
+        when college_regex
+          u = User.where(netid: netid).first
+          if u
+            u.college = value
+            u.save
+          end
+        when name_regex
+          u = User.where(netid: netid).first
+          if u
+            name = value.split(" ")
+            u.fname = name[0]
+            u.lname = name[name.length - 1]
+            u.save
+          end 
+      end
+    end
+    u = User.where(netid: netid).first
+    p u
+    u
   end
-  
+
+  def User.make_cas_browser
+    browser = Mechanize.new
+    browser.get( 'https://secure.its.yale.edu/cas/login' )
+    form = browser.page.forms.first
+    form.username = ENV['CAS_NETID']
+    form.password = ENV['CAS_PASS']
+    form.submit
+    browser
+  end
+
+ 
 end
