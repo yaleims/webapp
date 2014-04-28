@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('yaleImsApp')
-	.factory('Student', function($resource) {
+	.factory('Student', ['$resource', function($resource) {
         return $resource('/api/v1' + '/users/me', {});
-});
+}]);
